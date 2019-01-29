@@ -8,6 +8,7 @@
 package frc.robot;
 import org.usfirst.frc.team4999.controllers.LogitechF310;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -30,7 +31,9 @@ public class RobotMap {
   public static final Spark leftBack = new Spark(2);
   public static final Spark rightBack = new Spark(3);
 
-
+  public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,1); // TODO: set to actual solenoid values
+  public static final DoubleSolenoid hatchSolenoidLeft = new DoubleSolenoid(2,3);
+  public static final DoubleSolenoid hatchSolenoidRight = new DoubleSolenoid(4,5); //placeholder values
 
   public static final LogitechF310 controller1 = new LogitechF310(0);// TODO: PORT NUMBERS
 }
