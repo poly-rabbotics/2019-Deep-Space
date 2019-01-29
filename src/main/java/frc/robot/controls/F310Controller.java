@@ -52,5 +52,10 @@ public class F310Controller implements DriveController{
         return controller1.getBButtonPressed();
     }
 
+    @Override
+    public boolean getToggleHatchPusher(){
+        return controller1.getAButtonPressed();
+    }
+
     
 }

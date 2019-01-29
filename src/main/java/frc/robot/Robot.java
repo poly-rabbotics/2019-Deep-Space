@@ -13,8 +13,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.HatchPusherCommand;
 import frc.robot.controls.*;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +26,7 @@ import frc.robot.subsystems.Drive;
  */
 public class Robot extends TimedRobot {
   public static Drive drive = new Drive();
+  public static HatchPusher hatchPusher = new HatchPusher();
   public static DriveController controller = new F310Controller();
   public static OI m_oi;
 
@@ -113,6 +115,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) 
       m_autonomousCommand.cancel();
     new DriveCommand().start();
+    new HatchPusherCommand().start();
   }
 
   /**
