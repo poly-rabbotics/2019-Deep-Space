@@ -57,5 +57,17 @@ public class F310Controller implements DriveController{
         return controller1.getAButtonPressed();
     }
 
+    @Override
+    public boolean getToggleInwards(){
+        return controller1.getBumperPressed(Hand kLeft);
+    }
+
+    @Override
+    public boolean getToggleOutwards(){
+        return controller1.getBumperPressed(Hand kRight);
+    }
+    
+
+  
     
 }

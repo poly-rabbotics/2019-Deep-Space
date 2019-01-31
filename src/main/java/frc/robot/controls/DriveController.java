@@ -16,5 +16,7 @@ public interface DriveController {
     public double getSpeedLimit();
     public boolean getReverseDirection();
     public boolean getToggleHatchPusher();
+    public boolean getToggleInwards();
+    public boolean getToggleOutwards();
 
 }

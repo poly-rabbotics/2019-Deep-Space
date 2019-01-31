@@ -10,6 +10,7 @@ import org.usfirst.frc.team4999.controllers.LogitechF310;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.VictorSP;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -30,6 +31,10 @@ public class RobotMap {
   public static final Spark rightFront = new Spark(1);
   public static final Spark leftBack = new Spark(2);
   public static final Spark rightBack = new Spark(3);
+
+  public static final VictorSP wheelArmLeft = new VictorSP(4);;// TODO: Set to actual port numbers
+  public static final VictorSP wheelArmRight = new VictorSP(5);
+  public static final VictorSP wheelArmAngle = new VictorSP(6);
 
   public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,1); // TODO: set to actual solenoid values
   public static final DoubleSolenoid hatchSolenoidLeft = new DoubleSolenoid(2,3);
