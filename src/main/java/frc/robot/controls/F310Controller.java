@@ -41,20 +41,20 @@ public class F310Controller implements DriveController{
     }
     @Override
     public double getSpeedLimit(){
-        if(controller1.getXButtonPressed() && speedLimitIndex>0)
+        if(controller1.getBackButtonPressed() && speedLimitIndex>0)
             speedLimitIndex--;
-        if(controller1.getYButtonPressed() && speedLimitIndex<speedLimits.length-1)
+        if(controller1.getStartButtonPressed() && speedLimitIndex<speedLimits.length-1)
             speedLimitIndex++;
         return speedLimits[speedLimitIndex];
     }
     @Override
     public boolean getReverseDirection(){
-        return controller1.getBButtonPressed();
+        return controller1.getXButtonPressed();
     }
 
     @Override
     public boolean getToggleHatchPusher(){
-        return controller1.getAButtonPressed();
+        return controller1.getBButtonPressed();
     }
 
     @Override
@@ -65,6 +65,21 @@ public class F310Controller implements DriveController{
     @Override
     public boolean getToggleOutwards(){
         return controller1.getBumperPressed(Hand kRight);
+    }
+
+    @Override
+    public boolean getToggleArmsUp(){
+        return controller1.getYButtonPressed();
+    }
+
+    @Override
+    public boolean getToggleArmsDown(){
+        return controller1.getAButtonPressed();
+    }
+    @Override
+    public boolean getStartLift(){
+        return controller1.getTriggerAxis(hand kLeft)>.75&&controller1.getTriggerAxis(hand kRight)>.75;
+        
     }
     
 

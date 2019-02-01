@@ -29,6 +29,7 @@ public class Robot extends TimedRobot {
   public static Drive drive = new Drive();
   public static HatchPusher hatchPusher = new HatchPusher();
   public static WheelArm wheelArm = new WheelArm();
+  public static LiftSystem liftSystem = new LiftSystem();
   public static DriveController controller = new F310Controller();
   public static OI m_oi;
 
