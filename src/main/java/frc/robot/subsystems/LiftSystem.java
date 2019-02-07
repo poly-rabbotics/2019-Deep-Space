@@ -18,11 +18,11 @@ public class LiftSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private DoubleSolenoid frontLeft = RobotMap.liftSystemFrontRight;
+  private DoubleSolenoid frontLeft = RobotMap.liftSystemFrontLeft;
   private DoubleSolenoid frontRight = RobotMap.liftSystemFrontRight;
-  private DoubleSolenoid backLeft = RobotMap.liftSystemFrontRight;
-  private DoubleSolenoid backRight = RobotMap.liftSystemFrontRight;
-  private Timer t= new Timer();
+  private DoubleSolenoid backLeft = RobotMap.liftSystemBackLeft;
+  private DoubleSolenoid backRight = RobotMap.liftSystemBackRight;
+  private final double driveSpeed = .5;//TODO: Add real value
 
   private VictorSP leftWheel = RobotMap.leftLiftWheel;
   private VictorSP rightWheel = RobotMap.rightLiftWheel;
@@ -37,23 +37,26 @@ public class LiftSystem extends Subsystem {
     addChild("Right Lift Wheel", rightWheel);
   }
 
-  public void lift(){
+  public void engageSolenoids(){
     frontLeft.set(Value.kForward);
     frontRight.set(Value.kForward);
     backleft.set(Value.kForward);
     backRight.set(Value.kForward);
-    t.delay(3.0);
-    leftWheel.set(Value.kForward);
-    rightWheel.set(Value.kForward);
-    t.delay(1.5);
+  }
+  public void driveForward(){
+    leftWheel.set(driveSpeed);
+    rightWheel.set(driveSpeed);
+  }
+  public void withdrawFrontSolenoids(){
     frontLeft.set(Value.kBackward);
     frontRight.set(Value.kBackward);
-    t.delay(2.5);
-    leftWheel.set(Value.kStop);
-    rightWheel.set(Value.kStop);
+  }
+  public void finishLift(){
+    leftWheel.set(0);
+    rightWheel.set(0);
     backLeft.set(Value.kBackward);
     backRight.set(Value.kBackward);
-
+  }
 
 
 

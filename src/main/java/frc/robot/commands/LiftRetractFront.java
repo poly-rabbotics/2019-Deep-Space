@@ -8,10 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.Timer;
+public Timer t2 = new Timer();
+private static final double stall2 = 2.0;
 
-public class LiftSystemCommand extends Command {
-  public LiftSystemCommand() {
-    requires(Robot.liftSystem);
+public class LiftRetractFront extends Command {
+  public LiftRetractFront() {
+    requires(robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -24,8 +27,8 @@ public class LiftSystemCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(controller.getStartLift())
-      Robot.LiftSystem.lift();
+    Robot.liftSystem.retractFrontSolenoids(); 
+    t2.delay(stall2); 
   }
 
   // Make this return true when this Command no longer needs to run execute()

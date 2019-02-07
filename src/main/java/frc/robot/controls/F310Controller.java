@@ -20,6 +20,7 @@ public class F310Controller implements DriveController{
 
     private static final double CURVE = 2;
     private static final double DEADZONE = .03;
+    private static final double startLift = .75;
 
     private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
     private int speedLimitIndex = speedLimits.length-1;
@@ -78,7 +79,7 @@ public class F310Controller implements DriveController{
     }
     @Override
     public boolean getStartLift(){
-        return controller1.getTriggerAxis(hand kLeft)>.75&&controller1.getTriggerAxis(hand kRight)>.75;
+        return controller1.getTriggerAxis(hand kLeft)>.startLift&&controller1.getTriggerAxis(hand kRight)>startLift;
         
     }
     

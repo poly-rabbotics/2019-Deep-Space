@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -120,6 +121,7 @@ public class Robot extends TimedRobot {
     new DriveCommand().start();
     new HatchPusherCommand().start();
     new WheelArmCommand().start();
+    new LiftSystemCommand().start();
   }
 
   /**

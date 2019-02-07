@@ -15,6 +15,7 @@ private VictorSP right = RobotMap.wheelArmRight;
 
 private boolean inwards = false;
 private boolean outwards = false;
+private static double wheelArmSpeed = .8;//TODO: Add real value
 public class WheelArm extends Subsystem {
 
 public WheelArm(){
@@ -25,21 +26,21 @@ public WheelArm(){
   }
   public void spinInwards(){
     inwards = true;
-    left.set(Value.kForward);//Check if Forwards means clockwise
-    right.set(Value.kReverse);
+    left.set(wheelArmSpeed);//Check if Forwards means clockwise
+    right.set(-wheelArmSpeed);
 
   }
   public void spinOutwards(){
     outwards = true;
-    left.set(Value.kReverse);
-    right.set(Value.kForward);
+    left.set(-wheelArmSpeed);
+    right.set(wheelArmSpeed);
 
   }
   public void stopArms(){
     inwards = false;
     outwards = false;
-    left.set(Value.kOff);
-    right.set(Value.kOff)
+    left.set(0);
+    right.set(0)
 
 
 
