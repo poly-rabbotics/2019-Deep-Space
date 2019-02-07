@@ -8,22 +8,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
-public Timer t = new Timer();
-private static final double stall = 3.0;
+
 public class EngageSolenoidCommand extends Command {
   public EngageSolenoidCommand() {
-    requires(robot.liftSystem);
+    requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
-  
+private static final Timer t = new Timer();
+private static final double stall = 3.0;
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     if(getStartLift){
       Robot.liftSystem.engageSolenoids();
       t.delay(stall);
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run

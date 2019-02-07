@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.HatchPusherCommand;
-import frc.robot.commands.WheelArmComand;
+import frc.robot.commands.LiftCommandGroup;
+import frc.robot.commands.WheelArmCommand;
 import frc.robot.controls.*;
 import frc.robot.subsystems.*;
 
@@ -121,7 +122,7 @@ public class Robot extends TimedRobot {
     new DriveCommand().start();
     new HatchPusherCommand().start();
     new WheelArmCommand().start();
-    new LiftSystemCommand().start();
+    new LiftCommandGroup().start();
   }
 
   /**

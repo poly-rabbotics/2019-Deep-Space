@@ -7,17 +7,18 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
+
+public class WheelArm extends Subsystem {
 private VictorSP left = RobotMap.wheelArmLeft;
 private VictorSP right = RobotMap.wheelArmRight;
 
 private boolean inwards = false;
 private boolean outwards = false;
 private static double wheelArmSpeed = .8;//TODO: Add real value
-public class WheelArm extends Subsystem {
-
 public WheelArm(){
     super("Wheel Arm");
     addChild("Left Motor", left);
@@ -40,7 +41,7 @@ public WheelArm(){
     inwards = false;
     outwards = false;
     left.set(0);
-    right.set(0)
+    right.set(0);
 
 
 

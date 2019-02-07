@@ -8,11 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 
 public class LiftDriveForward extends Command {
   public LiftDriveForward() {
-    requires(robot.liftSystem);
+    requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

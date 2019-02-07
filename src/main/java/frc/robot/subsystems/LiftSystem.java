@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -27,7 +28,7 @@ public class LiftSystem extends Subsystem {
   private VictorSP leftWheel = RobotMap.leftLiftWheel;
   private VictorSP rightWheel = RobotMap.rightLiftWheel;
 
-  public HatchPusher(){
+  public LiftSystem(){
     super("Lift System");
     addChild("Front Left Solenoid", frontLeft);
     addChild("Front Right Solenoid", frontRight);
@@ -40,7 +41,7 @@ public class LiftSystem extends Subsystem {
   public void engageSolenoids(){
     frontLeft.set(Value.kForward);
     frontRight.set(Value.kForward);
-    backleft.set(Value.kForward);
+    backLeft.set(Value.kForward);
     backRight.set(Value.kForward);
   }
   public void driveForward(){
@@ -48,14 +49,14 @@ public class LiftSystem extends Subsystem {
     rightWheel.set(driveSpeed);
   }
   public void withdrawFrontSolenoids(){
-    frontLeft.set(Value.kBackward);
-    frontRight.set(Value.kBackward);
+    frontLeft.set(Value.kReverse);
+    frontRight.set(Value.kReverse);
   }
   public void finishLift(){
     leftWheel.set(0);
     rightWheel.set(0);
-    backLeft.set(Value.kBackward);
-    backRight.set(Value.kBackward);
+    backLeft.set(Value.kReverse);
+    backRight.set(Value.kReverse);
   }
 
 
