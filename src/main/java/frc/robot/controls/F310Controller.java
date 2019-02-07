@@ -54,8 +54,16 @@ public class F310Controller implements DriveController{
     @Override
     public boolean getReverseDirection(){
         //return controller1.getBButtonPressed();
-        return false;
+        return controller1.getRawButtonPressed(3);
     }
 
+    public boolean getToggleInwards(){
+        return controller1.getRawButtonPressed(5);
+    }
+
+    public boolean getToggleOutwards(){
+        return controller1.getRawButtonPressed(6);
+    @Override
+    public boolean getStartLift(){
     
 }
