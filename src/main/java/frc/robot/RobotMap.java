@@ -6,8 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-import org.usfirst.frc.team4999.controllers.LogitechF310;
+//import org.usfirst.frc.team4999.controllers.LogitechF310;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -26,11 +27,12 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
   public static final Spark leftFront = new Spark(0);// TODO: Set to actual port numbers
-  public static final Spark rightFront = new Spark(1);
-  public static final Spark leftBack = new Spark(2);
+  public static final Spark rightFront = new Spark(2);
+  public static final Spark leftBack = new Spark(1);
   public static final Spark rightBack = new Spark(3);
 
 
 
-  public static final LogitechF310 controller1 = new LogitechF310(0);// TODO: PORT NUMBERS
+ // public static final LogitechF310 controller1 = new LogitechF310(0);// TODO: PORT NUMBERS
+  public static final Joystick controller1 = new Joystick(1);
 }

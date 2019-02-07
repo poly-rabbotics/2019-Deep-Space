@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
-import static org.usfirst.frc.team4999.utils.Utils.map;
+//import static org.usfirst.frc.team4999.utils.Utils.map;
 
 /**
  * Add your docs here.
@@ -31,9 +31,9 @@ public class Drive extends Subsystem {
     
   }
   public void arcadeDrive(double moveRequest, double turnRequest, double speedLimiter){
-    moveRequest = map(moveRequest, -1, 1, -speedLimiter, speedLimiter);
-    turnRequest = map(turnRequest, -1, 1, -speedLimiter, speedLimiter);
-    drive.arcadeDrive(moveRequest, turnRequest, false);
+    //moveRequest = map(moveRequest, -1, 1, -speedLimiter, speedLimiter);
+    //turnRequest = map(turnRequest, -1, 1, -speedLimiter, speedLimiter);
+    drive.arcadeDrive(moveRequest * speedLimiter, turnRequest * speedLimiter, false);
   }
   @Override
   public void initDefaultCommand() {
