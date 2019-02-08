@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
+import frc.robot.controls.DriveController;
 
 public class EngageSolenoidCommand extends Command {
   public EngageSolenoidCommand() {
@@ -17,22 +18,23 @@ public class EngageSolenoidCommand extends Command {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
-private static final Timer t = new Timer();
-private static final double stall = 3.0;
+
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    /*if(getStartLift){
-      Robot.liftSystem.engageSolenoids();
-      t.delay(stall);
-    }
-    */
+   
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    DriveController controller = Robot.controller;
+    if(controller.getStartLift()){
+      Robot.liftSystem.engageSolenoids();
+    
+    }
+    
     
   }
 

@@ -18,5 +18,6 @@ public interface DriveController {
     public boolean getToggleHatchPusher();
     public boolean getToggleInwards();
     public boolean getToggleOutwards();
+    public boolean getStartLift();
 
 }

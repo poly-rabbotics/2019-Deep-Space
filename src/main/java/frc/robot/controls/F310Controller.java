@@ -70,20 +70,20 @@ public class F310Controller implements DriveController{
 
     /*@Override
     public boolean getToggleArmsUp(){
-        return controller1.getYButtonPressed();
+        return controller1.getRawButtonPressed(4);
     }
 
     @Override
     public boolean getToggleArmsDown(){
-        return controller1.getAButtonPressed();
+        return controller1.getRawButtonPressed(1);
     }
-    
+    */
     @Override
     public boolean getStartLift(){
-        return controller1.getTriggerAxis(Hand Hand.kLeft)>startLift&&controller1.getTriggerAxis(Hand Hand.kRight)>startLift;
-      */  
+        return controller1.getRawAxis(2)>startLift;
+        
     }
-    
+}
 
   
     
