@@ -18,8 +18,8 @@ public class LiftRetractFront extends Command {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
-  private static final Timer t2 = new Timer();
-  private static final double stall2 = 2.0;
+  //private static final Timer t2 = new Timer();
+  //private static final double stall2 = 2.0;
 
   // Called just before this Command runs the first time
   @Override
@@ -30,7 +30,7 @@ public class LiftRetractFront extends Command {
   @Override
   protected void execute() {
     Robot.liftSystem.withdrawFrontSolenoids(); 
-    t2.delay(stall2); 
+    //t2.delay(stall2); 
   }
 
   // Make this return true when this Command no longer needs to run execute()

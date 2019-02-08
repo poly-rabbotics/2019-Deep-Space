@@ -22,10 +22,11 @@ private static final double stall = 3.0;
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if(getStartLift){
+    /*if(getStartLift){
       Robot.liftSystem.engageSolenoids();
       t.delay(stall);
     }
+    */
   }
 
   // Called repeatedly when this Command is scheduled to run

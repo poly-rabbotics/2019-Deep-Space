@@ -29,8 +29,8 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
   public static final Spark leftFront = new Spark(0);// TODO: Set to actual port numbers
-  public static final Spark rightFront = new Spark(1);
-  public static final Spark leftBack = new Spark(2);
+  public static final Spark leftBack = new Spark(1);
+  public static final Spark rightFront = new Spark(2);
   public static final Spark rightBack = new Spark(3);
 
   public static final VictorSP wheelArmLeft = new VictorSP(4);;// TODO: Set to actual port numbers
@@ -42,12 +42,8 @@ public class RobotMap {
   public static final Encoder wheelArmEncoder = new Encoder(0,1,false);//TODO: Fix encoder constructor
 
   public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,1); // TODO: set to actual solenoid values
-  public static final DoubleSolenoid hatchSolenoidLeft = new DoubleSolenoid(2,3);
-  public static final DoubleSolenoid hatchSolenoidRight = new DoubleSolenoid(4,5); //placeholder values
-  public static final DoubleSolenoid liftSystemBackLeft = new DoubleSolenoid(6,7); // Do we have this many?
-  public static final DoubleSolenoid liftSystemBackRight = new DoubleSolenoid(8,9);
-  public static final DoubleSolenoid liftSystemFrontLeft = new DoubleSolenoid(10,11);
-  public static final DoubleSolenoid liftSystemFrontRight = new DoubleSolenoid(12,13);
-
-  public static final LogitechF310 controller1 = new LogitechF310(0);// TODO: PORT NUMBERS
+  public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(2,3);
+  public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(4,5);
+  
+  public static final LogitechF310 controller1 = new LogitechF310(1);// TODO: PORT NUMBERS
 }

@@ -20,32 +20,28 @@ public class HatchPusher extends Subsystem {
   // here. Call these from Commands.
 
   private DoubleSolenoid top = RobotMap.hatchSolenoidTop;
-  private DoubleSolenoid left = RobotMap.hatchSolenoidLeft;
-  private DoubleSolenoid right = RobotMap.hatchSolenoidRight;
+  
 
  private boolean out = false;
-}
+
 
   public HatchPusher(){
     super("Hatch Pusher");
     addChild("Top Solenoid", top);
-    addChild("Left Solenoid", left);
-    addChild("Right Solenoid", right);
+   
   }
 
   public void extend(){
    out = true;
     top.set(Value.kForward);
-    left.set(Value.kForward);
-    right.set(Value.kForward);
+    
 
   }
 
   public void retract(){
     out = false;
     top.set(Value.kReverse);
-    left.set(Value.kReverse);
-    right.set(Value.kReverse);
+    
   }
 
   public boolean isOut(){

@@ -19,14 +19,14 @@ public class F310Controller implements DriveController{
     private LogitechF310 controller1 = RobotMap.controller1;
 
     private static final double CURVE = 2;
-    private static final double DEADZONE = .03;
+    private static final double DEADZONE = .01;
     private static final double startLift = .75;
 
     private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
     private int speedLimitIndex = speedLimits.length-1;
     @Override
     public double getMoveRequest(){
-        double speed = controller1.getY(Hand.kRight);
+        double speed = controller1.getRawAxis(1);
         speed = curve(speed, CURVE);
         speed = deadzone(speed, DEADZONE);
         return speed;
@@ -34,7 +34,7 @@ public class F310Controller implements DriveController{
     }
     @Override
     public double getTurnRequest(){
-        double speed = controller1.getX(Hand.kLeft);
+        double speed = controller1.getRawAxis(4);
         speed = curve(speed, CURVE);
         speed = deadzone(speed, DEADZONE);
         return speed;
@@ -42,20 +42,20 @@ public class F310Controller implements DriveController{
     }
     @Override
     public double getSpeedLimit(){
-        if(controller1.getBackButtonPressed() && speedLimitIndex>0)
+        if(controller1.getRawButtonPressed(7) && speedLimitIndex>0)
             speedLimitIndex--;
-        if(controller1.getStartButtonPressed() && speedLimitIndex<speedLimits.length-1)
+        if(controller1.getRawButtonPressed(8) && speedLimitIndex<speedLimits.length-1)
             speedLimitIndex++;
         return speedLimits[speedLimitIndex];
     }
     @Override
     public boolean getReverseDirection(){
-        return controller1.getXButtonPressed();
+        return controller1.getRawButtonPressed(3);
     }
 
     @Override
     public boolean getToggleHatchPusher(){
-        return controller1.getBButtonPressed();
+        return controller1.getRawButtonPressed(2);
     }
 
     @Override
@@ -77,14 +77,14 @@ public class F310Controller implements DriveController{
     public boolean getToggleArmsDown(){
         return controller1.getAButtonPressed();
     }
-    */
+    
     @Override
     public boolean getStartLift(){
         return controller1.getTriggerAxis(Hand Hand.kLeft)>startLift&&controller1.getTriggerAxis(Hand Hand.kRight)>startLift;
-        
+      */  
     }
     
 
   
     
-}
+

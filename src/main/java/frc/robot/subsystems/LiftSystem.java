@@ -19,10 +19,9 @@ public class LiftSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private DoubleSolenoid frontLeft = RobotMap.liftSystemFrontLeft;
-  private DoubleSolenoid frontRight = RobotMap.liftSystemFrontRight;
-  private DoubleSolenoid backLeft = RobotMap.liftSystemBackLeft;
-  private DoubleSolenoid backRight = RobotMap.liftSystemBackRight;
+  private DoubleSolenoid front = RobotMap.liftSystemFront;
+  private DoubleSolenoid back = RobotMap.liftSystemBack;
+  
   private final double driveSpeed = .5;//TODO: Add real value
 
   private VictorSP leftWheel = RobotMap.leftLiftWheel;
@@ -30,40 +29,34 @@ public class LiftSystem extends Subsystem {
 
   public LiftSystem(){
     super("Lift System");
-    addChild("Front Left Solenoid", frontLeft);
-    addChild("Front Right Solenoid", frontRight);
-    addChild("Back Left Solenoid", backLeft);
-    addChild("Back Right Solenoid", backRight);
+    addChild("Front Solenoid", front);
+    addChild("Back Solenoid", back);
     addChild("Left Lift Wheel", leftWheel);
     addChild("Right Lift Wheel", rightWheel);
   }
 
   public void engageSolenoids(){
-    frontLeft.set(Value.kForward);
-    frontRight.set(Value.kForward);
-    backLeft.set(Value.kForward);
-    backRight.set(Value.kForward);
+    front.set(Value.kForward);
+    back.set(Value.kForward);
   }
   public void driveForward(){
     leftWheel.set(driveSpeed);
     rightWheel.set(driveSpeed);
   }
   public void withdrawFrontSolenoids(){
-    frontLeft.set(Value.kReverse);
-    frontRight.set(Value.kReverse);
+    front.set(Value.kReverse);
   }
   public void finishLift(){
     leftWheel.set(0);
     rightWheel.set(0);
-    backLeft.set(Value.kReverse);
-    backRight.set(Value.kReverse);
+    back.set(Value.kReverse);
   }
 
 
 
 
 
-  }
+  
 
   @Override
   public void initDefaultCommand() {

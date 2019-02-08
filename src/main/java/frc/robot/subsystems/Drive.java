@@ -33,7 +33,7 @@ public class Drive extends Subsystem {
   public void arcadeDrive(double moveRequest, double turnRequest, double speedLimiter){
     moveRequest = map(moveRequest, -1, 1, -speedLimiter, speedLimiter);
     turnRequest = map(turnRequest, -1, 1, -speedLimiter, speedLimiter);
-    drive.arcadeDrive(moveRequest, turnRequest, false);
+    drive.arcadeDrive(moveRequest,turnRequest,true) ;
   }
   @Override
   public void initDefaultCommand() {
