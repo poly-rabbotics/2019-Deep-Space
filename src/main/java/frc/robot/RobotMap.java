@@ -10,6 +10,7 @@ import org.usfirst.frc.team4999.controllers.LogitechF310;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Encoder;
 /**
@@ -33,9 +34,9 @@ public class RobotMap {
   public static final Spark rightFront = new Spark(2);
   public static final Spark rightBack = new Spark(3);
 
-  public static final VictorSP wheelArmLeft = new VictorSP(4);;// TODO: Set to actual port numbers
-  public static final VictorSP wheelArmRight = new VictorSP(5);
-  public static final VictorSP wheelArmAngle = new VictorSP(6);
+  public static final VictorSP wheelArmLeft = new VictorSP(4);// TODO: Set to actual port numbers
+  public static final Talon wheelArmRight = new Talon(5);
+  public static final Talon wheelArmAngle = new Talon(6);
   public static final VictorSP leftLiftWheel = new VictorSP(7); 
   public static final VictorSP rightLiftWheel = new VictorSP(8);
 
