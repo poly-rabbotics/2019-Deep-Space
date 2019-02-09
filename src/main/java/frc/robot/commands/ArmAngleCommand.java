@@ -8,11 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import frc.robot.controls.DriveController;
 
 public class ArmAngleCommand extends Command {
   public ArmAngleCommand() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.armAngle);
   }
 
   // Called just before this Command runs the first time
@@ -23,6 +24,14 @@ public class ArmAngleCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    DriveController controller = Robot.controller;
+    if(controller.getMoveArmsUp){
+      Robot.armAngle.spinUpwards();
+    }
+    if(controller.getMoveArmsDown){
+      Robot.armAngle.spinDownwards();
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

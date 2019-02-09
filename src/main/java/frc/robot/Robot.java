@@ -17,6 +17,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.HatchPusherCommand;
 import frc.robot.commands.LiftCommandGroup;
 import frc.robot.commands.WheelArmCommand;
+import frc.robot.commands.ArmAngleCommand;
 import frc.robot.controls.*;
 import frc.robot.subsystems.*;
 
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
   public static HatchPusher hatchPusher = new HatchPusher();
   public static WheelArm wheelArm = new WheelArm();
   public static LiftSystem liftSystem = new LiftSystem();
+  public static ArmAngle armAngle = new ArmAngle();
   public static DriveController controller = new F310Controller();
   public static OI m_oi;
 

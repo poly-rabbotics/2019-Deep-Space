@@ -27,7 +27,7 @@ public WheelArm(){
   }
   public void spinInwards(){
     inwards = true;
-    left.set(wheelArmSpeed);//Check if Forwards means clockwise
+    left.set(wheelArmSpeed);
     right.set(-wheelArmSpeed);
 
   }

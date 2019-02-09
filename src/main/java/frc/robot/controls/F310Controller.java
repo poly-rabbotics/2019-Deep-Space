@@ -68,14 +68,14 @@ public class F310Controller implements DriveController{
         return controller1.getRawButtonPressed(6);
     }
 
-    /*@Override
-    public boolean getToggleArmsUp(){
-        return controller1.getRawButtonPressed(4);
+    
+    public boolean getMoveArmsUp(){
+        return controller1.getRawButton(4);
     }
 
     @Override
-    public boolean getToggleArmsDown(){
-        return controller1.getRawButtonPressed(1);
+    public boolean getMoveArmsDown(){
+        return controller1.getRawButton(1);
     }
     */
     @Override

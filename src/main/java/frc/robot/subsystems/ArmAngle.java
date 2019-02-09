@@ -8,13 +8,27 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.VictorSP;
+import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
 public class ArmAngle extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  private VictorSP angle = RobotMap.wheelArmAngle;
+  private static double armAngleSpeed = .3;//TODO: Add real value
+  public ArmAngle(){
+    super("Arm Angle");
+    addChild("Angle Motor", angle);
+  }
+  public void spinUpwards(){
+    angle.set(armAngleSpeed);
+  }
+  public void spinDownwards(){
+    angle.set(-armAngleSpeed);
+  }
+  public void stopSpin(){
+    angle.set(0);
+  }
 
   
   @Override
