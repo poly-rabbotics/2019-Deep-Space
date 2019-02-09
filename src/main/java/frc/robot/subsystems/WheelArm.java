@@ -19,7 +19,7 @@ private Talon right = RobotMap.wheelArmRight;
 
 private boolean inwards = false;
 private boolean outwards = false;
-private static double wheelArmSpeed = .3;//TODO: Add real value
+private static double wheelArmSpeed = .5;//TODO: Add real value
 public WheelArm(){
     super("Wheel Arm");
     addChild("Left Motor", left);
