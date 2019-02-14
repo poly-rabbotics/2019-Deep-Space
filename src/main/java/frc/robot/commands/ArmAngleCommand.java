@@ -25,16 +25,17 @@ public class ArmAngleCommand extends Command {
   @Override
   protected void execute() {
     DriveController controller = Robot.controller;
-    if(controller.getMoveArmsUp()) {
-      if(Robot.armAngle.getMoving())
+   if(Robot.armAngle.getMoving()) {
+    if(controller.getMoveArmsUp()||controller.getMoveArmsDown()) 
         Robot.armAngle.stopSpin();
-      Robot.armAngle.spinUpwards();
     }
-    if(controller.getMoveArmsDown()){
-      if(Robot.armAngle.getMoving())
-        Robot.armAngle.stopSpin();
-      Robot.armAngle.spinDownwards();
-    }
+   if(controller.getMoveArmsUp()){
+    Robot.armAngle.spinUpwards();
+   }
+   if(controller.getMoveArmsDown()){
+     Robot.armAngle.spinDownwards();
+   }
+    
 
   }
 
