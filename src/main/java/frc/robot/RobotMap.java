@@ -29,16 +29,16 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
-  public static final Spark leftFront = new Spark(0);// TODO: Set to actual port numbers
-  public static final Spark leftBack = new Spark(1);
-  public static final Spark rightFront = new Spark(2);
-  public static final Spark rightBack = new Spark(3);
+  public static final Spark leftFront = new Spark(8);// TODO: Set to actual port numbers
+  public static final Spark leftBack = new Spark(7);
+  public static final Spark rightFront = new Spark(6);
+  public static final Spark rightBack = new Spark(5);
 
-  public static final VictorSP wheelArmLeft = new VictorSP(4);// TODO: Set to actual port numbers
-  public static final Talon wheelArmRight = new Talon(5);
-  public static final Talon wheelArmAngle = new Talon(6);
-  public static final VictorSP leftLiftWheel = new VictorSP(7); 
-  public static final VictorSP rightLiftWheel = new VictorSP(8);
+  public static final VictorSP wheelArmLeft = new VictorSP(3);// TODO: Set to actual port numbers
+  public static final Talon wheelArmRight = new Talon(1);
+  public static final Talon wheelArmAngle = new Talon(0);
+  public static final VictorSP leftLiftWheel = new VictorSP(4); 
+  public static final VictorSP rightLiftWheel = new VictorSP(2);
 
   public static final Encoder wheelArmEncoder = new Encoder(0,1,false);//TODO: Fix encoder constructor
 
