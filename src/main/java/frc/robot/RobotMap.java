@@ -34,11 +34,19 @@ public class RobotMap {
   public static final Spark rightFront = new Spark(6);
   public static final Spark rightBack = new Spark(5);
 
+<<<<<<< HEAD
   public static final VictorSP wheelArmLeft = new VictorSP(3);// TODO: Set to actual port numbers
   public static final Talon wheelArmRight = new Talon(1);
   public static final Talon wheelArmAngle = new Talon(0);
   public static final VictorSP leftLiftWheel = new VictorSP(4); 
   public static final VictorSP rightLiftWheel = new VictorSP(2);
+=======
+  public static final VictorSP wheelArmLeft = new VictorSP(4);// TODO: Set to actual port numbers
+  public static final Talon wheelArmRight = new Talon(5); //Did these get changed to PWMVictorSPX? That might be the most accurate class although maybe it does not matter
+  public static final Talon wheelArmAngle = new Talon(6);
+  public static final VictorSP leftLiftWheel = new VictorSP(7); 
+  public static final VictorSP rightLiftWheel = new VictorSP(8);
+>>>>>>> 43ffbd444fe0067b1d99d397430e065afe579fbc
 
   public static final Encoder wheelArmEncoder = new Encoder(0,1,false);//TODO: Fix encoder constructor
 
