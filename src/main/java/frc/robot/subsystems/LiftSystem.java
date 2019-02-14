@@ -23,7 +23,7 @@ public class LiftSystem extends Subsystem {
   private DoubleSolenoid back = RobotMap.liftSystemBack;
   
   private final double driveSpeed = .5;//TODO: Add real value
-
+                                        //This value should be very nearly equal to the number of feet per second it moves, so 0.5 may result in a little less than 0.5 ft/s
   private VictorSP leftWheel = RobotMap.leftLiftWheel;
   private VictorSP rightWheel = RobotMap.rightLiftWheel;
 
