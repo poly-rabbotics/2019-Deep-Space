@@ -42,9 +42,9 @@ public class RobotMap {
 
   public static final Encoder wheelArmEncoder = new Encoder(0,1,false);//TODO: Fix encoder constructor
 
-  public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,1); // TODO: set to actual solenoid values
-  public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(2,3);
-  public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(4,5);
+  public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,3); // TODO: set to actual solenoid values
+  public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1,5);
+  public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(2,4);
   
   public static final LogitechF310 controller1 = new LogitechF310(1);// TODO: PORT NUMBERS
 }
