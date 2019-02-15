@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -17,46 +18,43 @@ import frc.robot.RobotMap;
 public class LiftSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private int driveSpeed = .5;
+  private  double driveSpeed = .5;
 
-  private DoubleSolenoid frontLeft = RobotMap.liftSystemFrontLeft;
-  private DoubleSolenoid frontRight = RobotMap.liftSystemFrontRight;
-  private DoubleSolenoid backLeft = RobotMap.liftSystemBackLeft;
-  private DoubleSolenoid backRight = RobotMap.liftSystemBackRight;
-  private Timer t = new Timer();
+  private DoubleSolenoid front = RobotMap.liftSystemFront;
+  private DoubleSolenoid back = RobotMap.liftSystemBack;
+  
+  
 
   private VictorSP leftWheel = RobotMap.leftLiftWheel;
   private VictorSP rightWheel = RobotMap.rightLiftWheel;
 
-  public HatchPusher(){
+  public LiftSystem(){
     super("Lift System");
-    addChild("Front Left Solenoid", frontLeft);
-    addChild("Front Right Solenoid", frontRight);
-    addChild("Back Left Solenoid", backLeft);
-    addChild("Back Right Solenoid", backRight);
+    addChild("Front Solenoid", front);
+    addChild("Back Solenoid", back);
     addChild("Left Lift Wheel", leftWheel);
     addChild("Right Lift Wheel", rightWheel);
   }
 
   public void engageSolenoids(){
-    frontLeft.set(Value.kForward);
-    frontRight.set(Value.kForward);
-    backleft.set(Value.kForward);
-    backRight.set(Value.kForward);
+    front.set(Value.kForward);
+    
+    back.set(Value.kForward);
+   
   }
   public void driveForward(){
     leftWheel.set(driveSpeed);
     rightWheel.set(driveSpeed);
   }
-  public void retractBackSolenoids(){
-    frontLeft.set(Value.kBackward);
-    frontRight.set(Value.kBackward);
+  public void retractFrontSolenoids(){
+    front.set(Value.kReverse);
+    
   }
-  public void endingLiftSequence(){
+  public void endLiftSequence(){
     leftWheel.set(0);
     rightWheel.set(0);
-    backLeft.set(Value.kBackward);
-    backRight.set(Value.kBackward);
+    back.set(Value.kReverse);
+    
 
   }
 

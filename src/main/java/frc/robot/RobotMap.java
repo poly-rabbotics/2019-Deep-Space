@@ -35,13 +35,8 @@ public class RobotMap {
   public static final Spark rightBack = new Spark(5);
 
   public static final VictorSP wheelArmLeft = new VictorSP(3);// TODO: Set to actual port numbers
-<<<<<<< HEAD
-  public static final Talon wheelArmRight = new Talon(0); //Did these get changed to PWMVictorSPX? That might be the most accurate class although maybe it does not matter
-  public static final Talon wheelArmAngle = new Talon(1);
-=======
   public static final VictorSP wheelArmRight = new VictorSP(1);
   public static final VictorSP wheelArmAngle = new VictorSP(0);
->>>>>>> bb557d5470d31bd6b61243ce97b9479d78d3f2e7
   public static final VictorSP leftLiftWheel = new VictorSP(4); 
   public static final VictorSP rightLiftWheel = new VictorSP(2);
 

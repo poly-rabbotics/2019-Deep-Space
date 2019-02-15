@@ -29,7 +29,7 @@ public class LiftRetractFront extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.liftSystem.withdrawFrontSolenoids(); 
+    Robot.liftSystem.retractFrontSolenoids(); 
     //t2.delay(stall2); 
   }
 
