@@ -10,7 +10,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Spark;
 import frc.robot.RobotMap;
+import frc.robot.commands.DriveCommand;
 import static org.usfirst.frc.team4999.utils.Utils.map;
 
 /**
@@ -33,11 +35,12 @@ public class Drive extends Subsystem {
   public void arcadeDrive(double moveRequest, double turnRequest, double speedLimiter){
     moveRequest = map(moveRequest, -1, 1, -speedLimiter, speedLimiter);
     turnRequest = map(turnRequest, -1, 1, -speedLimiter, speedLimiter);
-    drive.arcadeDrive(moveRequest,turnRequest,true) ;
+    drive.arcadeDrive(moveRequest, turnRequest, false);
   }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+  
 }

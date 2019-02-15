@@ -15,7 +15,7 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class ArmAngle extends Subsystem {
-  private Talon angle = RobotMap.wheelArmAngle;
+  private VictorSP angle = RobotMap.wheelArmAngle;
   private static double armAngleSpeed = .3;//TODO: Add real value
   public boolean moving = false;
   public ArmAngle(){
