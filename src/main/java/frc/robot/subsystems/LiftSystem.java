@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -18,45 +17,48 @@ import frc.robot.RobotMap;
 public class LiftSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  private int driveSpeed = .5;
 
-  private DoubleSolenoid front = RobotMap.liftSystemFront;
-  private DoubleSolenoid back = RobotMap.liftSystemBack;
-  
-  private final double driveSpeed = .5;//TODO: Add real value
-                                        //This value should be very nearly equal to the number of feet per second it moves, so 0.5 may result in a little less than 0.5 ft/s
+  private DoubleSolenoid frontLeft = RobotMap.liftSystemFrontLeft;
+  private DoubleSolenoid frontRight = RobotMap.liftSystemFrontRight;
+  private DoubleSolenoid backLeft = RobotMap.liftSystemBackLeft;
+  private DoubleSolenoid backRight = RobotMap.liftSystemBackRight;
+  private Timer t = new Timer();
+
   private VictorSP leftWheel = RobotMap.leftLiftWheel;
   private VictorSP rightWheel = RobotMap.rightLiftWheel;
 
-  public LiftSystem(){
+  public HatchPusher(){
     super("Lift System");
-    addChild("Front Solenoid", front);
-    addChild("Back Solenoid", back);
+    addChild("Front Left Solenoid", frontLeft);
+    addChild("Front Right Solenoid", frontRight);
+    addChild("Back Left Solenoid", backLeft);
+    addChild("Back Right Solenoid", backRight);
     addChild("Left Lift Wheel", leftWheel);
     addChild("Right Lift Wheel", rightWheel);
   }
 
   public void engageSolenoids(){
-    front.set(Value.kForward);
-    back.set(Value.kForward);
+    frontLeft.set(Value.kForward);
+    frontRight.set(Value.kForward);
+    backleft.set(Value.kForward);
+    backRight.set(Value.kForward);
   }
   public void driveForward(){
     leftWheel.set(driveSpeed);
     rightWheel.set(driveSpeed);
   }
-  public void withdrawFrontSolenoids(){
-    front.set(Value.kReverse);
+  public void retractBackSolenoids(){
+    frontLeft.set(Value.kBackward);
+    frontRight.set(Value.kBackward);
   }
-  public void finishLift(){
+  public void endingLiftSequence(){
     leftWheel.set(0);
     rightWheel.set(0);
-    back.set(Value.kReverse);
+    backLeft.set(Value.kBackward);
+    backRight.set(Value.kBackward);
+
   }
-
-
-
-
-
-  
 
   @Override
   public void initDefaultCommand() {

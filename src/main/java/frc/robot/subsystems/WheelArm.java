@@ -15,7 +15,7 @@ import frc.robot.RobotMap;
 
 public class WheelArm extends Subsystem {
 private VictorSP left = RobotMap.wheelArmLeft;
-private Talon right = RobotMap.wheelArmRight;           //Did we change this to a PWMVictorSPX ?
+private VictorSP right = RobotMap.wheelArmRight;           //Did we change this to a PWMVictorSPX ?
 
 private boolean inwards = false;
 private boolean outwards = false;
