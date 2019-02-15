@@ -23,6 +23,7 @@ public class ExampleCommandGroup extends CommandGroup {
     // use addParallel()
     // e.g. addParallel(new Command1());
     // addSequential(new Command2());
+    // Command1 and Command2 will run in parallel.
 
     // A command group will require all of the subsystems that each member
     // would require.
