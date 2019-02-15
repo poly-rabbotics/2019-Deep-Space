@@ -125,6 +125,7 @@ public class Robot extends TimedRobot {
     new HatchPusherCommand().start();
     new WheelArmCommand().start();
     new LiftCommandGroup().start();
+    new ArmAngleComand().start();
   }
 
   /**
