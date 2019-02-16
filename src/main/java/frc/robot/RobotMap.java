@@ -34,10 +34,10 @@ public class RobotMap {
   public static final Spark rightFront = new Spark(6);
   public static final Spark rightBack = new Spark(5);
 
-  public static final VictorSP wheelArmLeft = new VictorSP(3);// TODO: Set to actual port numbers
+  public static final VictorSP wheelArmLeft = new VictorSP(4);// TODO: Set to actual port numbers
   public static final VictorSP wheelArmRight = new VictorSP(1);
   public static final VictorSP wheelArmAngle = new VictorSP(0);
-  public static final VictorSP leftLiftWheel = new VictorSP(4); 
+  public static final VictorSP leftLiftWheel = new VictorSP(3); 
   public static final VictorSP rightLiftWheel = new VictorSP(2);
 
   public static final Encoder wheelArmEncoder = new Encoder(0,1,false);//TODO: Fix encoder constructor
@@ -46,5 +46,5 @@ public class RobotMap {
   public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1,5);
   public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(2,4);
   
-  public static final LogitechF310 controller1 = new LogitechF310(1);// TODO: PORT NUMBERS
+  public static final LogitechF310 controller1 = new LogitechF310(0);
 }
