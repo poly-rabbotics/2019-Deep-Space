@@ -43,7 +43,6 @@ public class RobotMap {
   public static final VictorSP rightLiftWheel = new VictorSP(2);
 
   public static final Encoder wheelArmEncoder = new CTREMagneticEncoder(0, 1, 2, false);//TODO: Fix encoder constructor
-  public static final PIDController wheelArmController = new PIDController(0.1, 0.01, 0.1, &wheelArmEncoder, &wheelArmAngle);
 
   public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0, 3); // TODO: set to actual solenoid values
   public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1, 5);
