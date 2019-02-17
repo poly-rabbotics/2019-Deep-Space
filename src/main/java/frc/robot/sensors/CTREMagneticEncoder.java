@@ -62,6 +62,42 @@ public class CTREMagneticEncoder
 		offsetDegrees = getAngle();
 		
 	}
+	//I have NO CLUE why this was not overloaded in the original: 
+	/**
+	 * 
+	 * @param dataAPort
+	 *            DIO port with the "A" data line plugged in (pin 7 on the
+	 *            encoder)
+	 * @param dataBPort
+	 *            DIO port with the "B" data line plugged in to it (pin 5 on the
+	 *            encoder)
+	 * @param pwmPort
+	 *            DIO port connected to pin 9 on the encoder, the PWM pin
+	 * 
+	 * @param inverted
+	 *            whether or not the encoder is inverted
+	 */
+	public CTREMagneticEncoder(int dataAPort, int dataBPort, int pwmPort, boolean inverted)
+	{
+		encoder = new Encoder(dataAPort, dataBPort);
+		encoder.setDistancePerPulse(360/PULSES_PER_REVOLUTION); //"Distance" (the argument) is in degrees
+		
+		pwmCounter = new Counter(pwmPort);
+		pwmCounter.setSemiPeriodMode(true); //only count rising edges
+		
+		//wait for the pwm signal to be counted
+		try
+		{
+			Thread.sleep(5);
+		}
+		catch(InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		offsetDegrees = 0; //Untested
+		offsetDegrees = getAngle();
+		
+	}
 
 	@Override
 	public double getSpeedInRPM()
