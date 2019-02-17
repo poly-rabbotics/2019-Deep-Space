@@ -1,6 +1,6 @@
-package org.usfirst.frc.team7042.triggers;
+package frc.robot.triggers;
 
-import org.usfirst.frc.team7042.robot.Robot;
+import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
