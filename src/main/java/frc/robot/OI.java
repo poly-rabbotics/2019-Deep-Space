@@ -43,9 +43,9 @@ public class OI {
   Trigger shoot = new ShootTrigger();
   
   
-	public OI() {
-		grab.whenActive(new Hunt());
-		grab.whenInactive(new GrabAndHold());
-		shoot.whenActive(new Shoot());
+  public OI() {
+    grab.whenActive(new Hunt());
+    grab.whenInactive(new GrabAndHold());
+    shoot.whenActive(new Shoot());
   }
 }
