@@ -58,7 +58,7 @@ public class CTREMagneticEncoder
 		{
 			e.printStackTrace();
 		}
-		
+		offsetDegrees = 0; //Untested
 		offsetDegrees = getAngle();
 		
 	}
@@ -81,13 +81,16 @@ public class CTREMagneticEncoder
 	public double getDistanceInDegrees()
 	{
 		return encoder.getDistance() + (offsetDegrees / 360);
+		//Since this returns degrees I have no idea why they converted offsetDegrees to radians.
+		//(I think this is a mistake. However, fortunately we're not using it anyway I hope.)
 	}
 
 	@Override
-	public double getAngle()
+	public double getAngle() //This is the one we need
 	{
 		//from 1 to 4096 us
-		return ((pwmCounter.getPeriod() - 1e-6) / 4095e-6) * 360;
+		return ((pwmCounter.getPeriod() - 1e-6) / 4095e-6) * 360 + offsetDegrees;
+		//I added offsetDegrees -- it wasn't in the original
 	}
 
 	@Override
