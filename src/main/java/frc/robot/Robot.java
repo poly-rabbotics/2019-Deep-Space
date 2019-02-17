@@ -151,7 +151,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     new DriveCommand().start();
     new HatchPusherCommand().start();
-    new WheelArmCommand().start();
+    //new WheelArmCommand().start();  //Replaced with the trigger-based Hunt, sequential command group GrabAndHold, and Shoot
     new LiftCommandGroup().start();
     new ArmAngleCommand().start();
   }
