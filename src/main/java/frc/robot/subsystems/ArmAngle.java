@@ -15,6 +15,7 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class ArmAngle extends Subsystem {
+  
   private VictorSP angle = RobotMap.wheelArmAngle;
   private static double armAngleSpeed = .5;//TODO: Add real value
   public boolean moving = false;
@@ -22,14 +23,15 @@ public class ArmAngle extends Subsystem {
     super("Arm Angle");
     addChild("Angle Motor", angle);
   }
-  public void spinUpwards(){
+  /*public void spinUpwards(){
     angle.set(armAngleSpeed);
     moving = true;
   }
   public void spinDownwards(){
     angle.set(-armAngleSpeed);
     moving = true;
-  }
+  }*/
+  public void spinUpwards
   public void stopSpin(){
     angle.set(0);
     moving = false;
