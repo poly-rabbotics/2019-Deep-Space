@@ -11,17 +11,31 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Talon;               //Are we just using Victor SPX ? Why are we not using PWMVictorSPX class?
 import edu.wpi.first.wpilibj.VictorSP;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.PIDController;
+
 /**
  * Add your docs here.
  */
+
 public class ArmAngle extends Subsystem {
   
+  private static final int DOWN_DEGREES = 0;         //TODO: Add real value
+  private static final int ROCKET_DEGREES = 30;
+  private static final int CARGO_SHIP_DEGREES = 45;
+  private static final int UP_DEGREES = 75;
+  private static final int[] POSITIONS = {DOWN_DEGREES, ROCKET_DEGREES, CARGO_SHIP_DEGREES, UP_DEGREES};
+  
+  private int position;
+  
   private VictorSP angle = RobotMap.wheelArmAngle;
-  private static double armAngleSpeed = .5;//TODO: Add real value
-  public boolean moving = false;
+  private CTREMagneticEncoder encoder = RobotMap.wheelArmEncoder;
+  private PIDController wheelArmController = new PIDController(0.1, 0.01, 0.1, &wheelArmEncoder, &angle);
+  //private static double armAngleSpeed = .5;   //TODO: Add real value
+  //public boolean moving = false;
   public ArmAngle(){
     super("Arm Angle");
     addChild("Angle Motor", angle);
+    position = 3;
   }
   /*public void spinUpwards(){
     angle.set(armAngleSpeed);
@@ -31,9 +45,20 @@ public class ArmAngle extends Subsystem {
     angle.set(-armAngleSpeed);
     moving = true;
   }*/
-  public void spinUpwards
+  public void spinUpwards() {
+    if (position < 3)
+      position++;
+    
+    wheelArmController.setSetPoint(POSITIONS[position]);
+  }
+  public void spinDownwards() {
+    if (position > 0)
+      position--;
+    
+    wheelArmController.setSetPoint(POSITIONS[position]);
+  }
   public void stopSpin(){
-    angle.set(0);
+    wheelArmController.setSetPoint(POSITIONS[position])
     moving = false;
   }
   public boolean getMoving(){
