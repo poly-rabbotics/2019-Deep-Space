@@ -4,6 +4,7 @@ package frc.robot.sensors;
 
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDSource;
 
 /**
  * Driver for a CTRE Magnetic Encoder using DIO ports on the roborio.
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.Encoder;
  * @author Narwhal
  *
  */
-public class CTREMagneticEncoder
+public class CTREMagneticEncoder implements PIDSource //Method to implement PIDSource is also added here
 {
 	// had to get this from a forum post by a CTR employee
 	private static final int PULSES_PER_REVOLUTION = 1024;
@@ -98,8 +99,21 @@ public class CTREMagneticEncoder
 		offsetDegrees = getAngle();
 		
 	}
-
+	
 	@Override
+	public void setPIDSourceType(PIDSourceType pidSource) {
+	}
+	
+	@Override
+	public PIDSourceType getPIDSourceType() {
+		return PIDSourceType.kDisplacement;
+	}
+	
+	@Override
+	public double pidGet() {
+		return getAngle();
+	}
+
 	public double getSpeedInRPM()
 	{
 
@@ -113,7 +127,6 @@ public class CTREMagneticEncoder
 		offsetDegrees = 0;
 	}
 
-	@Override
 	public double getDistanceInDegrees()
 	{
 		return encoder.getDistance() + (offsetDegrees / 360);
@@ -121,7 +134,6 @@ public class CTREMagneticEncoder
 		//(I think this is a mistake. However, fortunately we're not using it anyway I hope.)
 	}
 
-	@Override
 	public double getAngle() //This is the one we need
 	{
 		//from 1 to 4096 us
@@ -129,13 +141,11 @@ public class CTREMagneticEncoder
 		//I added offsetDegrees -- it wasn't in the original
 	}
 
-	@Override
 	public double getRawValue()
 	{
 		return pwmCounter.getPeriod();
 	}
 
-	@Override
 	public boolean canRevolveMultipleTimes()
 	{
 		return true;
