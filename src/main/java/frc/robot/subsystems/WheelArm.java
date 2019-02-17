@@ -24,28 +24,29 @@ public WheelArm(){
     super("Wheel Arm");
     addChild("Left Motor", left);
     addChild("Right Motor", right);
-    
   }
+    
+  public void setIntakeSpeed(double speed) {
+	left.set(speed);
+	right.set(-speed);
+  }
+    
   public void spinInwards(){
     inwards = true;
     left.set(wheelArmSpeed);
     right.set(-wheelArmSpeed);
-
   }
+    
   public void spinOutwards(){
     outwards = true;
     left.set(-wheelArmSpeed);
     right.set(wheelArmSpeed);
-
   }
   public void stopArms(){
     inwards = false;
     outwards = false;
     left.set(0);
     right.set(0);
-
-
-
   }
   
   public boolean isInwards(){
