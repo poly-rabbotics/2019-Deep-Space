@@ -12,8 +12,8 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.controls.DriveController;
 
-public class EngageSolenoidCommand extends Command {
-  public EngageSolenoidCommand() {
+public class EngageLiftSolenoidCommand extends Command {
+  public EngageLiftSolenoidCommand() {
     requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
