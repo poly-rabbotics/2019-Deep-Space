@@ -29,7 +29,7 @@ public class ArmAngle extends Subsystem {
   
   private VictorSP angle = RobotMap.wheelArmAngle;
   private CTREMagneticEncoder encoder = RobotMap.wheelArmEncoder;
-  private PIDController wheelArmController = new PIDController(0.1, 0.01, 0.1, &wheelArmEncoder, &angle);
+  private PIDController wheelArmController = new PIDController((0.1, 0.01, 0.1, &wheelArmEncoder, &angle);)
   //private static double armAngleSpeed = .5;   //TODO: Add real value
   //public boolean moving = false;
   public ArmAngle(){
@@ -57,13 +57,14 @@ public class ArmAngle extends Subsystem {
     
     wheelArmController.setSetPoint(POSITIONS[position]);
   }
-  public void stopSpin(){
+  /*public void stopSpin(){
     wheelArmController.setSetPoint(POSITIONS[position])
     moving = false;
   }
   public boolean getMoving(){
     return moving;
   }
+  */
   
   @Override
   public void initDefaultCommand() {
