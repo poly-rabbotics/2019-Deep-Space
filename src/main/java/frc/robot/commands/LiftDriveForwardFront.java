@@ -12,6 +12,8 @@ import frc.robot.Robot;
 
 
 public class LiftDriveForward extends Command {
+  Timer t = new Timer();
+  private static final double DRIVE_DELAY  = 2.0;
   public LiftDriveForward() {
     requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
@@ -21,6 +23,7 @@ public class LiftDriveForward extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    t.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -33,7 +36,7 @@ public class LiftDriveForward extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return (t.get()>=DRIVE_DELAY);
   }
 
   // Called once after isFinished returns true

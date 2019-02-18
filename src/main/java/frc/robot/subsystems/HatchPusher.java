@@ -32,20 +32,18 @@ public class HatchPusher extends Subsystem {
   }
 
   public void extend(){
-   out = true;
     top.set(Value.kForward);
     
 
   }
 
   public void retract(){
-    out = false;
     top.set(Value.kReverse);
     
   }
 
   public boolean isOut(){
-    return out;
+    return top.get()==Vaue.kForward;
   }
 
   @Override
