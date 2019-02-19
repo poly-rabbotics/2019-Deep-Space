@@ -37,6 +37,7 @@ public class ArmAngle extends Subsystem {
     super("Arm Angle");
     addChild("Angle Motor", angle);
     position = 3;
+    armController.enable();
   }
   
   public void spinUpwards() {
