@@ -27,13 +27,11 @@ public WheelArm(){
     
   }
   public void spinInwards(){
-    inwards = true;
     left.set(wheelArmSpeed);
     right.set(-wheelArmSpeed);
 
   }
   public void spinOutwards(){
-    outwards = true;
     left.set(-wheelArmSpeed);
     right.set(wheelArmSpeed);
 
