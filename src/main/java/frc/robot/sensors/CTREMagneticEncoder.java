@@ -139,6 +139,11 @@ public class CTREMagneticEncoder implements PIDSource //Method to implement PIDS
 	public double getAngle() //This is the one we need
 	{
 		//from 1 to 4096 us
+		System.out.print("getAngle() returns ");	//Debugging
+		System.out.println(((pwmCounter.getPeriod() - 1e-6) / 4095e-6) * 360 + offsetDegrees); //Debugging
+		System.out.print("Without offsetDegrees getAngle() would return ");	//Debugging
+		System.out.println(((pwmCounter.getPeriod() - 1e-6) / 4095e-6) * 360); //Debugging
+		
 		return ((pwmCounter.getPeriod() - 1e-6) / 4095e-6) * 360 + offsetDegrees;
 		//I added offsetDegrees -- it wasn't in the original
 	}
