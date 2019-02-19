@@ -21,6 +21,8 @@ public class F310Controller implements DriveController{
     private static final double CURVE = 2;
     private static final double DEADZONE = .01;
     private static final double startLift = .75;
+    private static final double ARM_UP_SPEED = 0.5;
+    private static final double ARM_DOWN_SPEED = -0.5;
 
     private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
     private int speedLimitIndex = speedLimits.length-1;
@@ -68,16 +70,16 @@ public class F310Controller implements DriveController{
         return controller1.getRawButtonPressed(6);
     }
 
-    
-    public boolean getMoveArmsUp(){
-        return controller1.getRawButtonPressed(4);
-    }
-
     @Override
-    public boolean getMoveArmsDown(){
-        return controller1.getRawButtonPressed(1);
-    } 
-    
+    public double getArmsSpeed() {
+        if(logitechf310.getRawButton(4)) {
+            return ARM_UP_SPEED;
+        } else if (logitechf310.getRawButton(1)) {
+            return ARM_DOWN_SPEED;
+        } else {
+            return 0;
+        }
+    }
     @Override
     public boolean getStartLift(){
         return controller1.getRawAxis(2)>startLift;

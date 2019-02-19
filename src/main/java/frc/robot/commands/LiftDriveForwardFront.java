@@ -10,8 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftSystemCommand extends Command {
-  public LiftSystemCommand() {
+
+public class LiftDriveForward extends Command {
+  Timer t = new Timer();
+  private static final double DRIVE_DELAY  = 2.0;
+  public LiftDriveForward() {
     requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -20,18 +23,20 @@ public class LiftSystemCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    t.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.liftSystem.driveForward();
+    
   }
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return (t.get()>=DRIVE_DELAY);
   }
 
   // Called once after isFinished returns true

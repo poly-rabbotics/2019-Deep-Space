@@ -24,19 +24,7 @@ public class ArmAngleCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
-   if(Robot.armAngle.getMoving()) {
-    if(controller.getMoveArmsUp()||controller.getMoveArmsDown()) 
-        Robot.armAngle.stopSpin();
-    }
-   if(controller.getMoveArmsUp()){
-    Robot.armAngle.spinUpwards();
-   }
-   if(controller.getMoveArmsDown()){
-     Robot.armAngle.spinDownwards();
-   }
-    
-
+    Robot.armAngle.setSpeed(Robot.controller.getArmsSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

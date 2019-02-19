@@ -37,6 +37,16 @@ public class WheelArmCommand extends Command {
     if(controller.getToggleOutwards()){
       Robot.wheelArm.spinOutwards();
     }
+    if(Robot.wheelArm.isInwards()){
+      Robot.wheelArm.spinInwards();
+    }
+    else if(Robot.wheelArm.isOutwards()){
+      Robot.wheelArm.spinOutwards();
+    }
+    else{
+      Robot.wheelArm.stopArms();
+    }
+
 
   }
 

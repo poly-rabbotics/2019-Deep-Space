@@ -8,48 +8,32 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
-import edu.wpi.first.wpilibj.Timer;
-import frc.robot.controls.DriveController;
 
-public class EngageSolenoidCommand extends Command {
-  public EngageSolenoidCommand() {
-    requires(Robot.liftSystem);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-  }
-
-
+public class LiftDriveForwardBack extends Command {
+  public LiftDriveForwardBack() {
+    Timer t = new Timer();
+    private static final double DRIVE_DELAY  = 3.0;
+    public LiftDriveForward() {
+      requires(Robot.liftSystem);
+      // Use requires() here to declare subsystem dependencies
+      // eg. requires(chassis);
+    }
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-   
+    t.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
-    if(controller.getStartLift()){
-      Robot.liftSystem.engageSolenoids();
-    
-    }
-    
-    
+    Robot.liftSystem.driveForward();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
+    return (t.get()>=DRIVE_DELAY);
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
