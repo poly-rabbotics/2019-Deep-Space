@@ -25,28 +25,22 @@ public WheelArm(){
     super("Wheel Arm");
     addChild("Left Motor", left);
     addChild("Right Motor", right);
-    
+    left.setInverted(false);
+    right.setInverted(true);
+    wheelMotors = new SpeedControllerGroup(left, right);
   }
   public void spinInwards(){
     inwards = true;
-    left.set(wheelArmIntake);
-    right.set(-wheelArmIntake);
-
+    wheelMotors.set(wheelArmIntake);
   }
   public void spinOutwards(){
     outwards = true;
-    left.set(-wheelArmOuttake);
-    right.set(wheelArmOuttake);
-
+    wheelMotors.set(-wheelArmOuttake);
   }
   public void stopArms(){
     inwards = false;
     outwards = false;
-    left.set(0);
-    right.set(0);
-
-
-
+    wheelMotors.set(0);
   }
   
   public boolean isInwards(){
