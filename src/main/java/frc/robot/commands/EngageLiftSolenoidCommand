@@ -12,16 +12,11 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.controls.DriveController;
 
-<<<<<<< HEAD:src/main/java/frc/robot/commands/EngageSolenoidCommand.java
 
 public class EngageSolenoidCommand extends Command {
   Timer t = new Timer();
   private static final double SOLENOID_DELAY = 4.0;
   public EngageSolenoidCommand() {
-=======
-public class EngageLiftSolenoidCommand extends Command {
-  public EngageLiftSolenoidCommand() {
->>>>>>> 4e8602c29dd2085f13673eb2b372b0d9e76147c4:src/main/java/frc/robot/commands/EngageLiftSolenoidCommand
     requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
