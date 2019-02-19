@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -57,25 +58,26 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
+    //SmartDashboard.putData("Auto mode", m_chooser);
 
-    SmartDashboard.putData("Auto mode", m_chooser);
-    hatchCamera = CameraServer.getInstance().startAutomaticCapture("front",0);
-    hatchCamera.setResolution(640, 480);
-    portCamera = CameraServer.getInstance().startAutomaticCapture("back",1);
-    portCamera.setResolution(1280, 960);
-    
-    // new Thread(()->{
-    //   UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    //   camera.setResolution(640, 480);
-    //   CvSink cvSink = CameraServer.getInstance().getVideo();
-    //   CvSource outputStream = CameraServer.getInstance().putVideo("7042", 640, 480);
-    //   Mat source = new Mat();
-    //   Mat output = new Mat();
-    //   while(!Thread.interrupted()){
-    //     cvSink.grabFrame(source);
-    //     outputStream.putFrame(output);
-    //   }
-    // }).start();
+    // hatchCamera = CameraServer.getInstance().startAutomaticCapture("hatch",0);
+    // hatchCamera.setResolution(640, 480);
+     portCamera = CameraServer.getInstance().startAutomaticCapture("port",1);
+     portCamera.setResolution(1280, 960);
+
+    new Thread(()->{
+      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
+      camera.setResolution(640, 480);
+      CvSink cvSink = CameraServer.getInstance().getVideo();
+      CvSource outputStream = CameraServer.getInstance().putVideo("7042", 640, 480);
+      Mat source = new Mat();
+      Mat output = new Mat();
+      while(!Thread.interrupted()){
+        cvSink.grabFrame(source);
+        Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+        outputStream.putFrame(output);
+      }
+    }).start();
  
   }
 
