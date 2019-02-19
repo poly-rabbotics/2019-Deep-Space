@@ -43,7 +43,7 @@ public class HatchPusher extends Subsystem {
   }
 
   public boolean isOut(){
-    return top.get()==Vaue.kForward;
+    return top.get()==Value.kForward;
   }
 
   @Override
