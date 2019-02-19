@@ -14,7 +14,7 @@ public class LiftCommandGroup extends CommandGroup {
 
 
   public LiftCommandGroup() {
-    addSequential(new EngageSolenoidCommand());
+   /* addSequential(new EngageSolenoidCommand());
     addSequential(new LiftDriveForwardFront());
     addSequential(new LiftRetractFront());
     addSequential(new LiftDriveForwardBack());
@@ -23,7 +23,7 @@ public class LiftCommandGroup extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-
+*/
     // To run multiple commands at the same time,
     // use addParallel()
     // e.g. addParallel(new Command1());

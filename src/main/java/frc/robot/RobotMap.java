@@ -46,5 +46,5 @@ public class RobotMap {
   public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1,5);
   public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(2,4);
   
-  public static final LogitechF310 controller1 = new LogitechF310(0);
+  public static final LogitechF310 controller1 = new LogitechF310(1);
 }

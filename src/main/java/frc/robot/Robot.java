@@ -21,6 +21,7 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.HatchPusherCommand;
 import frc.robot.commands.LiftCommandGroup;
@@ -28,6 +29,7 @@ import frc.robot.commands.WheelArmCommand;
 import frc.robot.commands.ArmAngleCommand;
 import frc.robot.controls.*;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.vision.Cameras;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -46,6 +48,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static UsbCamera hatchCamera;
   public static UsbCamera portCamera;
+  public int myCounter = 0;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -60,6 +63,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
 
+    /*
     // hatchCamera = CameraServer.getInstance().startAutomaticCapture("hatch",0);
     // hatchCamera.setResolution(640, 480);
      portCamera = CameraServer.getInstance().startAutomaticCapture("port",1);
@@ -78,7 +82,10 @@ public class Robot extends TimedRobot {
         outputStream.putFrame(output);
       }
     }).start();
- 
+    */
+		Cameras.setup(); // Setup and Connection to Pixy2 and Microsoft Camera
+		SmartDashboard.putNumber("Iteration", myCounter);
+
   }
 
   /**
@@ -91,6 +98,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+		SmartDashboard.putNumber("Iteration", myCounter);
+		Cameras.run();
   }
 
   /**

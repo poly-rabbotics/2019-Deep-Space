@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,13 +22,14 @@ private boolean inwards = false;
 private boolean outwards = false;
 private static double wheelArmOuttake = .40;//TODO: Add real value
 private static double wheelArmIntake = .80;
+private SpeedControllerGroup wheelMotors = new SpeedControllerGroup(left, right);
 public WheelArm(){
     super("Wheel Arm");
     addChild("Left Motor", left);
     addChild("Right Motor", right);
     left.setInverted(false);
     right.setInverted(true);
-    wheelMotors = new SpeedControllerGroup(left, right);
+    
   }
   public void spinInwards(){
     inwards = true;

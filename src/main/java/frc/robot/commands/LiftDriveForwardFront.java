@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 
-public class LiftDriveForward extends Command {
+/*public class LiftDriveForward extends Command {
   Timer t = new Timer();
   private static final double DRIVE_DELAY  = 2.0;
   public LiftDriveForward() {
@@ -50,3 +50,4 @@ public class LiftDriveForward extends Command {
   protected void interrupted() {
   }
 }
+*/
