@@ -70,7 +70,7 @@ public class F310Controller implements DriveController{
         return controller1.getRawButtonPressed(6);
     }
 
-    @ Override
+    @Override
     public double getArmsSpeed() {
         if(logitechf310.getRawButton(4)) {
             return ARM_UP_SPEED;
