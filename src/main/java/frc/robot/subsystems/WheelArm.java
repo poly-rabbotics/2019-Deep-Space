@@ -32,9 +32,11 @@ public WheelArm(){
   }
   public void toggleInwards(){
     inwards = !inwards;
+    if (inwards) outwards = false;
   }
   public void toggleOutwards(){
     outwards = !outwards;
+    if (outwards) inwards = false;
   }
   public void setStopped(){
       inwards = false;
@@ -49,7 +51,7 @@ public WheelArm(){
         left.set(wheelArmIntake);
         right.set(-wheelArmIntake);
       }
-      if (outwards){
+      else if (outwards){
           left.set(-wheelArmOuttake);
           right.set(wheelArmOuttake);
       }
