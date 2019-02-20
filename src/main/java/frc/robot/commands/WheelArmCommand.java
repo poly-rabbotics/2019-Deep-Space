@@ -31,13 +31,14 @@ public class WheelArmCommand extends Command {
         Robot.wheelArm.stopArms();
       }
     
-    }
+    }*/
     if(controller.getToggleInwards()){
-      Robot.wheelArm.spinInwards();
+      Robot.wheelArm.setInwards();
     }
     if(controller.getToggleOutwards()){
-      Robot.wheelArm.spinOutwards();
+      Robot.wheelArm.setOutwards();
     }
+    /*
     if(Robot.wheelArm.isInwards()){
       Robot.wheelArm.spinInwards();
     }
