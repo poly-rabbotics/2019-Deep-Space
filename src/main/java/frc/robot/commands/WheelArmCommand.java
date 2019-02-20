@@ -25,6 +25,12 @@ public class WheelArmCommand extends Command {
   @Override
   protected void execute() {
     DriveController controller = Robot.controller;
+    if(controller.getToggleInwards()){
+      Robot.wheelArm.toggleInwards();
+    }
+    if(controller.getToggleOutwards()){
+      Robot.wheelArm.toggleOutwards();
+    }
     Robot.wheelArm.setSpeed();
     /*if(Robot.wheelArm.isInwards()||Robot.wheelArm.isOutwards()){
       if(controller.getToggleInwards()||controller.getToggleOutwards()){
@@ -32,12 +38,7 @@ public class WheelArmCommand extends Command {
       }
     
     }*/
-    if(controller.getToggleInwards()){
-      Robot.wheelArm.toggleInwards();
-    }
-    if(controller.getToggleOutwards()){
-      Robot.wheelArm.toggleOutwards();
-    }
+
     /*
     if(Robot.wheelArm.isInwards()){
       Robot.wheelArm.spinInwards();
