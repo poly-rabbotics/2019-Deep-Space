@@ -33,10 +33,10 @@ public class WheelArmCommand extends Command {
     
     }*/
     if(controller.getToggleInwards()){
-      Robot.wheelArm.setInwards();
+      Robot.wheelArm.toggleInwards();
     }
     if(controller.getToggleOutwards()){
-      Robot.wheelArm.setOutwards();
+      Robot.wheelArm.toggleOutwards();
     }
     /*
     if(Robot.wheelArm.isInwards()){
