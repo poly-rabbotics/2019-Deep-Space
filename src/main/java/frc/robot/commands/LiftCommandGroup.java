@@ -14,7 +14,7 @@ public class LiftCommandGroup extends CommandGroup {
 
 
   public LiftCommandGroup() {
-    addSequential(new EngageSolenoidCommand());
+    //addSequential(new EngageSolenoidCommand());
     addSequential(new LiftDriveForwardFront());
     addSequential(new LiftRetractFront());
     addSequential(new LiftDriveForwardBack());

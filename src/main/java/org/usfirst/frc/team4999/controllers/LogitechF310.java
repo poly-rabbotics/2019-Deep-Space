@@ -125,6 +125,10 @@ public class LogitechF310 extends GenericHID {
 	public boolean getBackButtonReleased() {
 		return getRawButtonReleased(BACK);
 	}
+
+	public double getArmsSpeed() {
+		return 0;
+	}
 	
 
 }

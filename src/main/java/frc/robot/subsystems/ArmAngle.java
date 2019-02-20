@@ -8,13 +8,15 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Talon;               //Are we just using Victor SPX ? Why are we not using PWMVictorSPX class?
+import edu.wpi.first.wpilibj.Talon; //Are we just using Victor SPX ? Why are we not using PWMVictorSPX class?
 import edu.wpi.first.wpilibj.VictorSP;
 import frc.robot.RobotMap;
+import frc.robot.controls.DriveController;
 /**
  * Add your docs here.
  */
 public class ArmAngle extends Subsystem {
+  private double armAngleSpeed = RobotMap.controller1.getArmsSpeed();
   private VictorSP angle = RobotMap.wheelArmAngle;
   public ArmAngle(){
     super("Arm Angle");

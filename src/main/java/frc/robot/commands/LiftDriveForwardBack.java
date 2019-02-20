@@ -8,12 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;
 
 public class LiftDriveForwardBack extends Command {
-  public LiftDriveForwardBack() {
-    Timer t = new Timer();
+  Timer t = new Timer();
     private static final double DRIVE_DELAY  = 3.0;
-    public LiftDriveForward() {
+  public LiftDriveForwardBack() {
+    
       requires(Robot.liftSystem);
       // Use requires() here to declare subsystem dependencies
       // eg. requires(chassis);
@@ -34,6 +36,7 @@ public class LiftDriveForwardBack extends Command {
   @Override
   protected boolean isFinished() {
     return (t.get()>=DRIVE_DELAY);
+  }
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {

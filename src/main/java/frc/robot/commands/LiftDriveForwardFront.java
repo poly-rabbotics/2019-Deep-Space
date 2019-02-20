@@ -7,14 +7,15 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 
-public class LiftDriveForward extends Command {
+public class LiftDriveForwardFront extends Command {
   Timer t = new Timer();
   private static final double DRIVE_DELAY  = 2.0;
-  public LiftDriveForward() {
+  public LiftDriveForwardFront() {
     requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
