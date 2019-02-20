@@ -80,7 +80,8 @@ public class F310Controller implements DriveController{
             return 0;
         }
     }
-    @Override
+    
+
     public boolean getStartLift(){
         return controller1.getRawAxis(2)>startLift;
         

@@ -22,7 +22,7 @@ public class ArmAngle extends Subsystem {
     super("Arm Angle");
     addChild("Angle Motor", angle);
   }
-  public void spinSpeed(){
+  public void setSpeed(double armAngleSpeed){
     angle.set(armAngleSpeed);
   }
  

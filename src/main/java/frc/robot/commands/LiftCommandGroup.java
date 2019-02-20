@@ -19,6 +19,7 @@ public class LiftCommandGroup extends CommandGroup {
     addSequential(new LiftRetractFront());
     addSequential(new LiftDriveForwardBack());
     addSequential(new LiftSystemEnd());
+  }
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
@@ -36,4 +37,4 @@ public class LiftCommandGroup extends CommandGroup {
     // a CommandGroup containing them would require both the chassis and the
     // arm.
   }
-}
+
