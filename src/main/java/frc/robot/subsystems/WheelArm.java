@@ -30,11 +30,11 @@ public WheelArm(){
     right.setInverted(true);
    
   }
-  public void setInwards(){
-    inwards = true;
+  public void toggleInwards(){
+    inwards = !inwards;
   }
-  public void setOutwards(){
-    outwards = true;
+  public void toggleOutwards(){
+    outwards = !outwards;
   }
   public void setStopped(){
       inwards = false;
