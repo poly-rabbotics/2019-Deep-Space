@@ -25,7 +25,8 @@ public class WheelArmCommand extends Command {
   @Override
   protected void execute() {
     DriveController controller = Robot.controller;
-    if(Robot.wheelArm.isInwards()||Robot.wheelArm.isOutwards()){
+    Robot.wheelArm.setSpeed();
+    /*if(Robot.wheelArm.isInwards()||Robot.wheelArm.isOutwards()){
       if(controller.getToggleInwards()||controller.getToggleOutwards()){
         Robot.wheelArm.stopArms();
       }
@@ -46,7 +47,7 @@ public class WheelArmCommand extends Command {
     else{
       Robot.wheelArm.stopArms();
     }
-
+*/
 
   }
 
