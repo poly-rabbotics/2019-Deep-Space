@@ -14,11 +14,12 @@ public class LiftCommandGroup extends CommandGroup {
 
 
   public LiftCommandGroup() {
-    //addSequential(new EngageSolenoidCommand());
+    /*addSequential(new EngageLiftSolenoidCommand());
     addSequential(new LiftDriveForwardFront());
     addSequential(new LiftRetractFront());
     addSequential(new LiftDriveForwardBack());
     addSequential(new LiftSystemEnd());
+    */
   }
     // Add Commands here:
     // e.g. addSequential(new Command1());
