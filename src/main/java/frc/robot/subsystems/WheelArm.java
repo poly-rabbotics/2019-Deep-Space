@@ -30,29 +30,39 @@ public WheelArm(){
     right.setInverted(true);
    
   }
-  public void spinInwards(){
+  public void setInwards(){
     inwards = true;
-    left.set(wheelArmIntake);
-    right.set(-wheelArmIntake);
   }
-  public void spinOutwards(){
+  public void setOutwards(){
     outwards = true;
-    left.set(-wheelArmOuttake);
-    right.set(wheelArmOuttake);
+  }
+  public void setStopped(){
+      inwards = false;
+      outwards = false;
   }
   public void stopArms(){
-    inwards = false;
-    outwards = false;
     left.set(0);
     right.set(0);
   }
-  
-  public boolean isInwards(){
+  public void setSpeed(){
+      if (inwards){
+        left.set(wheelArmIntake);
+        right.set(-wheelArmIntake);
+      }
+      if (outwards){
+          left.set(-wheelArmOuttake);
+          right.set(wheelArmOuttake);
+      }
+      else {
+          stopArms();
+      }
+  }
+  /*public boolean isInwards(){
     return inwards;
   }
   public boolean isOutwards(){
     return outwards;
-  }
+  }*/
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
