@@ -32,24 +32,18 @@ public class HatchPusher extends Subsystem {
   }
 
   public void extend(){
-   out = true;
     top.set(Value.kForward);
     
 
   }
 
   public void retract(){
-    out = false;
     top.set(Value.kReverse);
     
   }
 
   public boolean isOut(){
-<<<<<<< HEAD
     return top.get()==Value.kForward;
-=======
-    return out;
->>>>>>> parent of e30b30a... "Fixed" Delays for Lift System
   }
 
   @Override

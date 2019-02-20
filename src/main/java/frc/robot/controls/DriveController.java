@@ -20,7 +20,6 @@ public interface DriveController {
     public boolean getToggleInwards();
     public boolean getToggleOutwards();
     public boolean getStartLift();
-    public boolean getMoveArmsUp();
-    public boolean getMoveArmsDown();
+    public double getArmsSpeed();
 
 }

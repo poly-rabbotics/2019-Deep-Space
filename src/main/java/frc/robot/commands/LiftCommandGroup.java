@@ -12,22 +12,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class LiftCommandGroup extends CommandGroup {
 
-private final double stall = 3.0;
-private final double stall2 = 2.0;
+
   public LiftCommandGroup() {
-<<<<<<< HEAD
     /*addSequential(new EngageLiftSolenoidCommand());
     addSequential(new LiftDriveForwardFront());
-=======
-    addSequential(new EngageSolenoidCommand());
-    Timer.delay(stall);
-    addSequential(new LiftDriveForward());
-    Timer.delay(stall2);
->>>>>>> parent of e30b30a... "Fixed" Delays for Lift System
     addSequential(new LiftRetractFront());
-    Timer.delay(stall);
-    addSequential(new LiftDriveForward());
-    Timer.delay(stall2);
+    addSequential(new LiftDriveForwardBack());
     addSequential(new LiftSystemEnd());
     */
   }

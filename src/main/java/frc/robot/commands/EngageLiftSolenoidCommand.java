@@ -12,15 +12,10 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.controls.DriveController;
 
-<<<<<<< HEAD:src/main/java/frc/robot/commands/EngageLiftSolenoidCommand.java
 public class EngageLiftSolenoidCommand extends Command {
   Timer t = new Timer();
   private static final double SOLENOID_DELAY = 4.0;
   public EngageLiftSolenoidCommand() {
-=======
-public class EngageSolenoidCommand extends Command {
-  public EngageSolenoidCommand() {
->>>>>>> parent of e30b30a... "Fixed" Delays for Lift System:src/main/java/frc/robot/commands/EngageSolenoidCommand.java
     requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -30,6 +25,7 @@ public class EngageSolenoidCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    t.start();
    
   }
 
@@ -48,7 +44,7 @@ public class EngageSolenoidCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return (t.get()>=SOLENOID_DELAY);
   }
 
   // Called once after isFinished returns true

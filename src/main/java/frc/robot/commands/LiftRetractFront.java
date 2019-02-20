@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.Timer;
 
 
 public class LiftRetractFront extends Command {
+  Timer t = new Timer();
+  public static final double RETRACT_DELAY = 3.0;
   public LiftRetractFront() {
     requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
@@ -24,6 +26,7 @@ public class LiftRetractFront extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    t.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -36,7 +39,7 @@ public class LiftRetractFront extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return (t.get()>=RETRACT_DELAY);
   }
 
   // Called once after isFinished returns true
