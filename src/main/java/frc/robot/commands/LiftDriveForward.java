@@ -7,38 +7,53 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.Timer;
 
-public class LiftDriveForwardBack extends Command {
+
+<<<<<<< HEAD:src/main/java/frc/robot/commands/LiftDriveForwardFront.java
+public class LiftDriveForwardFront extends Command {
   Timer t = new Timer();
-    private static final double DRIVE_DELAY  = 3.0;
-  public LiftDriveForwardBack() {
-    
-      requires(Robot.liftSystem);
-      // Use requires() here to declare subsystem dependencies
-      // eg. requires(chassis);
-    }
+  private static final double DRIVE_DELAY  = 2.0;
+  public LiftDriveForwardFront() {
+=======
+public class LiftDriveForward extends Command {
+  public LiftDriveForward() {
+>>>>>>> parent of e30b30a... "Fixed" Delays for Lift System:src/main/java/frc/robot/commands/LiftDriveForward.java
+    requires(Robot.liftSystem);
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+  }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    t.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     Robot.liftSystem.driveForward();
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (t.get()>=DRIVE_DELAY);
+    return false;
   }
+
+  // Called once after isFinished returns true
+  @Override
+  protected void end() {
+  }
+
+  // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+
   }
 }
+
