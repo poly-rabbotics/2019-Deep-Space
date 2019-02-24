@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.controls;
+
 import org.usfirst.frc.team4999.controllers.LogitechF310;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -15,79 +16,78 @@ import static org.usfirst.frc.team4999.utils.Utils.*;
 /**
  * Add your docs here.
  */
-public class F310Controller implements DriveController{
-    private LogitechF310 controller1 = RobotMap.controller1;
+public class F310Controller implements DriveController {
+  private LogitechF310 controller1 = RobotMap.controller1;
 
-    private static final double CURVE = 2;
-    private static final double DEADZONE = .01;
-    private static final double startLift = .75;
-    private static final double ARM_UP_SPEED = 0.5;
-    private static final double ARM_DOWN_SPEED = -0.5;
+  private static final double CURVE = 2;
+  private static final double DEADZONE = .01;
+  private static final double startLift = .75;
+  private static final double ARM_UP_SPEED = 0.5;
+  private static final double ARM_DOWN_SPEED = -0.5;
 
-    private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
-    private int speedLimitIndex = speedLimits.length-1;
-    @Override
-    public double getMoveRequest(){
-        double speed = controller1.getRawAxis(1);
-        speed = curve(speed, CURVE);
-        speed = deadzone(speed, DEADZONE);
-        return speed;
+  private double[] speedLimits = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 };
+  private int speedLimitIndex = speedLimits.length - 1;
 
-    }
-    @Override
-    public double getTurnRequest(){
-        double speed = controller1.getRawAxis(4);
-        speed = curve(speed, CURVE);
-        speed = deadzone(speed, DEADZONE);
-        return speed;
+  @Override
+  public double getMoveRequest() {
+    double speed = controller1.getRawAxis(1);
+    speed = curve(speed, CURVE);
+    speed = deadzone(speed, DEADZONE);
+    return speed;
 
-    }
-    @Override
-    public double getSpeedLimit(){
-        if(controller1.getRawButtonPressed(7) && speedLimitIndex>0)
-            speedLimitIndex--;
-        if(controller1.getRawButtonPressed(8) && speedLimitIndex<speedLimits.length-1)
-            speedLimitIndex++;
-        return speedLimits[speedLimitIndex];
-    }
-    @Override
-    public boolean getReverseDirection(){
-        return controller1.getRawButtonPressed(3);
-    }
+  }
 
-    @Override
-    public boolean getToggleHatchPusher(){
-        return controller1.getRawButtonPressed(2);
-    }
+  @Override
+  public double getTurnRequest() {
+    double speed = controller1.getRawAxis(4);
+    speed = curve(speed, CURVE);
+    speed = deadzone(speed, DEADZONE);
+    return speed;
 
-    @Override
-    public boolean getToggleInwards(){
-        return controller1.getRawButtonPressed(5);
-    }
+  }
 
-    @Override
-    public boolean getToggleOutwards(){
-        return controller1.getRawButtonPressed(6);
-    }
+  @Override
+  public double getSpeedLimit() {
+    if (controller1.getRawButtonPressed(7) && speedLimitIndex > 0)
+      speedLimitIndex--;
+    if (controller1.getRawButtonPressed(8) && speedLimitIndex < speedLimits.length - 1)
+      speedLimitIndex++;
+    return speedLimits[speedLimitIndex];
+  }
 
-    @Override
-    public double getArmsSpeed() {
-        if(controller1.getRawButton(4)) {
-            return ARM_UP_SPEED;
-        } else if (controller1.getRawButton(1)) {
-            return ARM_DOWN_SPEED;
-        } else {
-            return 0;
-        }
-    }
-    
+  @Override
+  public boolean getReverseDirection() {
+    return controller1.getRawButtonPressed(3);
+  }
 
-    public boolean getStartLift(){
-        return controller1.getRawAxis(2)>startLift;
-        
+  @Override
+  public boolean getToggleHatchPusher() {
+    return controller1.getRawButtonPressed(2);
+  }
+
+  @Override
+  public boolean getWheelArmInwards() {
+    return controller1.getRawButton(5);
+  }
+
+  @Override
+  public boolean getWheelArmOutwards() {
+    return controller1.getRawButton(6);
+  }
+
+  @Override
+  public double getArmsSpeed() {
+    if (controller1.getRawButton(4)) {
+      return ARM_UP_SPEED;
+    } else if (controller1.getRawButton(1)) {
+      return ARM_DOWN_SPEED;
+    } else {
+      return 0;
     }
+  }
+
+  public boolean getStartLift() {
+    return controller1.getRawAxis(2) > startLift;
+
+  }
 }
-
-  
-    
-

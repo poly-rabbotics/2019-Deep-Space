@@ -5,32 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands.hatchpusher;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
+import frc.robot.subsystems.HatchPusher;
+
 /**
  * Add your docs here.
  */
-public class ArmAngle extends Subsystem {
+public class ToggleHatchPusher extends InstantCommand {
 
-  private PWMVictorSPX angle = RobotMap.wheelArmAngle;
-  
-  public ArmAngle(){
-    super("Arm Angle");
-    addChild("Angle Motor", angle);
+  private HatchPusher pusher = Robot.hatchPusher;
+
+  public ToggleHatchPusher() {
+    super();
+    requires(pusher);
   }
 
-  public void setSpeed(double armAngleSpeed){
-    angle.set(armAngleSpeed);
-  }
-
-  public void stop() {
-    angle.set(0);
-  }
- 
+  // Called once when the command executes
   @Override
-  public void initDefaultCommand() {
+  protected void initialize() {
+    if (pusher.isOut())
+      pusher.retract();
+    else
+      pusher.extend();
   }
+
 }

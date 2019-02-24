@@ -12,8 +12,11 @@ import frc.robot.Robot;
 import frc.robot.controls.DriveController;
 
 public class DriveCommand extends Command {
+
   private boolean reverse = false;
+
   public DriveCommand() {
+    super();
     requires(Robot.drive);
   }
 
@@ -27,10 +30,12 @@ public class DriveCommand extends Command {
   protected void execute() {
     DriveController controller = Robot.controller;
     double moveRequest = controller.getMoveRequest();
-    if(controller.getReverseDirection())
+
+    moveRequest = reverse ? -moveRequest : moveRequest;
+
+    if (controller.getReverseDirection())
       reverse = !reverse;
-    if(reverse)
-      moveRequest=-moveRequest;
+
     Robot.drive.arcadeDrive(moveRequest, controller.getTurnRequest(), controller.getSpeedLimit());
   }
 
@@ -43,11 +48,13 @@ public class DriveCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.drive.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.drive.stop();
   }
 }

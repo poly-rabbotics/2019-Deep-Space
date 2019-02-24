@@ -5,37 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class LiftCommandGroup extends CommandGroup {
 
-
   public LiftCommandGroup() {
-    /*addSequential(new EngageLiftSolenoidCommand());
+    addSequential(new EngageLiftSolenoidCommand());
     addSequential(new LiftDriveForwardFront());
     addSequential(new LiftRetractFront());
     addSequential(new LiftDriveForwardBack());
-    addSequential(new LiftSystemEnd());
-    */
+    // addSequential(new LiftSystemEnd());
   }
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
-
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
-
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
-  }
-
+}

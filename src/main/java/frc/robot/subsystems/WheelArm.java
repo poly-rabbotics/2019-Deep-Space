@@ -7,64 +7,45 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-
 public class WheelArm extends Subsystem {
-private VictorSP left = RobotMap.wheelArmLeft;
-private VictorSP right = RobotMap.wheelArmRight;           //Did we change this to a PWMVictorSPX ?
+  private PWMVictorSPX left = RobotMap.wheelArmLeft;
+  private PWMVictorSPX right = RobotMap.wheelArmRight; // Did we change this to a PWMPWMVictorSPXX ?
 
-private boolean inwards = false;
-private boolean outwards = false;
-private static double wheelArmOuttake = .40;//TODO: Add real value
-private static double wheelArmIntake = .90;
-public WheelArm(){
+  private static double WHEEL_ARM_OUTTAKE = .40; // TODO: Add real values
+  private static double WHEEL_ARM_INTAKE = .90;
+
+  public WheelArm() {
     super("Wheel Arm");
     addChild("Left Motor", left);
     addChild("Right Motor", right);
     left.setInverted(false);
     right.setInverted(true);
-   
+
   }
-  public void toggleInwards(){
-    inwards = !inwards;
-    if (inwards) outwards = false;
-  }
-  public void toggleOutwards(){
-    outwards = !outwards;
-    if (outwards) inwards = false;
-  }
-  public void setStopped(){
-      inwards = false;
-      outwards = false;
-  }
-  public void stopArms(){
+
+  public void stopArms() {
     left.set(0);
     right.set(0);
   }
-  public void setSpeed(){
-      if (inwards){
-        left.set(wheelArmIntake);
-        right.set(-wheelArmIntake);
-      }
-      else if (outwards){
-          left.set(-wheelArmOuttake);
-          right.set(wheelArmOuttake);
-      }
-      else {
-          stopArms();
-      }
+
+  public void runInwards() {
+    left.set(WHEEL_ARM_INTAKE);
+    right.set(WHEEL_ARM_INTAKE);
   }
-  /*public boolean isInwards(){
-    return inwards;
+
+  public void runOutwards() {
+    left.set(WHEEL_ARM_OUTTAKE);
+    right.set(WHEEL_ARM_OUTTAKE);
   }
-  public boolean isOutwards(){
-    return outwards;
-  }*/
+
+  /*
+   * public boolean isInwards(){ return inwards; } public boolean isOutwards(){
+   * return outwards; }
+   */
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

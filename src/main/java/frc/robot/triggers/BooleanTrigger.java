@@ -5,32 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.triggers;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.buttons.Trigger;
+import java.util.function.BooleanSupplier;;
+
 /**
  * Add your docs here.
  */
-public class ArmAngle extends Subsystem {
+public class BooleanTrigger extends Trigger {
+  private BooleanSupplier condition;
 
-  private PWMVictorSPX angle = RobotMap.wheelArmAngle;
-  
-  public ArmAngle(){
-    super("Arm Angle");
-    addChild("Angle Motor", angle);
+  public BooleanTrigger(BooleanSupplier cond) {
+    condition = cond;
   }
 
-  public void setSpeed(double armAngleSpeed){
-    angle.set(armAngleSpeed);
-  }
-
-  public void stop() {
-    angle.set(0);
-  }
- 
   @Override
-  public void initDefaultCommand() {
+  public boolean get() {
+    return condition.getAsBoolean();
   }
 }

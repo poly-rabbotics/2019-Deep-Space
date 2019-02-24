@@ -10,5 +10,10 @@
     ".classpath": true,
     ".project": true
   },
-  "wpilib.deployOffline": false
+  "wpilib.deployOffline": false,
+  
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true
 }

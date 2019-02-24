@@ -8,27 +8,26 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+
 /*
  * Add your docs here.
  */
 public class LiftSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private  double driveSpeed = .5;
+  private double driveSpeed = .5;
 
   private DoubleSolenoid front = RobotMap.liftSystemFront;
   private DoubleSolenoid back = RobotMap.liftSystemBack;
-  
-  
 
-  private VictorSP leftWheel = RobotMap.leftLiftWheel;
-  private VictorSP rightWheel = RobotMap.rightLiftWheel;
+  private PWMVictorSPX leftWheel = RobotMap.leftLiftWheel;
+  private PWMVictorSPX rightWheel = RobotMap.rightLiftWheel;
 
-  public LiftSystem(){
+  public LiftSystem() {
     super("Lift System");
     addChild("Front Solenoid", front);
     addChild("Back Solenoid", back);
@@ -36,25 +35,24 @@ public class LiftSystem extends Subsystem {
     addChild("Right Lift Wheel", rightWheel);
   }
 
-  public void engageSolenoids(){
+  public void engageSolenoids() {
     front.set(Value.kForward);
-    
     back.set(Value.kForward);
-   
   }
-  public void driveForward(){
+
+  public void driveForward() {
     leftWheel.set(driveSpeed);
     rightWheel.set(driveSpeed);
   }
-  public void retractFrontSolenoids(){
+
+  public void retractFrontSolenoids() {
     front.set(Value.kReverse);
-    
   }
-  public void endLiftSequence(){
+
+  public void endLiftSequence() {
     leftWheel.set(0);
     rightWheel.set(0);
     back.set(Value.kReverse);
-    
 
   }
 
