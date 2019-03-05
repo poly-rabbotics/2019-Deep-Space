@@ -30,6 +30,7 @@ import frc.robot.commands.arm.ArmAngleCommand;
 import frc.robot.controls.*;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.vision.Cameras;
+import edu.wpi.first.wpilibj.Spark;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -46,14 +47,20 @@ public class Robot extends TimedRobot {
   public static ArmAngle armAngle = new ArmAngle();
   public static DriveController controller = new F310Controller();
   public static Drive drive1 = new Drive();
-  public static OI m_oi;
 
   public AHRS ahrs;
 
-  public static SpeedControllerGroup left = new SpeedControllerGroup(RobotMap.leftFront, RobotMap.leftBack);
-  public static SpeedControllerGroup right = new SpeedControllerGroup(RobotMap.rightFront, RobotMap.rightBack);
+  public static final Spark leftFront = new Spark(8);
+  public static final Spark leftBack = new Spark(7);
+  public static final Spark rightFront = new Spark(6);
+  public static final Spark rightBack = new Spark(5);
+
+  public static SpeedControllerGroup left = new SpeedControllerGroup(leftFront, leftBack);
+  public static SpeedControllerGroup right = new SpeedControllerGroup(rightFront, rightBack);
 
   public static DifferentialDrive drive = new DifferentialDrive(left, right);
+
+  public static OI m_oi;
 
   private Command driveCommand = new DriveCommand();
   private Command armCommand = new WheelArmCommand();

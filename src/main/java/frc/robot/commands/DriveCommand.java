@@ -37,7 +37,7 @@ public class DriveCommand extends Command {
       reverse = !reverse;
 
     // Robot.drive1.arcadeDrive(moveRequest, controller.getTurnRequest());
-    Robot.drive1.bad();
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

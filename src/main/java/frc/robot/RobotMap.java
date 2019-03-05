@@ -10,7 +10,6 @@ package frc.robot;
 import org.usfirst.frc.team4999.controllers.LogitechF310;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 
@@ -21,10 +20,6 @@ import edu.wpi.first.wpilibj.Encoder;
  * floating around.
  */
 public class RobotMap {
-  public static final Spark leftFront = new Spark(8);// TODO: Set to actual port numbers
-  public static final Spark leftBack = new Spark(7);
-  public static final Spark rightFront = new Spark(6);
-  public static final Spark rightBack = new Spark(5);
 
   public static final PWMVictorSPX wheelArmLeft = new PWMVictorSPX(4);// TODO: Set to actual port numbers
   public static final PWMVictorSPX wheelArmRight = new PWMVictorSPX(1);

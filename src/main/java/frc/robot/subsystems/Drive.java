@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveCommand;
 
@@ -19,8 +20,8 @@ import static org.usfirst.frc.team4999.utils.Utils.map;
  * Add your docs here.
  */
 public class Drive extends Subsystem {
-  private SpeedControllerGroup leftMotors = new SpeedControllerGroup(RobotMap.leftFront, RobotMap.leftBack);
-  private SpeedControllerGroup rightMotors = new SpeedControllerGroup(RobotMap.rightFront, RobotMap.rightBack);
+  private SpeedControllerGroup leftMotors = new SpeedControllerGroup(Robot.leftFront, Robot.leftBack);
+  private SpeedControllerGroup rightMotors = new SpeedControllerGroup(Robot.rightFront, Robot.rightBack);
 
   private DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
@@ -41,11 +42,6 @@ public class Drive extends Subsystem {
   public void arcadeDrive(double moveRequest, double turnRequest) {
 
     drive.arcadeDrive(moveRequest, turnRequest);
-  }
-
-  public void bad() {
-    leftMotors.set(.5);
-    rightMotors.set(.5);
   }
 
   public void stop() {

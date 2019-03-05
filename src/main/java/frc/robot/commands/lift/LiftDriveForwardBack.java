@@ -36,7 +36,8 @@ public class LiftDriveForwardBack extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return t.hasPeriodPassed(DRIVE_DELAY);
+    // return t.hasPeriodPassed(DRIVE_DELAY);
+    return false;
   }
 
   // subsystems is scheduled to run
