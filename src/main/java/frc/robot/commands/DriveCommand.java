@@ -17,7 +17,7 @@ public class DriveCommand extends Command {
 
   public DriveCommand() {
     super();
-    requires(Robot.drive);
+    requires(Robot.drive1);
   }
 
   // Called just before this Command runs the first time
@@ -36,7 +36,8 @@ public class DriveCommand extends Command {
     if (controller.getReverseDirection())
       reverse = !reverse;
 
-    Robot.drive.arcadeDrive(moveRequest, controller.getTurnRequest(), controller.getSpeedLimit());
+    // Robot.drive1.arcadeDrive(moveRequest, controller.getTurnRequest());
+    Robot.drive1.bad();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -48,13 +49,13 @@ public class DriveCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drive.stop();
+    // Robot.drive1.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.drive.stop();
+    // Robot.drive1.stop();
   }
 }

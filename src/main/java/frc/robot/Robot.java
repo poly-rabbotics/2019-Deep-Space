@@ -13,11 +13,13 @@ import com.kauailabs.navx.frc.AHRS.SerialDataType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -37,15 +39,21 @@ import frc.robot.subsystems.vision.Cameras;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Drive drive = new Drive();
+
   public static HatchPusher hatchPusher = new HatchPusher();
   public static WheelArm wheelArm = new WheelArm();
   public static LiftSystem liftSystem = new LiftSystem();
   public static ArmAngle armAngle = new ArmAngle();
   public static DriveController controller = new F310Controller();
+  public static Drive drive1 = new Drive();
   public static OI m_oi;
 
   public AHRS ahrs;
+
+  public static SpeedControllerGroup left = new SpeedControllerGroup(RobotMap.leftFront, RobotMap.leftBack);
+  public static SpeedControllerGroup right = new SpeedControllerGroup(RobotMap.rightFront, RobotMap.rightBack);
+
+  public static DifferentialDrive drive = new DifferentialDrive(left, right);
 
   private Command driveCommand = new DriveCommand();
   private Command armCommand = new WheelArmCommand();
@@ -150,6 +158,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    double move_request = 0; // controller.get
+    double turn_request = 0; // controller.getRawAxis(4);
+    drive.arcadeDrive(move_request, turn_request);
   }
 
   /**

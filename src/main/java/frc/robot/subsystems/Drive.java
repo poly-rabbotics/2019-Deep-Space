@@ -32,10 +32,20 @@ public class Drive extends Subsystem {
 
   }
 
-  public void arcadeDrive(double moveRequest, double turnRequest, double speedLimiter) {
-    moveRequest = map(moveRequest, -1, 1, -speedLimiter, speedLimiter);
-    turnRequest = map(turnRequest, -1, 1, -speedLimiter, speedLimiter);
-    drive.arcadeDrive(moveRequest, turnRequest, false);
+  /*
+   * public void arcadeDrive(double moveRequest, double turnRequest, double
+   * speedLimiter) { moveRequest = map(moveRequest, -1, 1, -speedLimiter,
+   * speedLimiter); turnRequest = map(turnRequest, -1, 1, -speedLimiter,
+   * speedLimiter); drive.arcadeDrive(moveRequest, turnRequest); }
+   */
+  public void arcadeDrive(double moveRequest, double turnRequest) {
+
+    drive.arcadeDrive(moveRequest, turnRequest);
+  }
+
+  public void bad() {
+    leftMotors.set(.5);
+    rightMotors.set(.5);
   }
 
   public void stop() {
