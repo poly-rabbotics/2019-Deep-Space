@@ -5,44 +5,39 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.lift;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.controls.DriveController;
 
-public class HatchPusherCommand extends Command {
-  public HatchPusherCommand() {
-    requires(Robot.hatchPusher);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class LiftDriveForwardFront extends Command {
+  Timer t = new Timer();
+  private static final double DRIVE_DELAY = 2.0;
+
+  public LiftDriveForwardFront() {
+    super();
+    requires(Robot.liftSystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    t.start();
+    t.reset();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
-    if(controller.getToggleHatchPusher()){
-      if(Robot.hatchPusher.isOut()){
-        Robot.hatchPusher.retract();
-      }
-      else{
-        Robot.hatchPusher.extend();
-      }
-    }
-
+    Robot.liftSystem.driveForward();
 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return t.hasPeriodPassed(DRIVE_DELAY);
   }
 
   // Called once after isFinished returns true
@@ -54,5 +49,6 @@ public class HatchPusherCommand extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+
   }
 }

@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
+import frc.robot.commands.DriveCommand;
+
 import static org.usfirst.frc.team4999.utils.Utils.map;
 
 /**
@@ -22,22 +24,37 @@ public class Drive extends Subsystem {
 
   private DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
-
-  public Drive(){
+  public Drive() {
     super("Drive");
     addChild("Left Motors", leftMotors);
     addChild("Right Motors", rightMotors);
     drive.setDeadband(0);
-    
+
   }
-  public void arcadeDrive(double moveRequest, double turnRequest, double speedLimiter){
-    moveRequest = map(moveRequest, -1, 1, -speedLimiter, speedLimiter);
-    turnRequest = map(turnRequest, -1, 1, -speedLimiter, speedLimiter);
-    drive.arcadeDrive(moveRequest, turnRequest, false);
+
+  /*
+   * public void arcadeDrive(double moveRequest, double turnRequest, double
+   * speedLimiter) { moveRequest = map(moveRequest, -1, 1, -speedLimiter,
+   * speedLimiter); turnRequest = map(turnRequest, -1, 1, -speedLimiter,
+   * speedLimiter); drive.arcadeDrive(moveRequest, turnRequest); }
+   */
+  public void arcadeDrive(double moveRequest, double turnRequest) {
+
+    drive.arcadeDrive(moveRequest, turnRequest);
   }
+
+  public void bad() {
+    leftMotors.set(.5);
+    rightMotors.set(.5);
+  }
+
+  public void stop() {
+    drive.stopMotor();
+  }
+
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new DriveCommand());
   }
+
 }

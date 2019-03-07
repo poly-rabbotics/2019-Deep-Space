@@ -7,16 +7,29 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS.SerialDataType;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSource;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.HatchPusherCommand;
-import frc.robot.commands.WheelArmComand;
+import frc.robot.commands.lift.LiftCommandGroup;
+import frc.robot.commands.WheelArmCommand;
+import frc.robot.commands.arm.ArmAngleCommand;
 import frc.robot.controls.*;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.vision.Cameras;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,43 +39,72 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Drive drive = new Drive();
+
   public static HatchPusher hatchPusher = new HatchPusher();
   public static WheelArm wheelArm = new WheelArm();
   public static LiftSystem liftSystem = new LiftSystem();
+  public static ArmAngle armAngle = new ArmAngle();
   public static DriveController controller = new F310Controller();
+  public static Drive drive1 = new Drive();
   public static OI m_oi;
 
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  public AHRS ahrs;
+
+  public static SpeedControllerGroup left = new SpeedControllerGroup(RobotMap.leftFront, RobotMap.leftBack);
+  public static SpeedControllerGroup right = new SpeedControllerGroup(RobotMap.rightFront, RobotMap.rightBack);
+
+  public static DifferentialDrive drive = new DifferentialDrive(left, right);
+
+  private Command driveCommand = new DriveCommand();
+  private Command armCommand = new WheelArmCommand();
+  private Command liftCommand = new LiftCommandGroup();
+  private Command armAngleCommand = new ArmAngleCommand();
 
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
     m_oi = new OI();
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+
+    VideoSource lifeCam = new UsbCamera("Driver Camera", 0);
+    lifeCam.setResolution(640, 480);
+    lifeCam.setFPS(15);
+    CameraServer.getInstance().startAutomaticCapture(lifeCam);
+
+    Cameras.setup(); // Setup and Connection to Pixy2
+    try {
+      ahrs = new AHRS(SerialPort.Port.kMXP);
+    } catch (RuntimeException ex) {
+      DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), false);
+    }
+
   }
 
   /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
+   * This function is called every robot packet, no matter the mode. Use this for
+   * items like diagnostics that you want ran during disabled, autonomous,
+   * teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
+   * <p>
+   * This runs after the mode specific periodic functions, but before LiveWindow
+   * and SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
+
+    if (ahrs != null) {
+      SmartDashboard.putData(ahrs);
+    }
+
+    Cameras.run();
   }
 
   /**
-   * This function is called once each time the robot enters Disabled mode.
-   * You can use it to reset any subsystem information you want to clear when
-   * the robot is disabled.
+   * This function is called once each time the robot enters Disabled mode. You
+   * can use it to reset any subsystem information you want to clear when the
+   * robot is disabled.
    */
   @Override
   public void disabledInit() {
@@ -75,30 +117,22 @@ public class Robot extends TimedRobot {
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString code to get the auto name from the text box below the Gyro
+   * between different autonomous modes using the dashboard. The sendable chooser
+   * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+   * remove all of the chooser code and uncomment the getString code to get the
+   * auto name from the text box below the Gyro
    *
-   * <p>You can add additional auto modes by adding additional commands to the
-   * chooser code above (like the commented example) or additional comparisons
-   * to the switch structure below with additional strings & commands.
+   * <p>
+   * You can add additional auto modes by adding additional commands to the
+   * chooser code above (like the commented example) or additional comparisons to
+   * the switch structure below with additional strings & commands.
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    driveCommand.start();
+    armCommand.start();
+    liftCommand.start();
+    armAngleCommand.start();
   }
 
   /**
@@ -111,15 +145,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    if (m_autonomousCommand != null) 
-      m_autonomousCommand.cancel();
-    new DriveCommand().start();
-    new HatchPusherCommand().start();
-    new WheelArmCommand().start();
+    Scheduler.getInstance().removeAll();
+    driveCommand.start();
+    armCommand.start();
+    liftCommand.start();
+    armAngleCommand.start();
   }
 
   /**
@@ -128,6 +158,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    double move_request = 0; // controller.get
+    double turn_request = 0; // controller.getRawAxis(4);
+    drive.arcadeDrive(move_request, turn_request);
   }
 
   /**

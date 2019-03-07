@@ -6,12 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+
 import org.usfirst.frc.team4999.controllers.LogitechF310;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -19,35 +21,22 @@ import edu.wpi.first.wpilibj.Encoder;
  * floating around.
  */
 public class RobotMap {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
+  public static final Spark leftFront = new Spark(8);// TODO: Set to actual port numbers
+  public static final Spark leftBack = new Spark(7);
+  public static final Spark rightFront = new Spark(6);
+  public static final Spark rightBack = new Spark(5);
 
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
-  public static final Spark leftFront = new Spark(0);// TODO: Set to actual port numbers
-  public static final Spark rightFront = new Spark(1);
-  public static final Spark leftBack = new Spark(2);
-  public static final Spark rightBack = new Spark(3);
+  public static final PWMVictorSPX wheelArmLeft = new PWMVictorSPX(4);// TODO: Set to actual port numbers
+  public static final PWMVictorSPX wheelArmRight = new PWMVictorSPX(1);
+  public static final PWMVictorSPX wheelArmAngle = new PWMVictorSPX(0);
+  public static final PWMVictorSPX leftLiftWheel = new PWMVictorSPX(3);
+  public static final PWMVictorSPX rightLiftWheel = new PWMVictorSPX(2);
 
-  public static final VictorSP wheelArmLeft = new VictorSP(4);;// TODO: Set to actual port numbers
-  public static final VictorSP wheelArmRight = new VictorSP(5);
-  public static final VictorSP wheelArmAngle = new VictorSP(6);
-  public static final VictorSP leftLiftWheel = new VictorSP(7); 
-  public static final VictorSP rightLiftWheel = new VictorSP(8);
+  public static final Encoder wheelArmEncoder = new Encoder(0, 1, false);// TODO: Fix encoder constructor
 
-  public static final Encoder wheelArmEncoder = new Encoder(0,1,false);//TODO: Fix encoder constructor
+  public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0, 3); // TODO: set to actual solenoid values
+  public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1, 5);
+  public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(2, 4);
 
-  public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,1); // TODO: set to actual solenoid values
-  public static final DoubleSolenoid hatchSolenoidLeft = new DoubleSolenoid(2,3);
-  public static final DoubleSolenoid hatchSolenoidRight = new DoubleSolenoid(4,5); //placeholder values
-  public static final DoubleSolenoid liftSystemBackLeft = new DoubleSolenoid(6,7); // Do we have this many?
-  public static final DoubleSolenoid liftSystemBackRight = new DoubleSolenoid(8,9);
-  public static final DoubleSolenoid liftSystemFrontLeft = new DoubleSolenoid(10,11);
-  public static final DoubleSolenoid liftSystemFrontRight = new DoubleSolenoid(12,13);
-
-  public static final LogitechF310 controller1 = new LogitechF310(0);// TODO: PORT NUMBERS
+  public static final LogitechF310 controller1 = new LogitechF310(1);
 }

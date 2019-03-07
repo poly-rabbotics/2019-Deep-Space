@@ -11,12 +11,23 @@ package frc.robot.controls;
  * Add your docs here.
  */
 public interface DriveController {
-    public double getMoveRequest();
-    public double getTurnRequest();
-    public double getSpeedLimit();
-    public boolean getReverseDirection();
-    public boolean getToggleHatchPusher();
-    public boolean getToggleInwards();
-    public boolean getToggleOutwards();
+
+  public double getMoveRequest();
+
+  public double getTurnRequest();
+
+  public double getSpeedLimit();
+
+  public boolean getReverseDirection();
+
+  public boolean getToggleHatchPusher();
+
+  public boolean getWheelArmInwards();
+
+  public boolean getWheelArmOutwards();
+
+  public boolean getStartLift();
+
+  public double getArmsSpeed();
 
 }

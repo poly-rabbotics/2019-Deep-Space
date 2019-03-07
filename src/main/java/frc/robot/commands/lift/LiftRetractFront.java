@@ -5,57 +5,48 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.controls.DriveController;
+import edu.wpi.first.wpilibj.Timer;
 
-public class DriveCommand extends Command {
+public class LiftRetractFront extends Command {
+  Timer t = new Timer();
+  public static final double RETRACT_DELAY = 3.0;
 
-  private boolean reverse = false;
-
-  public DriveCommand() {
+  public LiftRetractFront() {
     super();
-    requires(Robot.drive1);
+    requires(Robot.liftSystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    t.start();
+    t.reset();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
-    double moveRequest = controller.getMoveRequest();
-
-    moveRequest = reverse ? -moveRequest : moveRequest;
-
-    if (controller.getReverseDirection())
-      reverse = !reverse;
-
-    // Robot.drive1.arcadeDrive(moveRequest, controller.getTurnRequest());
-    Robot.drive1.bad();
+    Robot.liftSystem.retractFrontSolenoids();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return t.hasPeriodPassed(RETRACT_DELAY);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    // Robot.drive1.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    // Robot.drive1.stop();
   }
 }

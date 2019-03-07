@@ -5,19 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.controls.DriveController;
 
-public class DriveCommand extends Command {
-
-  private boolean reverse = false;
-
-  public DriveCommand() {
+public class ArmAngleCommand extends Command {
+  public ArmAngleCommand() {
     super();
-    requires(Robot.drive1);
+    requires(Robot.armAngle);
   }
 
   // Called just before this Command runs the first time
@@ -28,16 +24,7 @@ public class DriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
-    double moveRequest = controller.getMoveRequest();
-
-    moveRequest = reverse ? -moveRequest : moveRequest;
-
-    if (controller.getReverseDirection())
-      reverse = !reverse;
-
-    // Robot.drive1.arcadeDrive(moveRequest, controller.getTurnRequest());
-    Robot.drive1.bad();
+    Robot.armAngle.setSpeed(Robot.controller.getArmsSpeed());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -49,13 +36,12 @@ public class DriveCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    // Robot.drive1.stop();
+    Robot.armAngle.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    // Robot.drive1.stop();
   }
 }

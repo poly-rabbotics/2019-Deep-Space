@@ -5,38 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;
 
-public class ArmAngleCommand extends Command {
-  public ArmAngleCommand() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class LiftDriveForwardBack extends Command {
+  Timer t = new Timer();
+  private static final double DRIVE_DELAY = 3.0;
+
+  public LiftDriveForwardBack() {
+    super();
+    requires(Robot.liftSystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    t.start();
+    t.reset();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.liftSystem.driveForward();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return t.hasPeriodPassed(DRIVE_DELAY);
   }
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
