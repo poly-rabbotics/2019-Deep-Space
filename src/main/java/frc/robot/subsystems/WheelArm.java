@@ -7,16 +7,19 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
+
+public class WheelArm extends Subsystem {
 private VictorSP left = RobotMap.wheelArmLeft;
-private VictorSP right = RobotMap.wheelArmRight;
+private VictorSP right = RobotMap.wheelArmRight;           //Did we change this to a PWMVictorSPX ?
 
 private boolean inwards = false;
 private boolean outwards = false;
-public class WheelArm extends Subsystem {
-
+private static double wheelArmSpeed = .75;//TODO: Add real value
 public WheelArm(){
     super("Wheel Arm");
     addChild("Left Motor", left);
@@ -25,21 +28,21 @@ public WheelArm(){
   }
   public void spinInwards(){
     inwards = true;
-    left.set(Value.kForward);//Check if Forwards means clockwise
-    right.set(Value.kReverse);
+    left.set(wheelArmSpeed);
+    right.set(-wheelArmSpeed);
 
   }
   public void spinOutwards(){
     outwards = true;
-    left.set(Value.kReverse);
-    right.set(Value.kForward);
+    left.set(-wheelArmSpeed);
+    right.set(wheelArmSpeed);
 
   }
   public void stopArms(){
     inwards = false;
     outwards = false;
-    left.set(Value.kOff);
-    right.set(Value.kOff)
+    left.set(0);
+    right.set(0);
 
 
 

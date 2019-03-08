@@ -8,14 +8,35 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.Talon;               //Are we just using Victor SPX ? Why are we not using PWMVictorSPX class?
+import edu.wpi.first.wpilibj.VictorSP;
+import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
 public class ArmAngle extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-
+  private VictorSP angle = RobotMap.wheelArmAngle;
+  private static double armAngleSpeed = .5;//TODO: Add real value
+  public boolean moving = false;
+  public ArmAngle(){
+    super("Arm Angle");
+    addChild("Angle Motor", angle);
+  }
+  public void spinUpwards(){
+    angle.set(armAngleSpeed);
+    moving = true;
+  }
+  public void spinDownwards(){
+    angle.set(-armAngleSpeed);
+    moving = true;
+  }
+  public void stopSpin(){
+    angle.set(0);
+    moving = false;
+  }
+  public boolean getMoving(){
+    return moving;
+  }
   
   @Override
   public void initDefaultCommand() {

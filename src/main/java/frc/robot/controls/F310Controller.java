@@ -19,13 +19,14 @@ public class F310Controller implements DriveController{
     private LogitechF310 controller1 = RobotMap.controller1;
 
     private static final double CURVE = 2;
-    private static final double DEADZONE = .03;
+    private static final double DEADZONE = .01;
+    private static final double startLift = .75;
 
     private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
     private int speedLimitIndex = speedLimits.length-1;
     @Override
     public double getMoveRequest(){
-        double speed = controller1.getY(Hand.kRight);
+        double speed = controller1.getRawAxis(1);
         speed = curve(speed, CURVE);
         speed = deadzone(speed, DEADZONE);
         return speed;
@@ -33,7 +34,7 @@ public class F310Controller implements DriveController{
     }
     @Override
     public double getTurnRequest(){
-        double speed = controller1.getX(Hand.kLeft);
+        double speed = controller1.getRawAxis(4);
         speed = curve(speed, CURVE);
         speed = deadzone(speed, DEADZONE);
         return speed;
@@ -41,48 +42,49 @@ public class F310Controller implements DriveController{
     }
     @Override
     public double getSpeedLimit(){
-        if(controller1.getBackButtonPressed() && speedLimitIndex>0)
+        if(controller1.getRawButtonPressed(7) && speedLimitIndex>0)
             speedLimitIndex--;
-        if(controller1.getStartButtonPressed() && speedLimitIndex<speedLimits.length-1)
+        if(controller1.getRawButtonPressed(8) && speedLimitIndex<speedLimits.length-1)
             speedLimitIndex++;
         return speedLimits[speedLimitIndex];
     }
     @Override
     public boolean getReverseDirection(){
-        return controller1.getXButtonPressed();
+        return controller1.getRawButtonPressed(3);
     }
 
     @Override
     public boolean getToggleHatchPusher(){
-        return controller1.getBButtonPressed();
+        return controller1.getRawButtonPressed(2);
     }
 
     @Override
     public boolean getToggleInwards(){
-        return controller1.getBumperPressed(Hand kLeft);
+        return controller1.getRawButtonPressed(5);
     }
 
     @Override
     public boolean getToggleOutwards(){
-        return controller1.getBumperPressed(Hand kRight);
+        return controller1.getRawButtonPressed(6);
+    }
+
+    
+    public boolean getMoveArmsUp(){
+        return controller1.getRawButtonPressed(4);
     }
 
     @Override
-    public boolean getToggleArmsUp(){
-        return controller1.getYButtonPressed();
-    }
-
-    @Override
-    public boolean getToggleArmsDown(){
-        return controller1.getAButtonPressed();
-    }
+    public boolean getMoveArmsDown(){
+        return controller1.getRawButtonPressed(1);
+    } 
+    
     @Override
     public boolean getStartLift(){
-        return controller1.getTriggerAxis(hand kLeft)>.75&&controller1.getTriggerAxis(hand kRight)>.75;
+        return controller1.getRawAxis(2)>startLift;
         
     }
-    
+}
 
   
     
-}
+

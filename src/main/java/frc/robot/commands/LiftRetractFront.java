@@ -9,12 +9,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.controls.DriveController;
+import edu.wpi.first.wpilibj.Timer;
 
-public class ArmAngleCommand extends Command {
-  public ArmAngleCommand() {
-    requires(Robot.armAngle);
+
+public class LiftRetractFront extends Command {
+  public LiftRetractFront() {
+    requires(Robot.liftSystem);
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
+  //private static final Timer t2 = new Timer();
+  //private static final double stall2 = 2.0;
 
   // Called just before this Command runs the first time
   @Override
@@ -24,19 +29,8 @@ public class ArmAngleCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
-   if(Robot.armAngle.getMoving()) {
-    if(controller.getMoveArmsUp()||controller.getMoveArmsDown()) 
-        Robot.armAngle.stopSpin();
-    }
-   if(controller.getMoveArmsUp()){
-    Robot.armAngle.spinUpwards();
-   }
-   if(controller.getMoveArmsDown()){
-     Robot.armAngle.spinDownwards();
-   }
-    
-
+    Robot.liftSystem.retractFrontSolenoids(); 
+    //t2.delay(stall2); 
   }
 
   // Make this return true when this Command no longer needs to run execute()

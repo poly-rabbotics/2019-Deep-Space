@@ -7,14 +7,24 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.opencv.core.Mat;
+
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.HatchPusherCommand;
-import frc.robot.commands.WheelArmComand;
+import frc.robot.commands.LiftCommandGroup;
+import frc.robot.commands.WheelArmCommand;
+import frc.robot.commands.ArmAngleCommand;
 import frc.robot.controls.*;
 import frc.robot.subsystems.*;
 
@@ -30,8 +40,11 @@ public class Robot extends TimedRobot {
   public static HatchPusher hatchPusher = new HatchPusher();
   public static WheelArm wheelArm = new WheelArm();
   public static LiftSystem liftSystem = new LiftSystem();
+  public static ArmAngle armAngle = new ArmAngle();
   public static DriveController controller = new F310Controller();
   public static OI m_oi;
+  public static UsbCamera hatchCamera;
+  public static UsbCamera portCamera;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -44,7 +57,26 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
+
     SmartDashboard.putData("Auto mode", m_chooser);
+    hatchCamera = CameraServer.getInstance().startAutomaticCapture("front",0);
+    hatchCamera.setResolution(640, 480);
+    portCamera = CameraServer.getInstance().startAutomaticCapture("back",1);
+    portCamera.setResolution(1280, 960);
+    
+    // new Thread(()->{
+    //   UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    //   camera.setResolution(640, 480);
+    //   CvSink cvSink = CameraServer.getInstance().getVideo();
+    //   CvSource outputStream = CameraServer.getInstance().putVideo("7042", 640, 480);
+    //   Mat source = new Mat();
+    //   Mat output = new Mat();
+    //   while(!Thread.interrupted()){
+    //     cvSink.grabFrame(source);
+    //     outputStream.putFrame(output);
+    //   }
+    // }).start();
+    
   }
 
   /**
@@ -120,6 +152,8 @@ public class Robot extends TimedRobot {
     new DriveCommand().start();
     new HatchPusherCommand().start();
     new WheelArmCommand().start();
+    new LiftCommandGroup().start();
+    new ArmAngleCommand().start();
   }
 
   /**
