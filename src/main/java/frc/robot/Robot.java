@@ -21,6 +21,7 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.EngageLiftSolenoidCommand;
 import frc.robot.commands.HatchPusherCommand;
 import frc.robot.commands.LiftCommandGroup;
 import frc.robot.commands.WheelArmCommand;
@@ -154,6 +155,7 @@ public class Robot extends TimedRobot {
     new WheelArmCommand().start();
     new LiftCommandGroup().start();
     new ArmAngleCommand().start();
+    
   }
 
   /**
