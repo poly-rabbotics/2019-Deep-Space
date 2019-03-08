@@ -15,7 +15,7 @@ public class LiftCommandGroup extends CommandGroup {
 private final double stall = 3.0;
 private final double stall2 = 2.0;
   public LiftCommandGroup() {
-    addSequential(new EngageLiftSolenoidCommand());
+   // addSequential(new EngageLiftSolenoidCommand());
     Timer.delay(stall);
     addSequential(new LiftDriveForward());
     Timer.delay(stall2);
