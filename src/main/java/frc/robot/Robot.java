@@ -7,19 +7,20 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSource;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.opencv.core.Mat;
-
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.HatchPusherCommand;
 import frc.robot.commands.LiftCommandGroup;
@@ -27,6 +28,7 @@ import frc.robot.commands.WheelArmCommand;
 import frc.robot.commands.ArmAngleCommand;
 import frc.robot.controls.*;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.vision.Cameras;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -43,8 +45,9 @@ public class Robot extends TimedRobot {
   public static ArmAngle armAngle = new ArmAngle();
   public static DriveController controller = new F310Controller();
   public static OI m_oi;
-  public static UsbCamera hatchCamera;
-  public static UsbCamera portCamera;
+  public AHRS ahrs;
+  public static UsbCamera frontCam;
+  public static UsbCamera backCam;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -56,27 +59,33 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    // chooser.addOption("My Auto", new MyAutoCommand());
 
-    SmartDashboard.putData("Auto mode", m_chooser);
-    hatchCamera = CameraServer.getInstance().startAutomaticCapture("front",0);
-    hatchCamera.setResolution(640, 480);
-    portCamera = CameraServer.getInstance().startAutomaticCapture("back",1);
-    portCamera.setResolution(1280, 960);
-    
-    // new Thread(()->{
-    //   UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    //   camera.setResolution(640, 480);
-    //   CvSink cvSink = CameraServer.getInstance().getVideo();
-    //   CvSource outputStream = CameraServer.getInstance().putVideo("7042", 640, 480);
-    //   Mat source = new Mat();
-    //   Mat output = new Mat();
-    //   while(!Thread.interrupted()){
-    //     cvSink.grabFrame(source);
-    //     outputStream.putFrame(output);
-    //   }
-    // }).start();
-    
+    // VideoSource frontCam = new UsbCamera("Front Camera", 0); // did not work as 0 or 2, with pixy2 on spi
+    // frontCam.setResolution(320, 240);
+    // //frontCam.setFPS(15);
+    // CameraServer.getInstance().startAutomaticCapture(frontCam);
+
+    // VideoSource backCam = new UsbCamera("Back Camera", 1); //this worked in inboard usb port, connected rr by usb to station
+    // backCam.setResolution(640, 480);
+    // backCam.setFPS(15);
+    // CameraServer.getInstance().startAutomaticCapture(backCam);
+     frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
+     frontCam.setResolution(320, 240);
+    //  frontCam.setFPS(15);
+    // //frontCam.setBrightness(3);
+     backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
+     backCam.setResolution(320, 240);
+    //  backCam.setFPS(15);
+
+
+     //Cameras.setup(); // Setup and Connection to Pixy2
+
+    try {
+      ahrs = new AHRS(SerialPort.Port.kMXP);
+    } catch (RuntimeException ex) {
+      DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), false);
+    }
+
   }
 
   /**
@@ -89,6 +98,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    if (ahrs != null) {
+     SmartDashboard.putData(ahrs);
+    }
+    //Cameras.run();
   }
 
   /**
@@ -147,7 +160,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) 
+    if (m_autonomousCommand != null)
       m_autonomousCommand.cancel();
     new DriveCommand().start();
     new HatchPusherCommand().start();
