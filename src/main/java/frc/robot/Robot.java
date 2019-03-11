@@ -59,9 +59,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-   
+
     // VideoSource frontCam = new UsbCamera("Front Camera", 0); // did not work as 0 or 2, with pixy2 on spi
-    // //frontCam.setResolution(640, 480);
+    // frontCam.setResolution(320, 240);
     // //frontCam.setFPS(15);
     // CameraServer.getInstance().startAutomaticCapture(frontCam);
 
@@ -69,16 +69,17 @@ public class Robot extends TimedRobot {
     // backCam.setResolution(640, 480);
     // backCam.setFPS(15);
     // CameraServer.getInstance().startAutomaticCapture(backCam);
-    frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
-    frontCam.setResolution(640, 480);
-    frontCam.setFPS(15);
-    backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
-    backCam.setResolution(640, 480);
-    backCam.setFPS(15);
+     frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
+     frontCam.setResolution(320, 240);
+    //  frontCam.setFPS(15);
+    // //frontCam.setBrightness(3);
+     backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
+     backCam.setResolution(320, 240);
+    //  backCam.setFPS(15);
 
 
-    Cameras.setup(); // Setup and Connection to Pixy2
-    
+     //Cameras.setup(); // Setup and Connection to Pixy2
+
     try {
       ahrs = new AHRS(SerialPort.Port.kMXP);
     } catch (RuntimeException ex) {
@@ -98,9 +99,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     if (ahrs != null) {
-      SmartDashboard.putData(ahrs);
+     SmartDashboard.putData(ahrs);
     }
-    Cameras.run();
+    //Cameras.run();
   }
 
   /**
@@ -159,7 +160,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) 
+    if (m_autonomousCommand != null)
       m_autonomousCommand.cancel();
     new DriveCommand().start();
     new HatchPusherCommand().start();
