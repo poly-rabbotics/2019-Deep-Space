@@ -12,6 +12,8 @@ import frc.robot.Robot;
 import frc.robot.controls.DriveController;
 
 public class ArmAngleCommand extends Command {
+  //double upPressed = false;
+  //double downPressed = false;
   public ArmAngleCommand() {
     requires(Robot.armAngle);
   }
@@ -25,17 +27,17 @@ public class ArmAngleCommand extends Command {
   @Override
   protected void execute() {
     DriveController controller = Robot.controller;
-   if(Robot.armAngle.getMoving()) {
-    if(controller.getMoveArmsUp()||controller.getMoveArmsDown()) 
-        Robot.armAngle.stopSpin();
+
+    if (controller.getMoveArmsUp())  //Only do this the first time we detect the button is pressed
+    {
+      //upPressed = true;
+      Robot.armAngle.spinUpwards();
     }
-   if(controller.getMoveArmsUp()){
-    Robot.armAngle.spinUpwards();
-   }
-   if(controller.getMoveArmsDown()){
-     Robot.armAngle.spinDownwards();
-   }
-    
+    else if (controller.getMoveArmsDown()) //Only do this the first time we detect the button is pressed
+    {
+      //downPressed = true;
+      Robot.armAngle.spinDownwards();
+    }
 
   }
 
