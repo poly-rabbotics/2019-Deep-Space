@@ -20,8 +20,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.EngageLiftSolenoidCommand;
 import frc.robot.commands.HatchPusherCommand;
 import frc.robot.commands.LiftCommandGroup;
 import frc.robot.commands.WheelArmCommand;

@@ -7,21 +7,19 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.Timer;
 
 
-public class LiftRetractFront extends Command {
+public class LiftDriveForward2 extends Command {
   Timer t = new Timer();
-  public static double RETRACT_FRONT_DELAY = 3.0;
-  public LiftRetractFront() {
+  private static double DRIVE_FORWARD_DELAY_2 = 3.0;
+  public LiftDriveForward2() {
     requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
-  //private static final Timer t2 = new Timer();
-  //private static final double stall2 = 2.0;
 
   // Called just before this Command runs the first time
   @Override
@@ -32,16 +30,15 @@ public class LiftRetractFront extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.liftSystem.stopMotors();
-	  Robot.liftSystem.retractFrontSolenoids(); 
-    //t2.delay(stall2); 
+    Robot.liftSystem.driveForward();
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return t.get()>=RETRACT_FRONT_DELAY;
-	  }
+    return t.get()>=DRIVE_FORWARD_DELAY_2;
+  }
 
   // Called once after isFinished returns true
   @Override
