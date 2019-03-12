@@ -57,6 +57,14 @@ public class LiftSystem extends Subsystem {
     
 
   }
+  public void retractAllSolenoids(){
+    front.set(Value.kReverse);
+    back.set(Value.kReverse);
+  }
+  public void stopMotors(){
+    leftWheel.set(0);
+    rightWheel.set(0);
+  }
 
   @Override
   public void initDefaultCommand() {

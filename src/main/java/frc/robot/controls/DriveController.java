@@ -21,5 +21,5 @@ public interface DriveController {
     public boolean getStartLift();
     public boolean getMoveArmsUp();
     public boolean getMoveArmsDown();
-
+    public boolean getStopLift();
 }
