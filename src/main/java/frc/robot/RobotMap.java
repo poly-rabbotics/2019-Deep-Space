@@ -41,7 +41,7 @@ public class RobotMap {
   public static final VictorSP leftLiftWheel = new VictorSP(3); 
   public static final VictorSP rightLiftWheel = new VictorSP(2);
 
-  public static final CTREMagneticEncoder wheelArmEncoder = new CTREMagneticEncoder(0, 1, 2, false);
+  public static final CTREMagneticEncoder wheelArmEncoder = new CTREMagneticEncoder(0, 1, 2, false); //Arguments: int dataAPort, int dataBPort, int pwmPort, double pulsesPerRevolution, boolean inverted
 
   public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,3); // TODO: set to actual solenoid values
   public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1,5);
