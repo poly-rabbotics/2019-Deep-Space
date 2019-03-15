@@ -13,19 +13,18 @@ import com.kauailabs.navx.frc.AHRS.SerialDataType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoSource;
-import edu.wpi.first.cameraserver.CameraServer;
+// import edu.wpi.cscore.UsbCamera;
+// import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.EngageLiftSolenoidCommand;
 import frc.robot.commands.HatchPusherCommand;
 import frc.robot.commands.LiftCommandGroup;
 import frc.robot.commands.WheelArmCommand;
 import frc.robot.commands.ArmAngleCommand;
+import frc.robot.commands.CameraSwitchView;
 import frc.robot.controls.*;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.vision.Cameras;
@@ -46,8 +45,9 @@ public class Robot extends TimedRobot {
   public static DriveController controller = new F310Controller();
   public static OI m_oi;
   public AHRS ahrs;
-  public static UsbCamera frontCam;
-  public static UsbCamera backCam;
+  public static boolean lookForward = true;
+  // public static UsbCamera frontCam;
+  // public static UsbCamera backCam;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -69,23 +69,23 @@ public class Robot extends TimedRobot {
     // backCam.setResolution(640, 480);
     // backCam.setFPS(15);
     // CameraServer.getInstance().startAutomaticCapture(backCam);
-     frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
-     frontCam.setResolution(320, 240);
+    // //  frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
+    // //  frontCam.setResolution(320, 240);
     //  frontCam.setFPS(15);
     // //frontCam.setBrightness(3);
-     backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
-     backCam.setResolution(320, 240);
+    // //  backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
+    // //  backCam.setResolution(320, 240);
     //  backCam.setFPS(15);
 
-
-     //Cameras.setup(); // Setup and Connection to Pixy2
+    SmartDashboard.putData("CameraSwitchView", new CameraSwitchView());
+    SmartDashboard.putBoolean("lookForward", Robot.lookForward);
+    Cameras.setup(); // Setup and Connection to Pixy2
 
     try {
       ahrs = new AHRS(SerialPort.Port.kMXP);
     } catch (RuntimeException ex) {
       DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), false);
     }
-
   }
 
   /**
@@ -167,6 +167,7 @@ public class Robot extends TimedRobot {
     new WheelArmCommand().start();
     new LiftCommandGroup().start();
     new ArmAngleCommand().start();
+    new CameraSwitchView().start();
   }
 
   /**
