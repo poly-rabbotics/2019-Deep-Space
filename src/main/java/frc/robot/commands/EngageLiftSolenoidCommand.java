@@ -9,12 +9,19 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.controls.DriveController;
 
-public class ArmAngleCommand extends Command {
-  public ArmAngleCommand() {
-    requires(Robot.armAngle);
+public class EngageLiftSolenoidCommand extends Command {
+  Timer t = new Timer();
+  private static final double SOLENOID_DELAY = 4.0;
+  
+	public EngageLiftSolenoidCommand() {
+    requires(Robot.liftSystem);
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
+
 
   // Called just before this Command runs the first time
   @Override
@@ -25,24 +32,24 @@ public class ArmAngleCommand extends Command {
   @Override
   protected void execute() {
     DriveController controller = Robot.controller;
-   if(Robot.armAngle.getMoving()) {
-    if(controller.getMoveArmsUp()||controller.getMoveArmsDown()) 
-        Robot.armAngle.stopSpin();
-    }
-   if(controller.getMoveArmsUp()){
-    Robot.armAngle.spinUpwards();
-   }
-   if(controller.getMoveArmsDown()){
-     Robot.armAngle.spinDownwards();
-   }
+    if(controller.getStartLift()){
+      Robot.liftSystem.engageSolenoids();
+      t.start();
     
+    }
+    if(controller.getStopLift()){
+      Robot.liftSystem.retractAllSolenoids();
+      t.start();
+    }
 
+    
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return t.get()>=SOLENOID_DELAY;
   }
 
   // Called once after isFinished returns true
