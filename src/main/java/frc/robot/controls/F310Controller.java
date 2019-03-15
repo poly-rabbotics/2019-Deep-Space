@@ -60,12 +60,12 @@ public class F310Controller implements DriveController{
 
     @Override
     public boolean getToggleInwards(){
-        return controller1.getRawButtonPressed(5);
+        return controller1.getRawButtonPressed(6);
     }
 
     @Override
     public boolean getToggleOutwards(){
-        return controller1.getRawButtonPressed(6);
+        return controller1.getRawButtonPressed(5);
     }
 
     

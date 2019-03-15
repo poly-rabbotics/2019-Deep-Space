@@ -34,9 +34,9 @@ public class RobotMap {
   public static final Spark rightFront = new Spark(6);
   public static final Spark rightBack = new Spark(5);
 
-  public static final VictorSP wheelArmLeft = new VictorSP(4);// TODO: Set to actual port numbers
+  public static final VictorSP wheelArmLeft = new VictorSP(0);// 2019-03-15 switch 0 and 4 - won't reach this was 4 --> 0
   public static final VictorSP wheelArmRight = new VictorSP(1);
-  public static final VictorSP wheelArmAngle = new VictorSP(0);
+  public static final VictorSP wheelArmAngle = new VictorSP(4);// 2019-03-15 switch 0 and 4 - won't reach this was 0 --> 4
   public static final VictorSP leftLiftWheel = new VictorSP(3); 
   public static final VictorSP rightLiftWheel = new VictorSP(2);
 
