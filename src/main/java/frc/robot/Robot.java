@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
-    SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
+    //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
     m_oi = new OI();
 
     // VideoSource frontCam = new UsbCamera("Front Camera", 0); // did not work as 0 or 2, with pixy2 on spi
@@ -105,7 +105,7 @@ public class Robot extends TimedRobot {
     /*if (ahrs != null) {
      SmartDashboard.putData(ahrs);
     }*/
-    SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
+    //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
     //Cameras.run();
   }
 
@@ -165,7 +165,7 @@ public class Robot extends TimedRobot {
     new WheelArmCommand().start();
     new LiftCommandGroup().start();
     new ArmAngleCommand().start();
-    SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
+    //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
   }
 
   /**

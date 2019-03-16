@@ -45,6 +45,7 @@ public class RobotMap {
 
  // public static final Encoder wheelArmEncoder = new Encoder(0,1,false);//TODO: Fix encoder constructor
   public static final DigitalInput armSwitch = new DigitalInput(2);
+  public static final DigitalInput armSwitch2 = new DigitalInput(3);
 
   public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,3); // TODO: set to actual solenoid values
   public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1,5);
