@@ -8,6 +8,7 @@
 package frc.robot;
 import org.usfirst.frc.team4999.controllers.LogitechF310;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
@@ -43,6 +44,7 @@ public class RobotMap {
   public static final VictorSP rightLiftWheel = new VictorSP(2);
 
  // public static final Encoder wheelArmEncoder = new Encoder(0,1,false);//TODO: Fix encoder constructor
+  public static final DigitalInput armSwitch = new DigitalInput(2);
 
   public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,3); // TODO: set to actual solenoid values
   public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1,5);
