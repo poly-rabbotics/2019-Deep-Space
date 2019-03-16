@@ -24,18 +24,34 @@ public class WheelArmCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
-    if(Robot.wheelArm.isInwards()||Robot.wheelArm.isOutwards()){
-      if(controller.getToggleInwards()||controller.getToggleOutwards()){
+    DriveController controller1 = Robot.controller1;
+    DriveController controller2 = Robot.controller2;
+    /*if(Robot.wheelArm.isInwards()||Robot.wheelArm.isOutwards()){
+      if(controller1.getToggleInwards()||controller1.getToggleOutwards()||controller1.getToggleInwards()||controller1.getToggleOutwards()){
         Robot.wheelArm.stopArms();
       }
     
     }
-    if(controller.getToggleInwards()){
+    */
+    if(Robot.wheelArm.isInwards()){
+      if(controller1.getToggleInwards()||controller2.getToggleInwards()){
+        Robot.wheelArm.stopArms();
+      }
+    }
+    if(Robot.wheelArm.isOutwards()){
+      if(controller1.getToggleOutwards()||controller2.getToggleOutwards()){
+        Robot.wheelArm.stopArms();
+      }
+    }
+
+    if(controller1.getToggleInwards()||controller2.getToggleInwards()){
       Robot.wheelArm.spinInwards();
     }
-    if(controller.getToggleOutwards()){
+    if(controller1.getToggleOutwards()||controller2.getToggleOutwards()){
       Robot.wheelArm.spinOutwards();
+    }
+    if(Robot.wheelArm.isInwards()==false&&Robot.wheelArm.isOutwards()==false){
+      Robot.wheelArm.neutral();
     }
 
   }

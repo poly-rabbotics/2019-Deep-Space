@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.controls.XBoxController;
 import edu.wpi.first.wpilibj.Encoder;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -47,4 +49,5 @@ public class RobotMap {
   public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(2,4);
   
   public static final LogitechF310 controller1 = new LogitechF310(0);
+  public static final XboxController controller2 = new XboxController(1);
 }

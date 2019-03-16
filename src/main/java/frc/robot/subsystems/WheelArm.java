@@ -19,8 +19,8 @@ private VictorSP right = RobotMap.wheelArmRight;           //Did we change this 
 
 private boolean inwards = false;
 private boolean outwards = false;
-private static double wheelInSpeed = .95;//TODO: Add real value
-private static double wheelOutSpeed = .25;
+private static double wheelInSpeed = .75;//TODO: Add real value
+private static double wheelOutSpeed = .50;
 public WheelArm(){
     super("Wheel Arm");
     addChild("Left Motor", left);
@@ -47,6 +47,10 @@ public WheelArm(){
 
 
 
+  }
+  public void neutral(){
+    left.set(-.1);
+    right.set(.1);
   }
   
   public boolean isInwards(){
