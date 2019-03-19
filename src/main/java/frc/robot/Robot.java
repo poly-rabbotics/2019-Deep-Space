@@ -43,7 +43,8 @@ public class Robot extends TimedRobot {
   public static WheelArm wheelArm = new WheelArm();
   public static LiftSystem liftSystem = new LiftSystem();
   public static ArmAngle armAngle = new ArmAngle();
-  public static DriveController controller = new F310Controller();
+  public static DriveController controller1 = new F310Controller();
+  public static DriveController controller2 = new XBoxController();
   public static OI m_oi;
   public AHRS ahrs;
   public static UsbCamera frontCam;
@@ -58,6 +59,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    CameraServer.getInstance().startAutomaticCapture(0);
+    CameraServer.getInstance().startAutomaticCapture(1);
+    //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
     m_oi = new OI();
 
     // VideoSource frontCam = new UsbCamera("Front Camera", 0); // did not work as 0 or 2, with pixy2 on spi
@@ -69,22 +73,22 @@ public class Robot extends TimedRobot {
     // backCam.setResolution(640, 480);
     // backCam.setFPS(15);
     // CameraServer.getInstance().startAutomaticCapture(backCam);
-     frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
-     frontCam.setResolution(320, 240);
+    // frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
+    // frontCam.setResolution(320, 240);
     //  frontCam.setFPS(15);
     // //frontCam.setBrightness(3);
-     backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
-     backCam.setResolution(320, 240);
+     //backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
+     //backCam.setResolution(320, 240);
     //  backCam.setFPS(15);
 
 
      //Cameras.setup(); // Setup and Connection to Pixy2
 
-    try {
+    /*try {
       ahrs = new AHRS(SerialPort.Port.kMXP);
     } catch (RuntimeException ex) {
       DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), false);
-    }
+    }*/
 
   }
 
@@ -98,9 +102,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if (ahrs != null) {
+    /*if (ahrs != null) {
      SmartDashboard.putData(ahrs);
-    }
+    }*/
+    //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
     //Cameras.run();
   }
 
@@ -132,18 +137,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    new DriveCommand().start();
+    new HatchPusherCommand().start();
+    new WheelArmCommand().start();
+    new LiftCommandGroup().start();
+    new ArmAngleCommand().start();
   }
 
   /**
@@ -167,6 +165,7 @@ public class Robot extends TimedRobot {
     new WheelArmCommand().start();
     new LiftCommandGroup().start();
     new ArmAngleCommand().start();
+    //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
   }
 
   /**

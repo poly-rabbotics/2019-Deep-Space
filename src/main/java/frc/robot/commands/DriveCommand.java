@@ -25,12 +25,14 @@ public class DriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
+    DriveController controller = Robot.controller2;
     double moveRequest = controller.getMoveRequest();
+    double turnRequest = controller.getTurnRequest();
     if(controller.getReverseDirection())
       reverse = !reverse;
     if(reverse)
       moveRequest=-moveRequest;
+      turnRequest=-turnRequest;
     Robot.drive.arcadeDrive(moveRequest, controller.getTurnRequest(), controller.getSpeedLimit());
   }
 

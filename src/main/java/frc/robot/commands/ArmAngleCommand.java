@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.controls.DriveController;
 
@@ -24,17 +25,19 @@ public class ArmAngleCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
+    DriveController controller1 = Robot.controller1;
+    DriveController controller2 = Robot.controller2;
    if(Robot.armAngle.getMoving()) {
-    if(controller.getMoveArmsUp()||controller.getMoveArmsDown()) 
+    if(controller1.getMoveArmsUp()||controller1.getMoveArmsDown()||controller2.getMoveArmsUp()||controller2.getMoveArmsDown()) 
         Robot.armAngle.stopSpin();
     }
-   if(controller.getMoveArmsUp()){
+   if(controller1.getMoveArmsUp()||controller2.getMoveArmsUp()){
     Robot.armAngle.spinUpwards();
    }
-   if(controller.getMoveArmsDown()){
+   if(controller1.getMoveArmsDown()||controller2.getMoveArmsDown()){
      Robot.armAngle.spinDownwards();
    }
+   SmartDashboard.putBoolean("Arms Moving", Robot.armAngle.getMoving());
     
 
   }

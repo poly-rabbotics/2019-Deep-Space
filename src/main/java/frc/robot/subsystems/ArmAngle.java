@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;               //Are we just using Victor SPX ? Why are we not using PWMVictorSPX class?
 import edu.wpi.first.wpilibj.VictorSP;
 import frc.robot.RobotMap;
@@ -16,6 +17,9 @@ import frc.robot.RobotMap;
  */
 public class ArmAngle extends Subsystem {
   private VictorSP angle = RobotMap.wheelArmAngle;
+  private DigitalInput armSwitch = RobotMap.armSwitch;
+  
+  private DigitalInput armSwitch2 = RobotMap.armSwitch2;
   private static double armAngleSpeed = .5;//TODO: Add real value
   public boolean moving = false;
   public ArmAngle(){
@@ -23,12 +27,25 @@ public class ArmAngle extends Subsystem {
     addChild("Angle Motor", angle);
   }
   public void spinUpwards(){
+    if(!armSwitch.get()){
     angle.set(armAngleSpeed);
     moving = true;
+    }
+    else{
+      angle.set(0);
+      moving = false;
+    }
+    
   }
   public void spinDownwards(){
-    angle.set(-armAngleSpeed);
-    moving = true;
+    if(!armSwitch2.get()){
+      angle.set(-armAngleSpeed);
+      moving = true;
+      }
+      else{
+        angle.set(0);
+        moving = false;
+      }
   }
   public void stopSpin(){
     angle.set(0);
@@ -37,6 +54,7 @@ public class ArmAngle extends Subsystem {
   public boolean getMoving(){
     return moving;
   }
+ 
   
   @Override
   public void initDefaultCommand() {

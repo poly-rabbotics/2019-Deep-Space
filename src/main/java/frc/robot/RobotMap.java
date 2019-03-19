@@ -8,10 +8,13 @@
 package frc.robot;
 import org.usfirst.frc.team4999.controllers.LogitechF310;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.controls.XBoxController;
 import edu.wpi.first.wpilibj.Encoder;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -34,17 +37,20 @@ public class RobotMap {
   public static final Spark rightFront = new Spark(6);
   public static final Spark rightBack = new Spark(5);
 
-  public static final VictorSP wheelArmLeft = new VictorSP(4);// TODO: Set to actual port numbers
+  public static final VictorSP wheelArmLeft = new VictorSP(0);// 2019-03-15 switch 0 and 4 - won't reach this was 4 --> 0
   public static final VictorSP wheelArmRight = new VictorSP(1);
-  public static final VictorSP wheelArmAngle = new VictorSP(0);
+  public static final VictorSP wheelArmAngle = new VictorSP(4);// 2019-03-15 switch 0 and 4 - won't reach this was 0 --> 4
   public static final VictorSP leftLiftWheel = new VictorSP(3); 
   public static final VictorSP rightLiftWheel = new VictorSP(2);
 
  // public static final Encoder wheelArmEncoder = new Encoder(0,1,false);//TODO: Fix encoder constructor
+  public static final DigitalInput armSwitch = new DigitalInput(2);
+  public static final DigitalInput armSwitch2 = new DigitalInput(3);
 
   public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,3); // TODO: set to actual solenoid values
   public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1,5);
   public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(2,4);
   
   public static final LogitechF310 controller1 = new LogitechF310(0);
+  public static final XboxController controller2 = new XboxController(1);
 }

@@ -26,8 +26,9 @@ public class HatchPusherCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller;
-    if(controller.getToggleHatchPusher()){
+    DriveController controller1 = Robot.controller1;
+    DriveController controller2 = Robot.controller2;
+    if(controller1.getToggleHatchPusher()||controller2.getToggleHatchPusher()){
       if(Robot.hatchPusher.isOut()){
         Robot.hatchPusher.retract();
       }
