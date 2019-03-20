@@ -55,7 +55,7 @@ public class F310Controller implements DriveController{
 
     @Override
     public boolean getToggleHatchPusher(){
-        return controller1.getRawButtonPressed(2);
+        return controller1.getRawButton(2);
     }
 
     @Override

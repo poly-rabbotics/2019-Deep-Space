@@ -59,7 +59,7 @@ public class XBoxController implements DriveController{
 
     @Override
     public boolean getToggleHatchPusher(){
-        return controller2.getRawButtonPressed(2);
+        return controller2.getRawButton(2);
     }
 
     @Override
