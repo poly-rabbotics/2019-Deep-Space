@@ -29,16 +29,16 @@ public class HatchPusherCommand extends Command {
     DriveController controller1 = Robot.controller1;
     DriveController controller2 = Robot.controller2;
     if(controller1.getToggleHatchPusher()||controller2.getToggleHatchPusher()){
-      if(Robot.hatchPusher.isOut()){
-        Robot.hatchPusher.retract();
+        Robot.hatchPusher.extend();
       }
       else{
-        Robot.hatchPusher.extend();
+        Robot.hatchPusher.retract();
       }
     }
 
 
-  }
+
+  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

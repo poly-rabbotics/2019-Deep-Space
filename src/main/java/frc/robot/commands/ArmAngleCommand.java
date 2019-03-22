@@ -27,16 +27,13 @@ public class ArmAngleCommand extends Command {
   protected void execute() {
     DriveController controller1 = Robot.controller1;
     DriveController controller2 = Robot.controller2;
-   if(Robot.armAngle.getMoving()) {
-    if(controller1.getMoveArmsUp()||controller1.getMoveArmsDown()||controller2.getMoveArmsUp()||controller2.getMoveArmsDown()) 
-        Robot.armAngle.stopSpin();
+    if(controller1.getMoveArmsUp()||controller2.getMoveArmsUp()){ 
+        Robot.armAngle.spinUpwards();
     }
-   if(controller1.getMoveArmsUp()||controller2.getMoveArmsUp()){
-    Robot.armAngle.spinUpwards();
-   }
    if(controller1.getMoveArmsDown()||controller2.getMoveArmsDown()){
-     Robot.armAngle.spinDownwards();
+    Robot.armAngle.spinDownwards();
    }
+   
    SmartDashboard.putBoolean("Arms Moving", Robot.armAngle.getMoving());
     
 
