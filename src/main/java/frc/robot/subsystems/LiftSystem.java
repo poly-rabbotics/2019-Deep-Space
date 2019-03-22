@@ -18,7 +18,7 @@ import frc.robot.RobotMap;
 public class LiftSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private  double driveSpeed = .5;
+  private  double driveSpeed = .75;
 
   private DoubleSolenoid front = RobotMap.liftSystemFront;
   private DoubleSolenoid back = RobotMap.liftSystemBack;

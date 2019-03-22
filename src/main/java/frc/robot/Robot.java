@@ -1,3 +1,4 @@
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -59,10 +60,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    CameraServer.getInstance().startAutomaticCapture(0);
-    CameraServer.getInstance().startAutomaticCapture(1);
+    // // CameraServer.getInstance().startAutomaticCapture(0);
+    // // CameraServer.getInstance().startAutomaticCapture(1);
     //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
-    m_oi = new OI();
 
     // VideoSource frontCam = new UsbCamera("Front Camera", 0); // did not work as 0 or 2, with pixy2 on spi
     // frontCam.setResolution(320, 240);
@@ -73,13 +73,14 @@ public class Robot extends TimedRobot {
     // backCam.setResolution(640, 480);
     // backCam.setFPS(15);
     // CameraServer.getInstance().startAutomaticCapture(backCam);
-    // frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
-    // frontCam.setResolution(320, 240);
-    //  frontCam.setFPS(15);
-    // //frontCam.setBrightness(3);
-     //backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
-     //backCam.setResolution(320, 240);
-    //  backCam.setFPS(15);
+    frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
+    //frontCam.setResolution(320, 240);
+    frontCam.setFPS(15);
+    // frontCam.setBrightness(3);
+    backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
+    backCam.setResolution(320, 240);
+    backCam.setFPS(15);
+    m_oi = new OI();
 
 
      //Cameras.setup(); // Setup and Connection to Pixy2

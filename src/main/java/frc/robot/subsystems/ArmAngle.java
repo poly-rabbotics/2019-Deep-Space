@@ -20,7 +20,8 @@ public class ArmAngle extends Subsystem {
   private DigitalInput armSwitch = RobotMap.armSwitch;
   
   private DigitalInput armSwitch2 = RobotMap.armSwitch2;
-  private static double armAngleSpeed = .5;//TODO: Add real value
+  private static double armAngleSpeedUp = .5;
+  private static double armAngleSpeedDown = -.5;
   public boolean moving = false;
   public ArmAngle(){
     super("Arm Angle");
@@ -28,7 +29,7 @@ public class ArmAngle extends Subsystem {
   }
   public void spinUpwards(){
     if(!armSwitch.get()){
-    angle.set(armAngleSpeed);
+    angle.set(armAngleSpeedUp);
     moving = true;
     }
     else{
@@ -39,7 +40,7 @@ public class ArmAngle extends Subsystem {
   }
   public void spinDownwards(){
     if(!armSwitch2.get()){
-      angle.set(-armAngleSpeed);
+      angle.set(armAngleSpeedDown);
       moving = true;
       }
       else{
