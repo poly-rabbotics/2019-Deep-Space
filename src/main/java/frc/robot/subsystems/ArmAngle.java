@@ -23,11 +23,13 @@ public class ArmAngle extends Subsystem {
   private static double armAngleSpeedUp = .5;
   private static double armAngleSpeedDown = -.5;
   public boolean moving = false;
+
   public ArmAngle(){
     super("Arm Angle");
     addChild("Angle Motor", angle);
   }
   public void spinUpwards(){
+    System.out.println(angle.get());
     if(!armSwitch.get()){
     angle.set(armAngleSpeedUp);
     moving = true;
@@ -38,9 +40,19 @@ public class ArmAngle extends Subsystem {
     }
     
   }
+  public boolean returnUpper()
+  {
+    return armSwitch.get();
+  }
+  public boolean returnLower()
+  {
+    return armSwitch2.get();
+  }
   public void spinDownwards(){
+    System.out.println(angle.get());
     if(!armSwitch2.get()){
       angle.set(armAngleSpeedDown);
+      
       moving = true;
       }
       else{

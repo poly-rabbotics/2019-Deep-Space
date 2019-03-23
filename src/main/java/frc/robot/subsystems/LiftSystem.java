@@ -18,7 +18,7 @@ import frc.robot.RobotMap;
 public class LiftSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private  double driveSpeed = .75;
+  private  double driveSpeed = .5;
 
   private DoubleSolenoid front = RobotMap.liftSystemFront;
   private DoubleSolenoid back = RobotMap.liftSystemBack;
@@ -36,12 +36,15 @@ public class LiftSystem extends Subsystem {
     addChild("Right Lift Wheel", rightWheel);
   }
 
-  public void engageSolenoids(){
+  public void engageFrontSolenoids(){
     front.set(Value.kForward);
-    
-    back.set(Value.kForward);
    
   }
+   
+  public void engageBackSolenoids(){
+    back.set(Value.kForward);
+  }
+
   public void driveForward(){
     leftWheel.set(driveSpeed);
     rightWheel.set(driveSpeed);
@@ -50,6 +53,11 @@ public class LiftSystem extends Subsystem {
     front.set(Value.kReverse);
     
   }
+
+  public void retractBackSolenoids(){
+    back.set(Value.kReverse);
+  }
+
   public void endLiftSequence(){
     leftWheel.set(0);
     rightWheel.set(0);
@@ -65,6 +73,12 @@ public class LiftSystem extends Subsystem {
     leftWheel.set(0);
     rightWheel.set(0);
   }
+
+  public void engageSolenoids(){
+    
+  }
+
+
 
   @Override
   public void initDefaultCommand() {

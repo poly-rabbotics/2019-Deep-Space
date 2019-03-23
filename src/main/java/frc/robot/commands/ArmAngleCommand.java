@@ -30,11 +30,16 @@ public class ArmAngleCommand extends Command {
     if(controller1.getMoveArmsUp()||controller2.getMoveArmsUp()){ 
         Robot.armAngle.spinUpwards();
     }
-   if(controller1.getMoveArmsDown()||controller2.getMoveArmsDown()){
+    
+   else if(controller1.getMoveArmsDown()||controller2.getMoveArmsDown()){
     Robot.armAngle.spinDownwards();
    }
+   else Robot.armAngle.stopSpin();
    
-   SmartDashboard.putBoolean("Arms Moving", Robot.armAngle.getMoving());
+   SmartDashboard.putBoolean("Upper Switch", Robot.armAngle.returnUpper());
+   SmartDashboard.putBoolean("Lower Switch", Robot.armAngle.returnLower());
+   System.out.println(Robot.armAngle.returnUpper());
+   System.out.println(Robot.armAngle.returnLower());
     
 
   }

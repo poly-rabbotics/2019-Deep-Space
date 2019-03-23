@@ -48,8 +48,8 @@ public class RobotMap {
   public static final DigitalInput armSwitch2 = new DigitalInput(3);
 
   public static final DoubleSolenoid hatchSolenoidTop = new DoubleSolenoid(0,3); // TODO: set to actual solenoid values
-  public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(1,5);
-  public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(2,4);
+  public static final DoubleSolenoid liftSystemFront = new DoubleSolenoid(1,4);
+  public static final DoubleSolenoid liftSystemBack = new DoubleSolenoid(2,5);
   
   public static final LogitechF310 controller1 = new LogitechF310(0);
   public static final XboxController controller2 = new XboxController(1);

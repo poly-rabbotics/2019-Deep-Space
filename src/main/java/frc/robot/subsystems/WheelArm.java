@@ -21,7 +21,7 @@ private boolean inwards = false;
 private boolean outwards = false;
 private static double wheelInSpeed = 1.00;//TODO: Add real value
 private static double rocket2Speed = 1.00;
-private static double wheelOutSpeed = .50;
+private static double wheelOutSpeed = .5;
 public WheelArm(){
     super("Wheel Arm");
     addChild("Left Motor", left);
@@ -56,8 +56,8 @@ public WheelArm(){
 
   }
   public void neutral(){
-    left.set(-.1);
-    right.set(.1);
+    left.set(-.05);
+    right.set(.05);
   }
   
   public boolean isInwards(){

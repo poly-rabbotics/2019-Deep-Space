@@ -22,4 +22,9 @@ public interface DriveController {
     public boolean getMoveArmsUp();
     public boolean getMoveArmsDown();
     public boolean getStopLift();
+    public boolean getEngageFrontSolenoid();
+    public boolean getEngageBackSolenoid();
+    public boolean getRetractFrontSolenoid();
+    public boolean getRetractBackSolenoid();
+    public boolean getDriveLiftForward();
 }

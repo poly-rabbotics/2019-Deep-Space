@@ -59,39 +59,65 @@ public class XBoxController implements DriveController{
 
     @Override
     public boolean getToggleHatchPusher(){
-        return controller2.getRawButton(2);
+        return controller2.getRawButton(11);
+        //Not in use
     }
 
     @Override
     public boolean getToggleInwards(){
-        return controller2.getRawButtonPressed(6);
+        return false; //controller2.getRawButtonPressed(15);
+        //Not in use
     }
 
     @Override
     public boolean getToggleOutwards(){
-        return controller2.getRawButtonPressed(5);
+        return controller2.getRawButtonPressed(13);
+        //Not in use
     }
 
     
     public boolean getMoveArmsUp(){
-        return controller2.getRawButtonPressed(4);
+        return controller2.getRawButton(12);
+        //Not in use
     }
 
     @Override
     public boolean getMoveArmsDown(){
-        return controller2.getRawButtonPressed(1);
+        return controller2.getRawButton(10);
+        //not in use
     } 
     
     @Override
     public boolean getStartLift(){
         return (controller2.getRawAxis(2)>startLift&&controller2.getRawAxis(3)>startLift&&controller2.getRawButton(7)&&controller2.getRawButton(8));
-	      
+	      //not in use
     }
 
     @Override
 	    public boolean getStopLift(){
-	        return(controller2.getRawButton(9)&&controller2.getRawButton(10));
-	    }
+            return(controller2.getRawButton(9)&&controller2.getRawButton(10));
+            //not in use
+        }
+        
+        public boolean getEngageFrontSolenoid(){
+            return(controller2.getRawButtonPressed(5)); //TODO: assign actual buttons
+        }
+
+        public boolean getEngageBackSolenoid(){
+            return(controller2.getRawButtonPressed(6));
+        }
+
+        public boolean getRetractFrontSolenoid(){
+            return(controller2.getRawButtonPressed(2)); // TODO: assign 
+        }
+
+        public boolean getRetractBackSolenoid(){
+            return(controller2.getRawButtonPressed(4));
+        }
+
+        public boolean getDriveLiftForward(){
+            return(controller2.getRawButton(1));
+        }
 	}
 
   

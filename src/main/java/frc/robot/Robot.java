@@ -25,6 +25,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.EngageLiftSolenoidCommand;
 import frc.robot.commands.HatchPusherCommand;
 import frc.robot.commands.LiftCommandGroup;
+import frc.robot.commands.ManualLiftCommand;
 import frc.robot.commands.WheelArmCommand;
 import frc.robot.commands.ArmAngleCommand;
 import frc.robot.controls.*;
@@ -164,7 +165,8 @@ public class Robot extends TimedRobot {
     new DriveCommand().start();
     new HatchPusherCommand().start();
     new WheelArmCommand().start();
-    new LiftCommandGroup().start();
+  //  new LiftCommandGroup().start();
+    new ManualLiftCommand().start();
     new ArmAngleCommand().start();
     //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
   }
@@ -175,6 +177,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+
   }
 
   /**
