@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
   public static WheelArm wheelArm = new WheelArm();
   public static LiftSystem liftSystem = new LiftSystem();
   public static ArmAngle armAngle = new ArmAngle();
+  public static CargoMechanismLatch cargoMechanismLatch = new CargoMechanismLatch();
   public static DriveController controller1 = new F310Controller();
   public static DriveController controller2 = new XBoxController();
   public static OI m_oi;
@@ -143,6 +144,7 @@ public class Robot extends TimedRobot {
     new WheelArmCommand().start();
     new LiftCommandGroup().start();
     new ArmAngleCommand().start();
+    new LatchCommand().start();
   }
 
   /**
