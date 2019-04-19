@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import static org.junit.Assume.assumeNoException;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
