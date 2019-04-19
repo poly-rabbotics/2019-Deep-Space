@@ -9,19 +9,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.controls.DriveController;
 
-public class EngageLiftSolenoidCommand extends Command {
-  Timer t = new Timer();
-  private static final double SOLENOID_DELAY = 4.0;
-  
-	public EngageLiftSolenoidCommand() {
+public class ManualLiftCommand extends Command {
+  public ManualLiftCommand() {
     requires(Robot.liftSystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
-
 
   // Called just before this Command runs the first time
   @Override
@@ -31,25 +26,37 @@ public class EngageLiftSolenoidCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DriveController controller = Robot.controller1;
-    if(controller.getStartLift()){
-      Robot.liftSystem.engageAllSolenoids();
-      t.start();
-    
-    }
-    if(controller.getStopLift()){
-      Robot.liftSystem.retractAllSolenoids();
-      t.start();
+    DriveController controller2 = Robot.controller2;
+
+    if(controller2.getEngageFrontSolenoid()){
+      Robot.liftSystem.engageFrontSolenoids();
     }
 
+    if(controller2.getEngageBackSolenoid()){
+      Robot.liftSystem.engageBackSolenoids();
+    }
+
+    if(controller2.getRetractFrontSolenoid()){
+      Robot.liftSystem.retractFrontSolenoids();
+    }
+
+    if(controller2.getRetractBackSolenoid()){
+      Robot.liftSystem.retractBackSolenoids();
+    }
     
-    
+    if(controller2.getDriveLiftForward()){
+      Robot.liftSystem.driveForward();
+    }
+   else{
+      Robot.liftSystem.stopMotors();
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return t.get()>=SOLENOID_DELAY;
+    return false;
   }
 
   // Called once after isFinished returns true

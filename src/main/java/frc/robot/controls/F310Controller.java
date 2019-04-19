@@ -87,8 +87,31 @@ public class F310Controller implements DriveController{
     @Override
 	    public boolean getStopLift(){
 	        return(controller1.getRawButton(9)&&controller1.getRawButton(10));
-	    }
-	}
+        }
+        
+        public boolean getEngageFrontSolenoid(){
+            return false;//TODO: assign actual buttons
+        }
+
+        public boolean getEngageBackSolenoid(){
+            return false;//(controller1.getRawButtonPressed(15));
+        }
+
+        public boolean getRetractFrontSolenoid(){
+            return false; // TODO: assign 
+        }
+
+        public boolean getRetractBackSolenoid(){
+            return false;
+        }
+
+        public boolean getDriveLiftForward(){
+            return false;
+        }
+
+    }
+    
+
 
   
     
