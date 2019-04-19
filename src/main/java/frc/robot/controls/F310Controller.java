@@ -90,7 +90,7 @@ public class F310Controller implements DriveController{
         }
         
         public boolean getEngageFrontSolenoid(){
-            return(controller1.getRawButtonPressed(10)); //TODO: assign actual buttons
+            return false;//TODO: assign actual buttons
         }
 
         public boolean getEngageBackSolenoid(){
@@ -98,15 +98,15 @@ public class F310Controller implements DriveController{
         }
 
         public boolean getRetractFrontSolenoid(){
-            return(controller1.getRawButtonPressed(11)); // TODO: assign 
+            return false; // TODO: assign 
         }
 
         public boolean getRetractBackSolenoid(){
-            return(controller1.getRawButtonPressed(12));
+            return false;
         }
 
         public boolean getDriveLiftForward(){
-            return(controller1.getRawButtonPressed(13));
+            return false;
         }
 
     }

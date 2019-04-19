@@ -59,7 +59,7 @@ public class XBoxController implements DriveController{
 
     @Override
     public boolean getToggleHatchPusher(){
-        return controller2.getRawButton(11);
+        return false;
         //Not in use
     }
 
@@ -71,31 +71,31 @@ public class XBoxController implements DriveController{
 
     @Override
     public boolean getToggleOutwards(){
-        return controller2.getRawButtonPressed(13);
+        return false;
         //Not in use
     }
 
     
     public boolean getMoveArmsUp(){
-        return controller2.getRawButton(12);
+        return controller2.getRawButton(10);
         //Not in use
     }
 
     @Override
     public boolean getMoveArmsDown(){
-        return controller2.getRawButton(10);
+        return false;
         //not in use
     } 
     
     @Override
     public boolean getStartLift(){
-        return (controller2.getRawAxis(2)>startLift&&controller2.getRawAxis(3)>startLift&&controller2.getRawButton(7)&&controller2.getRawButton(8));
+        return false;
 	      //not in use
     }
 
     @Override
 	    public boolean getStopLift(){
-            return(controller2.getRawButton(9)&&controller2.getRawButton(10));
+            return false;
             //not in use
         }
         

@@ -33,7 +33,7 @@ public class EngageLiftSolenoidCommand extends Command {
   protected void execute() {
     DriveController controller = Robot.controller1;
     if(controller.getStartLift()){
-      Robot.liftSystem.engageSolenoids();
+      Robot.liftSystem.engageAllSolenoids();
       t.start();
     
     }

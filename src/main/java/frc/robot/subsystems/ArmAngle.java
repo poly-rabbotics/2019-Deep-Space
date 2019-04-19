@@ -35,7 +35,7 @@ public class ArmAngle extends Subsystem {
     moving = true;
     }
     else{
-      angle.set(0);
+      angle.set(.1);
       moving = false;
     }
     
@@ -56,7 +56,7 @@ public class ArmAngle extends Subsystem {
       moving = true;
       }
       else{
-        angle.set(0);
+        angle.set(-.1);
         moving = false;
       }
   }

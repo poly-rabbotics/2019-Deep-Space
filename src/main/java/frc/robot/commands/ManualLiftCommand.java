@@ -48,9 +48,8 @@ public class ManualLiftCommand extends Command {
       Robot.liftSystem.driveForward();
     }
    else{
-
-    Robot.liftSystem.stopMotors();
-   }
+      Robot.liftSystem.stopMotors();
+    }
 
   }
 

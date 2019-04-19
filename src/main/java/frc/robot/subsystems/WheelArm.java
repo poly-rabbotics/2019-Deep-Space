@@ -19,8 +19,8 @@ private VictorSP right = RobotMap.wheelArmRight;           //Did we change this 
 
 private boolean inwards = false;
 private boolean outwards = false;
-private static double wheelInSpeed = 1.00;//TODO: Add real value
-private static double rocket2Speed = 1.00;
+private static double wheelInSpeed = .90;//TODO: Add real value
+private static double rocket2Speed = .90;
 private static double wheelOutSpeed = .5;
 public WheelArm(){
     super("Wheel Arm");
