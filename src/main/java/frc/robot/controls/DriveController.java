@@ -5,6 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/**
+   * This code declares everything that a drive controller can do. After this, we just
+   * have to explain how it does those things.
+   * We should talk about why most of these methods should not be declared here. That discussion
+   * can happen later
+*/
 package frc.robot.controls;
 
 /**
