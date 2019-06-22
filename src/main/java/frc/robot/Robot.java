@@ -88,6 +88,7 @@ public class Robot extends TimedRobot {
   public static DriveController controller2 = new XBoxController();
   public static OI m_oi; //for output and input. The m_ says it's a member variable, but almost 
                          //all of these are member variables so it's kind of meaningless.
+                         //To keep things simple, we didn't use this, but in the future we should.
   public AHRS ahrs;      //Attitude and Heading Reference System. I thinks it's just an accelerometer
                          //(for linear acceleration and gravity) and gyroscope (for rotational acceleration, or turning)
   //Say what kinds of cameras we're using (they're UsbCameras).
@@ -118,7 +119,7 @@ public class Robot extends TimedRobot {
     backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera", 1); //same as above ^
     backCam.setResolution(320, 240);//We can't send information too fast, so low resolution can address that problem
     backCam.setFPS(15);
-    m_oi = new OI(); //Declare our output/input.
+    m_oi = new OI(); //Declare our output/input. To keep things simple, we didn't use this, but in the future we should.
   }
 
   /**
