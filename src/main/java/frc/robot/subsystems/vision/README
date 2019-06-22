@@ -1,0 +1,13 @@
+The person writing this doesn't understand everything, so take the following with a grain of salt:
+
+First, there is a difference between computer vision and just getting a livestream of what cameras
+on the robot are seeing. Computer vision is actually analyzing the images with a computer to get 
+shapes and find out where they are. THIS IS COMPUTER VISION.
+
+Actually, the computer vision is all done on a chip inside the Pixy camera. We didn't write it.
+The files contained by this folder are just using the "something that does something" that another
+person made to communicate with the Pixy camera, so that is can tell us what shapes there are and 
+where they are.
+
+To the best of my knowledge, we didn't use these files in competition this year, and although it 
+would be great for everyone to understand them, it's not first priority.
