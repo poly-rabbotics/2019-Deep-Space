@@ -5,27 +5,36 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.controls;
+/**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * Reminder: this is a wrapper. When we ask this controller how fast we want to turn 
+   * the robot (for example), it takes that question, and it turns that into a question
+   * of what input we are getting from the driver's controller. In other words, it
+   * basically translates from one question to another.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+*/
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.RobotMap;
-import static org.usfirst.frc.team4999.utils.Utils.*;
+package frc.robot.controls; //Duplicate code from F310Controller.java
+
+import edu.wpi.first.wpilibj.XboxController; //Duplicate code from F310Controller.java
+import edu.wpi.first.wpilibj.GenericHID.Hand; //Duplicate code from F310Controller.java
+import frc.robot.RobotMap;//Duplicate code from F310Controller.java
+import static org.usfirst.frc.team4999.utils.Utils.*;//Duplicate code from F310Controller.java
 
 /**
  * Add your docs here.
  */
-public class XBoxController implements DriveController{
-    private XboxController controller2 = RobotMap.controller2;
+public class XBoxController implements DriveController{//Duplicate code from F310Controller.java
+    private XboxController controller2 = RobotMap.controller2;//Duplicate code from F310Controller.java
 
-    private static final double CURVE = 2;
-    private static final double DEADZONE = .01;
-    private static final double startLift = .75;
+    private static final double CURVE = 2;//Duplicate code from F310Controller.java
+    private static final double DEADZONE = .01;//Duplicate code from F310Controller.java
+    private static final double startLift = .75;//Duplicate code from F310Controller.java
 
-    private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
-    private int speedLimitIndex = speedLimits.length-1;
+    //private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
+    //private int speedLimitIndex = speedLimits.length-1;
     @Override
-    public double getMoveRequest(){
+    public double getMoveRequest(){//Duplicate code from F310Controller.java
       double speed = controller2.getRawAxis(1);
         speed = curve(speed, CURVE);
         speed = deadzone(speed, DEADZONE);
@@ -35,28 +44,29 @@ public class XBoxController implements DriveController{
     }
     
     @Override
-    public double getTurnRequest(){
+    public double getTurnRequest(){//Duplicate code from F310Controller.java
         double speed = controller2.getRawAxis(4);
         speed = curve(speed, CURVE);
         speed = deadzone(speed, DEADZONE);
         return speed;
 
     }
-    @Override
-    public double getSpeedLimit(){
+    /*@Override
+    public double getSpeedLimit(){//Duplicate code from F310Controller.java
        if(controller2.getRawButtonPressed(7) && speedLimitIndex>0)
             speedLimitIndex--;
         if(controller2.getRawButtonPressed(8) && speedLimitIndex<speedLimits.length-1)
             speedLimitIndex++;
         return speedLimits[speedLimitIndex];
-        
-    }
+    }*/
     
     @Override
-    public boolean getReverseDirection(){
+    public boolean getReverseDirection(){//Duplicate code from F310Controller.java
         return controller2.getRawButtonPressed(3);
     }
 
+    //All of the "not in use" methods are the reason why the way we used
+	//the interface DriveController makes no sense. Ignore them. Let's not do this again.
     @Override
     public boolean getToggleHatchPusher(){
         return false;
@@ -98,9 +108,14 @@ public class XBoxController implements DriveController{
             return false;
             //not in use
         }
-        
+/**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * Translate from "should the front be raise up?" to "Is button #5 on controller #2 pressed?"
+   * They're equivalent questions: the answer to one is the same as the answer to the other.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+*/
         public boolean getEngageFrontSolenoid(){
-            return(controller2.getRawButtonPressed(5)); //TODO: assign actual buttons
+            return(controller2.getRawButtonPressed(5));
         }
 
         public boolean getEngageBackSolenoid(){
@@ -108,7 +123,7 @@ public class XBoxController implements DriveController{
         }
 
         public boolean getRetractFrontSolenoid(){
-            return(controller2.getRawButtonPressed(2)); // TODO: assign 
+            return(controller2.getRawButtonPressed(2));
         }
 
         public boolean getRetractBackSolenoid(){
