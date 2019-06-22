@@ -1,0 +1,22 @@
+This folder contains wrappers for wrappers. Or, it's supposed to, anyway.
+
+A wrapper is "a class which contains an instance of another class, but which does not
+directly expose that instance. The wrapper's main purpose is to provide a 'different' 
+way to use wrapped object (perhaps the wrapper provides a simpler interface, or adds 
+some functionality)." https://stackoverflow.com/questions/3293752/where-and-how-is-the-term-used-wrapper-in-programming-what-does-it-help-to-do
+
+In other words, a wrapper takes something and just changes the way you interact with it.
+The class LogitechF310 is a wrapper because it gives us more readable ways to say the 
+same thing. For example, we can say getX(Hand.kRight) instead of 
+getRawAxis(4). The first is more readable because you know it gets you a value
+for something on an x axis on the left-hand side of the controller, whereas the second
+just tells you you're getting information from channel 2 (which actually is the same thing,
+but how would you know that?). So that wrapper basically translated from getRawAxis(4)
+to getX(Hand.kRight).
+
+So now, we are taking that wrapper, and wrapping it in another wrapper that translates from
+getX(Hand.kRight) to a request to turn the robot.
+
+
+(in reality, we ended up translating directly from getRawAxis(4) to the turn request. Why? I
+have no idea.)
