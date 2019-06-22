@@ -6,7 +6,7 @@ shapes and find out where they are. THIS IS COMPUTER VISION.
 
 Actually, the computer vision is all done on a chip inside the Pixy camera. We didn't write it.
 The files contained by this folder are just using the "something that does something" that another
-person made to communicate with the Pixy camera, so that is can tell us what shapes there are and 
+person made to communicate with the Pixy camera, so that it can tell us what shapes there are and 
 where they are.
 
 To the best of my knowledge, we didn't use these files in competition this year, and although it 
