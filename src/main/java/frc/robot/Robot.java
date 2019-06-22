@@ -6,21 +6,55 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+/**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * This code is the center of everything our robot does because it is the interface
+   * between the system built by FRC and the code that we wrote.
+   * FRC gave us an object that performs actions either on once startup or periodically (many
+   * times per second), but we just have to fill in the blanks and say what those actions are.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+*/
 
+
+package frc.robot; //Say what package this file belongs in, thereby defining what
+                   //other files it can access. Explained in ArmAngle.java.
+
+//both of the imports below are for the accelerometer, for detecting acceleration
+//(and the force of gravity). I don't think we ended up using it.
 import com.kauailabs.navx.frc.AHRS;
 import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
+//The "mysterious other code" from FRC can only work with a few types
+//(actually classes) of things (objects). TimedRobot is one of those things that
+//works with the code FRC uses. To create something that FRC can work with, we
+//have to get something that literally "is a" TimedRobot, and then just extend it
+//with our own code. As a result, what we give back to FRC literally IS the thing
+//that they gave us and told us they could work with, just altered a bit.
 import edu.wpi.first.wpilibj.TimedRobot;
+
+//A command is another something that does something. A Command tells parts of the 
+//robot (or subsystems) to do things.
 import edu.wpi.first.wpilibj.command.Command;
+//The scheduler makes commands keep on happening until they are finished.
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoSource;
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.cscore.UsbCamera; //lets us get input from a camera.
+//import edu.wpi.cscore.VideoSource; //Commented out b/c we don't use this.
+import edu.wpi.first.cameraserver.CameraServer; //lets us send our camera input 
+                                                //back to the driver station.
+//import edu.wpi.first.wpilibj.DriverStation; //Commented out b/c we don't use this.
+//import edu.wpi.first.wpilibj.SerialPort;    //commented out b/c we don't use this.
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser; //This is used to present 
+                                                //choices for us to select in the 
+                                                //SmartDashboard (part of the Driver Station?
+                                                //Ask Mr. Gever or someone)
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; //for user interface in SmartDashboard
+
+/**
+* ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+* The next 7 lines are just importing our own commands so that we will be able to tell the
+* robot to do things.
+* ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+*/
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.EngageLiftSolenoidCommand;
 import frc.robot.commands.HatchPusherCommand;
@@ -28,9 +62,10 @@ import frc.robot.commands.LiftCommandGroup;
 import frc.robot.commands.ManualLiftCommand;
 import frc.robot.commands.WheelArmCommand;
 import frc.robot.commands.ArmAngleCommand;
-import frc.robot.controls.*;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.vision.Cameras;
+
+import frc.robot.controls.*; //The asterisk means we import everything in the controls package.
+import frc.robot.subsystems.*; //The asterisk means we import everything in the subsystems package.
+//import frc.robot.subsystems.vision.Cameras;//Not used so commented out
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,58 +75,50 @@ import frc.robot.subsystems.vision.Cameras;
  * project.
  */
 public class Robot extends TimedRobot {
+  //Now we are just saying what all the kinds of parts (what classes of parts) 
+  //the robot has, but we still haven't said exactly what those parts are (we
+  //haven't instantiated them as objects)
   public static Drive drive = new Drive();
   public static HatchPusher hatchPusher = new HatchPusher();
   public static WheelArm wheelArm = new WheelArm();
   public static LiftSystem liftSystem = new LiftSystem();
   public static ArmAngle armAngle = new ArmAngle();
+  //Now we say what kinds of controllers we're using.
   public static DriveController controller1 = new F310Controller();
   public static DriveController controller2 = new XBoxController();
-  public static OI m_oi;
-  public AHRS ahrs;
+  public static OI m_oi; //for output and input. The m_ says it's a member variable, but almost 
+                         //all of these are member variables so it's kind of meaningless.
+  public AHRS ahrs;      //Attitude and Heading Reference System. I thinks it's just an accelerometer
+                         //(for linear acceleration and gravity) and gyroscope (for rotational acceleration, or turning)
+  //Say what kinds of cameras we're using (they're UsbCameras).
   public static UsbCamera frontCam;
   public static UsbCamera backCam;
 
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  Command m_autonomousCommand; //Used to store the autonomous program we choose in SmartDashboard.
+                               //We didn't really use this.
+  SendableChooser<Command> m_chooser = new SendableChooser<>(); //SendableChooser is actually a template.
+                                                                //This is a SendableChooser for choosing commands. 
 
   /**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
+   * 
+   * The first thing we are doing when the robot starts is start sending video to the driver
+   * station. That is what we set up in robotInit.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
    */
-  @Override
+  @Override //annotation that says we are overriding a method
   public void robotInit() {
-    // // CameraServer.getInstance().startAutomaticCapture(0);
-    // // CameraServer.getInstance().startAutomaticCapture(1);
-    //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
-
-    // VideoSource frontCam = new UsbCamera("Front Camera", 0); // did not work as 0 or 2, with pixy2 on spi
-    // frontCam.setResolution(320, 240);
-    // //frontCam.setFPS(15);
-    // CameraServer.getInstance().startAutomaticCapture(frontCam);
-
-    // VideoSource backCam = new UsbCamera("Back Camera", 1); //this worked in inboard usb port, connected rr by usb to station
-    // backCam.setResolution(640, 480);
-    // backCam.setFPS(15);
-    // CameraServer.getInstance().startAutomaticCapture(backCam);
-    frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera",0);
-    //frontCam.setResolution(320, 240);
-    frontCam.setFPS(15);
+    //Get a camera server to start sending images from the front camera to the dashboard.
+    frontCam = CameraServer.getInstance().startAutomaticCapture("Front Camera", 0); //Apparently the device # of the front camera is 0. Why? ask Mr. Powers or Mr. Gever.
+    //frontCam.setResolution(320, 240); 
+    frontCam.setFPS(15); //Set frames per second.
     // frontCam.setBrightness(3);
-    backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera",1);
-    backCam.setResolution(320, 240);
+    backCam = CameraServer.getInstance().startAutomaticCapture("Back Camera", 1); //same as above ^
+    backCam.setResolution(320, 240);//We can't send information too fast, so low resolution can address that problem
     backCam.setFPS(15);
-    m_oi = new OI();
-
-
-     //Cameras.setup(); // Setup and Connection to Pixy2
-
-    /*try {
-      ahrs = new AHRS(SerialPort.Port.kMXP);
-    } catch (RuntimeException ex) {
-      DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), false);
-    }*/
-
+    m_oi = new OI(); //Declare our output/input.
   }
 
   /**
@@ -104,11 +131,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    /*if (ahrs != null) {
-     SmartDashboard.putData(ahrs);
-    }*/
-    //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
-    //Cameras.run();
   }
 
   /**
@@ -125,6 +147,14 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
+  /**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * Deep Space is unusual because there wasn't really a true autonomous, so our
+   * autonomousInit is the same as our teleopInit.
+   * This is where we first command the various parts of our robot to start checking for and 
+   * responding to input from our driver.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   */
   /**
    * This autonomous (along with the chooser code above) shows how to select
    * between different autonomous modes using the dashboard. The sendable
@@ -147,6 +177,12 @@ public class Robot extends TimedRobot {
   }
 
   /**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * Throughout autonomous, we have to make the Scheduler keep all the commands going, so that
+   * the parts of the robot keep responding to controller input.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   */
+  /**
    * This function is called periodically during autonomous.
    */
   @Override
@@ -154,6 +190,12 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
+  /**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * This is where we first command the various parts of our robot to start checking for and 
+   * responding to input from our driver.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   */
   @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
@@ -171,6 +213,12 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
   }
 
+  /**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * Throughout autonomous, we have to make the Scheduler keep all the commands going, so that
+   * the parts of the robot keep responding to controller input.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   */
   /**
    * This function is called periodically during operator control.
    */
