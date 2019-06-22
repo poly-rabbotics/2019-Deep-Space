@@ -9,8 +9,8 @@
 /**
    * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
    * This code is the center of everything our robot does because it is the interface
-   * between the system built by FRC and the code that we wrote.
-   * FRC gave us an object that performs actions either on once startup or periodically (many
+   * between the system built by FRC and the code that we wrote. It makes everything else go.
+   * FRC gave us an object that performs actions either once on startup or periodically (many
    * times per second), but we just have to fill in the blanks and say what those actions are.
    * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
 */
