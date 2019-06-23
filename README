@@ -1,0 +1,23 @@
+Maybe read this after you've already looked at everything:
+
+This program is kind of...unnecessarily complicated. It looks super
+confusing because it has all these different files and it keeps interacting
+with other code.
+
+1. The driver presses a button, which is detected by a GenericHID that FIRST 
+made for us. 
+2. From there, it gets translated into a "request" by the controller
+wrapper, and then, 
+3. a Command finds out about this "request" and tells a part of
+the robot to do what has been requested, and then,
+4. that part of the robot tells a smaller part of the robot -- an individual 
+motor controller -- to do something, and then
+5. the RobotMap translates that motor controller into an actual port that
+is connected to a motor controller, to tell that motor controller to make a 
+motor do something.
+
+A piece of user input goes through about five different steps before anything
+happens.
+
+This entire program could be rewritten so that there are no files
+except the Robot file and the RobotMap file.
