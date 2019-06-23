@@ -20,3 +20,15 @@ getX(Hand.kRight) to a request to turn the robot.
 
 (in reality, we ended up translating directly from getRawAxis(4) to the turn request. Why? I
 have no idea.)
+
+
+
+Side note: There are two controllers, but the way we wrote the code each one "is a" 
+DriveController. That's really not okay. Why? Because each controller is "something
+that does something," but they do NOT do remotely the same thing! One controller tells
+the robot how to drive and climb, and the other controller tells the robot to do
+everything else. There should be no overlap in their functionality, but by declaring
+them as the same kind of thing, we sometimes FORCED ourselves to give both the same
+functionality, even when it doesn't make sense. The files in this folder and in the 
+commands folder are both littered with weird, counterintuitive consequences of this
+bad programming decision.
