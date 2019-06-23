@@ -5,6 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * Structured the same way as the other commands, but this one does more different things.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+*/
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,6 +29,13 @@ public class ManualLiftCommand extends Command {
   protected void initialize() {
   }
 
+  /**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * Lift up the front if told to do so, lift up the back if told to do so, lower the 
+   * front if told to do so, lower the back if told to do so, drive forward if told to do so,
+   * stop driving forward if told to do so. That's it.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+*/
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
