@@ -14,3 +14,8 @@ be determining whether it should go up: Weird, but in this instance, probably
 the best way to operate. (That becomes more questionable with things like
 the lift system, which really just can be commanded to extend or retract
 instead of being commanded to constantly check if it should extend or retract)
+
+
+(For the adventurous: I deleted several files that we never used. Feel free to look at
+them in the master branch, if you would like to see a confusing but maybe educational
+way in which we messed up in the 2019 season.)
