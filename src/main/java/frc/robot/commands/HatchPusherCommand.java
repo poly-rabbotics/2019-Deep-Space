@@ -5,6 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/**
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+   * Same as the other commands. Step 1: Every 20 milliseconds (or however frequently 
+   * execute is called), find out what the drive controller is telling the hatch mechanism 
+   * to do. Then, tell the hatch mechanism to do that thing.
+   * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
+*/
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,8 +36,8 @@ public class HatchPusherCommand extends Command {
   protected void execute() {
     DriveController controller1 = Robot.controller1;
     DriveController controller2 = Robot.controller2;
-    if(controller1.getToggleHatchPusher()||controller2.getToggleHatchPusher()){
-        Robot.hatchPusher.extend();
+    if(controller1.getToggleHatchPusher()||controller2.getToggleHatchPusher()){ //accepts input from both controllers, even though we just use one. This is probably bad programming.
+        Robot.hatchPusher.extend(); //extend if being told to extend, retract otherwise.
       }
       else{
         Robot.hatchPusher.retract();
@@ -43,7 +51,7 @@ public class HatchPusherCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return false; //This command is never finished.
   }
 
   // Called once after isFinished returns true
