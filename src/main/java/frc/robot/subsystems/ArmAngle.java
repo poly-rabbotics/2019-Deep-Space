@@ -13,7 +13,10 @@
 */
 
 
-package frc.robot.subsystems;
+package frc.robot.subsystems; //tells us what package this file is in. This lets 
+                              //this file access other files in the same package.
+                              //Note that the package is the same as the file path,
+                              //except with . instead of /
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DigitalInput;
