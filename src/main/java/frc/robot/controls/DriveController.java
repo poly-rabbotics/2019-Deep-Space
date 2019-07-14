@@ -19,7 +19,7 @@ package frc.robot.controls;
 public interface DriveController {
     public double getMoveRequest();
     public double getTurnRequest();
-    //public double getSpeedLimit();       //Another experiment that wasn't finished. It wasn't necessary.
+    public double getSpeedLimit();
     public boolean getReverseDirection();
     public boolean getToggleHatchPusher();
     public boolean getToggleInwards();

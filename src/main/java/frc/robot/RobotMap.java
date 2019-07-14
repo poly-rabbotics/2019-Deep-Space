@@ -28,12 +28,12 @@ import edu.wpi.first.wpilibj.DoubleSolenoid; //used to control pneumatic solenoi
 //this file doesn't know what those motor controllers are, and it can't do anything
 //with them.
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Talon;
+//import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 //XboxController is just like the LogitechF310 wrapper we got from Momentum, except
 //we get it from FIRST, not Momentum (team 4999).
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.controls.XBoxController; //Ask Juliana or Mr. Powers because I don't get it. 
+//import frc.robot.controls.XBoxController; //Ask Juliana or Mr. Powers because I don't get it. 
                                           //Because the B
                                           //in XBox is capitalized, and lower down in
                                           //the code it's not, we do not use this class

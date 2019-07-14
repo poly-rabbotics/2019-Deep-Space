@@ -18,7 +18,7 @@
 package frc.robot.controls; //say what package this file is in
 import org.usfirst.frc.team4999.controllers.LogitechF310; //this is the wrapper that we were suppposed to use inside this wrapper, but didn't
 
-import edu.wpi.first.wpilibj.GenericHID.Hand; //Import this for readability, so that when we mean left we can write "Hand.kLeft"
+//import edu.wpi.first.wpilibj.GenericHID.Hand; //Import this for readability, so that when we mean left we can write "Hand.kLeft"
 import frc.robot.RobotMap; //We need this to access the controllers
 import static org.usfirst.frc.team4999.utils.Utils.*; //Import all the boring utility functions we borrowed from Momentum (team 4999)
 
@@ -38,8 +38,8 @@ public class F310Controller implements DriveController{
 						//imperfections in our physical controller, not intentional driver input.
     private static final double startLift = .75; //the joysticks have to be pushed 3/4 of the way out to be interpreted as a command to start the lift sequence.
 
-    //private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0}; //for a method we didn't use.
-    // private int speedLimitIndex = speedLimits.length-1; 			//same ^
+    private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0}; //List of all the maximum speeds for the robot.
+    private int speedLimitIndex = speedLimits.length-1; 			//our current position in the above list - must be between 0 and 9 (speedLimits.length - 1)
 /**
    * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
    * translate the driver input into a request to drive forward or backward.
@@ -66,20 +66,21 @@ public class F310Controller implements DriveController{
         return speed;
 
     }
-    //Ignore this method. We didn't use it, so I am taking the liberty of commenting it out.
-    /*@Override
+    /**
+     * Change the maximum speed of the robot as needed and return the current maximum speed.
+     */
+    @Override
     public double getSpeedLimit(){
-        if(controller1.getRawButtonPressed(7) && speedLimitIndex>0)
+        if(controller1.getRawButtonPressed(7) && speedLimitIndex > 0)
             speedLimitIndex--;
-        if(controller1.getRawButtonPressed(8) && speedLimitIndex<speedLimits.length-1)
+        if(controller1.getRawButtonPressed(8) && speedLimitIndex < speedLimits.length - 1)
             speedLimitIndex++;
         return speedLimits[speedLimitIndex];
-    }*/
+    }
 /**
-   * The intention was to find out if the driver wanted to change which side of the 
-   * robot was considered the front, so that when the move request says go forward the robot
-   * would go the other way. Potentially useful for switching between using the hatch mechanism
-   * and using the cargo mechanism on the other side. Not sure if this function was implemented.
+   * This badly named function is meant to determine if the driver wants the intake to rapidly
+   * outtake cargo. In the future, maybe it would help to prefix with the name of the associated
+   * subsystem, to indicate what part of the robot this function is meant to control.
 */
     @Override
     public boolean getReverseDirection(){

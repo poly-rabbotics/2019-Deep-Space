@@ -27,9 +27,9 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 //This subsystem uses a type of drive called a DifferentialDrive, so we need to import that
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.Spark; //A Spark is just a cheap white motor controller that we know and love
+//import edu.wpi.first.wpilibj.Spark; //A Spark is just a cheap white motor controller that we know and love
 import frc.robot.RobotMap; //We need to know what motor controllers we have, and where they're connected
-import frc.robot.commands.DriveCommand; //I have no idea why we need this, ask Juliana or Mr. Powers
+//import frc.robot.commands.DriveCommand; //I have no idea why we need this, ask Juliana or Mr. Powers
 
 //We borrowed code from Momentum (Team 4999), just so we could use their method called "map"
 import static org.usfirst.frc.team4999.utils.Utils.map;

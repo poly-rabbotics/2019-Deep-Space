@@ -13,7 +13,7 @@
 package frc.robot.subsystems; //Say what package this file is in. Explained in ArmAngle.java.
 
 //We need to use the Talon and VictorSP motor controllers, so we'd better import them from FIRST.
-import edu.wpi.first.wpilibj.Talon;
+//import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem; //The thing we are making "is a" subsystem, so we'd
                                                 //better know what a Subsystem is first.
@@ -30,7 +30,7 @@ private VictorSP right = RobotMap.wheelArmRight;//right now refers to the same m
 private boolean inwards = false;   //Keep track if the intake is intaking or outtaking. Not sure if this
 private boolean outwards = false;  //is necessary.
 private static double wheelInSpeed = .90; //say how fast the intake goes when intaking
-//private static double rocket2Speed = .90; //Failed experiment. We can't shoot to the rocket level 2.
+private static double rocket2Speed = .90; //Say how fast the intake goes when shooting to rocket level 2. Failed experiment. We can't shoot to the rocket level 2.
 private static double wheelOutSpeed = .5;//say how fast the intake goes when outtaking (shooting out a ball)
 public WheelArm(){ //Subsystem constructor explained in ArmAngle.java
     super("Wheel Arm");
@@ -56,12 +56,15 @@ public WheelArm(){ //Subsystem constructor explained in ArmAngle.java
     right.set(wheelOutSpeed);
 
   }
-  /* This is going faster to go to rocket level 2. We can't do that though.
-  public void spinOutwardsBig(){ 
+  /**
+   * This is outtaking faster so that the cargo (ball) can go high enough to reach
+   * rocket level 2. We can't do that though.
+   */
+  public void spinOutwardsBig(){
     outwards = true;
     left.set(-rocket2Speed);
     right.set(rocket2Speed);
-  }*/
+  }
   /**
 * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
 * Say how to stop (when not holding a ball)

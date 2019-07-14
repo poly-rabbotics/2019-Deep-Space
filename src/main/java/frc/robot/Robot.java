@@ -22,7 +22,7 @@ package frc.robot; //Say what package this file belongs in, thereby defining wha
 //both of the imports below are for the accelerometer, for detecting acceleration
 //(and the force of gravity). I don't think we ended up using it.
 import com.kauailabs.navx.frc.AHRS;
-import com.kauailabs.navx.frc.AHRS.SerialDataType;
+//import com.kauailabs.navx.frc.AHRS.SerialDataType; //Never used
 
 //The "mysterious other code" from FRC can only work with a few types
 //(actually classes) of things (objects). TimedRobot is one of those things that
@@ -47,7 +47,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser; //This is used to p
                                                 //choices for us to select in the 
                                                 //SmartDashboard (part of the Driver Station?
                                                 //Ask Mr. Gever or someone)
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; //for user interface in SmartDashboard
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; //for user interface in SmartDashboard; never used
 
 /**
 * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
@@ -56,9 +56,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; //for user interface
 * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
 */
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.EngageLiftSolenoidCommand;
+//import frc.robot.commands.EngageLiftSolenoidCommand;
 import frc.robot.commands.HatchPusherCommand;
-import frc.robot.commands.LiftCommandGroup;
+//import frc.robot.commands.LiftCommandGroup;
 import frc.robot.commands.ManualLiftCommand;
 import frc.robot.commands.WheelArmCommand;
 import frc.robot.commands.ArmAngleCommand;
@@ -173,7 +173,7 @@ public class Robot extends TimedRobot {
     new DriveCommand().start();
     new HatchPusherCommand().start();
     new WheelArmCommand().start();
-    new LiftCommandGroup().start();
+    //new LiftCommandGroup().start();
     new ArmAngleCommand().start();
   }
 
@@ -208,7 +208,7 @@ public class Robot extends TimedRobot {
     new DriveCommand().start();
     new HatchPusherCommand().start();
     new WheelArmCommand().start();
-  //  new LiftCommandGroup().start();
+    // new LiftCommandGroup().start();
     new ManualLiftCommand().start();
     new ArmAngleCommand().start();
     //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
@@ -226,12 +226,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
   }
 
   /**
    * This function is called periodically during test mode.
-   */
+  */
   @Override
   public void testPeriodic() {
   }

@@ -17,7 +17,7 @@
 package frc.robot.controls; //Duplicate code from F310Controller.java
 
 import edu.wpi.first.wpilibj.XboxController; //Duplicate code from F310Controller.java
-import edu.wpi.first.wpilibj.GenericHID.Hand; //Duplicate code from F310Controller.java
+//import edu.wpi.first.wpilibj.GenericHID.Hand; //Duplicate code from F310Controller.java
 import frc.robot.RobotMap;//Duplicate code from F310Controller.java
 import static org.usfirst.frc.team4999.utils.Utils.*;//Duplicate code from F310Controller.java
 
@@ -29,10 +29,10 @@ public class XBoxController implements DriveController{//Duplicate code from F31
 
     private static final double CURVE = 2;//Duplicate code from F310Controller.java
     private static final double DEADZONE = .01;//Duplicate code from F310Controller.java
-    private static final double startLift = .75;//Duplicate code from F310Controller.java
+    //private static final double startLift = .75;//Duplicate code from F310Controller.java
 
-    //private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
-    //private int speedLimitIndex = speedLimits.length-1;
+    private double[] speedLimits = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
+    private int speedLimitIndex = speedLimits.length-1;
     @Override
     public double getMoveRequest(){//Duplicate code from F310Controller.java
       double speed = controller2.getRawAxis(1);
@@ -51,14 +51,17 @@ public class XBoxController implements DriveController{//Duplicate code from F31
         return speed;
 
     }
-    /*@Override
+    /**
+     * Change the maximum speed of the robot as needed and return the current maximum speed.
+     */
+    @Override
     public double getSpeedLimit(){//Duplicate code from F310Controller.java
        if(controller2.getRawButtonPressed(7) && speedLimitIndex>0)
             speedLimitIndex--;
         if(controller2.getRawButtonPressed(8) && speedLimitIndex<speedLimits.length-1)
             speedLimitIndex++;
         return speedLimits[speedLimitIndex];
-    }*/
+    }
     
     @Override
     public boolean getReverseDirection(){//Duplicate code from F310Controller.java

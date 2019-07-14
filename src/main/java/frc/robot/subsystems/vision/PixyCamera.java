@@ -9,7 +9,7 @@ package frc.robot.subsystems.vision;
 
 import io.pseudoresonance.pixy2api.Pixy2;
 import io.pseudoresonance.pixy2api.Pixy2CCC;
-import io.pseudoresonance.pixy2api.Pixy2CCC.Block;
+//import io.pseudoresonance.pixy2api.Pixy2CCC.Block;
 import io.pseudoresonance.pixy2api.links.Link;
 
 public class PixyCamera {

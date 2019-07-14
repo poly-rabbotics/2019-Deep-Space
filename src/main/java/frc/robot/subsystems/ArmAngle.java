@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 * Here, we're importing them as a type (or class) of somethings that do somethings.
 * That way, we can represent objects that exist in the real world inside our code.
 */
-import edu.wpi.first.wpilibj.Talon;
+//import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 /**
 * We need to know what ports everything is connected in (and what all our motor
