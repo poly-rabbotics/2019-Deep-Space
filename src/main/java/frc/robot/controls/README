@@ -15,7 +15,7 @@ but how would you know that?). So that wrapper basically translated from getRawA
 to getX(Hand.kRight).
 
 So now, we are taking that wrapper, and wrapping it in another wrapper that translates from
-getX(Hand.kRight) to a request to turn the robot.
+getX(Hand.kRight) to a turn request: a request to turn the robot.
 
 
 (in reality, we ended up translating directly from getRawAxis(4) to the turn request. Why? I
