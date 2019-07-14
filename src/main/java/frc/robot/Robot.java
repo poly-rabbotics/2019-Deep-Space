@@ -56,9 +56,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; //for user interface
 * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
 */
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.EngageLiftSolenoidCommand;
+//import frc.robot.commands.EngageLiftSolenoidCommand; //deleted file, please ignore
 import frc.robot.commands.HatchPusherCommand;
-import frc.robot.commands.LiftCommandGroup;
+//import frc.robot.commands.LiftCommandGroup;  //deleted file, please ignore
 import frc.robot.commands.ManualLiftCommand;
 import frc.robot.commands.WheelArmCommand;
 import frc.robot.commands.ArmAngleCommand;
