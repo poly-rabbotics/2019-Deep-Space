@@ -1,5 +1,4 @@
-Each part of the robot is something that does something.
-Each of these files corresponds to a specific part of the robot -- a subsystem,
-and each file says what that part of the robot does.
+Each part of the robot, or subsystem, is something that does something.
+Each of these files says what a particular subsystem does.
 
 That is all.
