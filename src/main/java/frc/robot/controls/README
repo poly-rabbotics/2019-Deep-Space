@@ -10,7 +10,7 @@ The class LogitechF310 is a wrapper because it gives us more readable ways to sa
 same thing. For example, we can say getX(Hand.kRight) instead of 
 getRawAxis(4). The first is more readable because you know it gets you a value
 for something on an x axis on the left-hand side of the controller, whereas the second
-just tells you you're getting information from channel 2 (which actually is the same thing,
+just tells you you're getting information from channel 4 (which actually is the same thing,
 but how would you know that?). So that wrapper basically translated from getRawAxis(4)
 to getX(Hand.kRight).
 
