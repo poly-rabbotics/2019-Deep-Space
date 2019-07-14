@@ -36,13 +36,13 @@ public class HatchPusherCommand extends Command {
   protected void execute() {
     DriveController controller1 = Robot.controller1;
     DriveController controller2 = Robot.controller2;
-    if(controller1.getToggleHatchPusher()||controller2.getToggleHatchPusher()){ //accepts input from both controllers, even though we just use one. This is probably bad programming.
-        Robot.hatchPusher.extend(); //extend if being told to extend, retract otherwise.
-      }
-      else{
-        Robot.hatchPusher.retract();
-      }
+    if (controller1.getToggleHatchPusher()||controller2.getToggleHatchPusher()) { //accepts input from both controllers, even though we just use one. This is probably bad programming.
+      Robot.hatchPusher.extend(); //extend if being told to extend, retract otherwise.
     }
+    else {
+      Robot.hatchPusher.retract();
+    }
+  }
 
 
 

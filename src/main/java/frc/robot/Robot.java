@@ -15,6 +15,7 @@
    * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
 */
 
+//TODO: REMOVE COMMENTS/COMMENTED OUT CODE THAT ADD CLUTTER. (After this code is tested)
 
 package frc.robot; //Say what package this file belongs in, thereby defining what
                    //other files it can access. Explained in ArmAngle.java.
@@ -47,7 +48,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser; //This is used to p
                                                 //choices for us to select in the 
                                                 //SmartDashboard (part of the Driver Station?
                                                 //Ask Mr. Gever or someone)
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; //for user interface in SmartDashboard; never used
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; //for user interface in SmartDashboard; never used
 
 /**
 * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
@@ -55,13 +56,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser; //This is used to p
 * robot to do things.
 * ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
 */
-import frc.robot.commands.DriveCommand;
+//import frc.robot.commands.DriveCommand;
 //import frc.robot.commands.EngageLiftSolenoidCommand; //deleted file, please ignore
-import frc.robot.commands.HatchPusherCommand;
+//import frc.robot.commands.HatchPusherCommand;
 //import frc.robot.commands.LiftCommandGroup;  //deleted file, please ignore
-import frc.robot.commands.ManualLiftCommand;
-import frc.robot.commands.WheelArmCommand;
-import frc.robot.commands.ArmAngleCommand;
+//import frc.robot.commands.ManualLiftCommand;
+//import frc.robot.commands.WheelArmCommand;
+//import frc.robot.commands.ArmAngleCommand;
 
 import frc.robot.controls.*; //The asterisk means we import everything in the controls package.
 import frc.robot.subsystems.*; //The asterisk means we import everything in the subsystems package.
@@ -170,11 +171,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
-    new DriveCommand().start();
-    new HatchPusherCommand().start();
-    new WheelArmCommand().start();
+    //new DriveCommand().start();
+    //new HatchPusherCommand().start();
+    //new WheelArmCommand().start();
     //new LiftCommandGroup().start();
-    new ArmAngleCommand().start();
+    //new ArmAngleCommand().start();
   }
 
   /**
@@ -188,7 +189,91 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
+    /**
+     * Drive execute, moved into periodic
+     */
+    {
+      boolean reverse = false;
+      DriveController controller = Robot.controller2; //This only responds to controller2, not controller1.
+      double moveRequest = controller.getMoveRequest();
+      double turnRequest = controller.getTurnRequest();
+      if(controller.getReverseDirection()) {
+        reverse = !reverse;
+      }
+      if(reverse) {
+        moveRequest = -moveRequest;
+        turnRequest = -turnRequest;
+      }
+      Robot.drive.arcadeDrive(moveRequest, controller.getTurnRequest(), controller.getSpeedLimit());
+    }
+    /**
+     * HatchPusherCommand, moved into periodic
+     */
+    {
+      DriveController controller1 = Robot.controller1;
+      DriveController controller2 = Robot.controller2;
+      if (controller1.getToggleHatchPusher()||controller2.getToggleHatchPusher()) { //accepts input from both controllers, even though we just use one. This is probably bad programming.
+        Robot.hatchPusher.extend(); //extend if being told to extend, retract otherwise.
+      }
+      else {
+        Robot.hatchPusher.retract();
+      }
+    }
+    /**
+     * WheelArmCommand, moved into periodic
+     */
+    {
+      DriveController controller1 = Robot.controller1;
+      DriveController controller2 = Robot.controller2;
+      if(Robot.wheelArm.isInwards()){
+        if(controller1.getToggleInwards()||controller2.getToggleInwards()){
+          Robot.wheelArm.stopArms();
+        }
+      }
+      if(Robot.wheelArm.isOutwards()){
+        if(controller1.getToggleOutwards()||controller2.getToggleOutwards()){
+          Robot.wheelArm.stopArms();
+        }
+      }
+  
+      if(controller1.getToggleInwards()||controller2.getToggleInwards()){
+        Robot.wheelArm.spinInwards();
+      }
+      if(controller1.getReverseDirection()){
+        Robot.wheelArm.spinOutwardsBig();
+      }
+      if(controller1.getToggleOutwards()||controller2.getToggleOutwards()){
+        Robot.wheelArm.spinOutwards();
+      }
+      if(Robot.wheelArm.isInwards() == false && Robot.wheelArm.isOutwards() == false){
+        Robot.wheelArm.neutral();
+      }
+    }
+    /**
+     * ArmAngleCommand, moved into periodic
+     */
+    {
+      DriveController controller1 = Robot.controller1;
+      DriveController controller2 = Robot.controller2;
+      if(controller1.getMoveArmsUp()||controller2.getMoveArmsUp()){ //Check to see if the drive
+                                                           //controller is telling the robot to move arms up
+          Robot.armAngle.spinUpwards(); //If yes, tell the part of the robot that moves the arms to move arms up.
+      }
+      
+     else if(controller1.getMoveArmsDown()||controller2.getMoveArmsDown()){ //same as with up ^
+      Robot.armAngle.spinDownwards();
+     }
+     else Robot.armAngle.stopSpin(); //Stop if not being told to move down OR up
+     
+     /* 
+     * The next four lines are for debugging: reporting what the limit switches say and what the armAngle subsystem
+     * says that the limit switches say.
+     */
+     SmartDashboard.putBoolean("Upper Switch", Robot.armAngle.returnUpper());
+     SmartDashboard.putBoolean("Lower Switch", Robot.armAngle.returnLower());
+     System.out.println(Robot.armAngle.returnUpper());
+     System.out.println(Robot.armAngle.returnLower());
+    }
   }
 
   /**
@@ -205,12 +290,12 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null)
       m_autonomousCommand.cancel();
-    new DriveCommand().start();
-    new HatchPusherCommand().start();
-    new WheelArmCommand().start();
+    //new DriveCommand().start();
+    //new HatchPusherCommand().start();
+    //new WheelArmCommand().start();
     // new LiftCommandGroup().start();
-    new ManualLiftCommand().start();
-    new ArmAngleCommand().start();
+    //new ManualLiftCommand().start();
+    //new ArmAngleCommand().start();
     //SmartDashboard.putBoolean("TeleOp Enabled", isOperatorControl());
   }
 
@@ -225,7 +310,91 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
+    /**
+     * Drive execute, moved into periodic
+     */
+    {
+      boolean reverse = false;
+      DriveController controller = Robot.controller2; //This only responds to controller2, not controller1.
+      double moveRequest = controller.getMoveRequest();
+      double turnRequest = controller.getTurnRequest();
+      if(controller.getReverseDirection()) {
+        reverse = !reverse;
+      }
+      if(reverse) {
+        moveRequest = -moveRequest;
+        turnRequest = -turnRequest;
+      }
+      Robot.drive.arcadeDrive(moveRequest, controller.getTurnRequest(), controller.getSpeedLimit());
+    }
+    /**
+     * HatchPusherCommand, moved into periodic
+     */
+    {
+      DriveController controller1 = Robot.controller1;
+      DriveController controller2 = Robot.controller2;
+      if (controller1.getToggleHatchPusher()||controller2.getToggleHatchPusher()) { //accepts input from both controllers, even though we just use one. This is probably bad programming.
+        Robot.hatchPusher.extend(); //extend if being told to extend, retract otherwise.
+      }
+      else {
+        Robot.hatchPusher.retract();
+      }
+    }
+    /**
+     * WheelArmCommand, moved into periodic
+     */
+    {
+      DriveController controller1 = Robot.controller1;
+      DriveController controller2 = Robot.controller2;
+      if(Robot.wheelArm.isInwards()){
+        if(controller1.getToggleInwards()||controller2.getToggleInwards()){
+          Robot.wheelArm.stopArms();
+        }
+      }
+      if(Robot.wheelArm.isOutwards()){
+        if(controller1.getToggleOutwards()||controller2.getToggleOutwards()){
+          Robot.wheelArm.stopArms();
+        }
+      }
+  
+      if(controller1.getToggleInwards()||controller2.getToggleInwards()){
+        Robot.wheelArm.spinInwards();
+      }
+      if(controller1.getReverseDirection()){
+        Robot.wheelArm.spinOutwardsBig();
+      }
+      if(controller1.getToggleOutwards()||controller2.getToggleOutwards()){
+        Robot.wheelArm.spinOutwards();
+      }
+      if(Robot.wheelArm.isInwards() == false && Robot.wheelArm.isOutwards() == false){
+        Robot.wheelArm.neutral();
+      }
+    }
+    /**
+     * ArmAngleCommand, moved into periodic
+     */
+    {
+      DriveController controller1 = Robot.controller1;
+      DriveController controller2 = Robot.controller2;
+      if(controller1.getMoveArmsUp()||controller2.getMoveArmsUp()){ //Check to see if the drive
+                                                           //controller is telling the robot to move arms up
+          Robot.armAngle.spinUpwards(); //If yes, tell the part of the robot that moves the arms to move arms up.
+      }
+      
+     else if(controller1.getMoveArmsDown()||controller2.getMoveArmsDown()){ //same as with up ^
+      Robot.armAngle.spinDownwards();
+     }
+     else Robot.armAngle.stopSpin(); //Stop if not being told to move down OR up
+     
+     /* 
+     * The next four lines are for debugging: reporting what the limit switches say and what the armAngle subsystem
+     * says that the limit switches say.
+     */
+     SmartDashboard.putBoolean("Upper Switch", Robot.armAngle.returnUpper());
+     SmartDashboard.putBoolean("Lower Switch", Robot.armAngle.returnLower());
+     System.out.println(Robot.armAngle.returnUpper());
+     System.out.println(Robot.armAngle.returnLower());
+    }
   }
 
   /**
